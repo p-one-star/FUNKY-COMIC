@@ -44,18 +44,17 @@
 <body class="bg-[#e2e8f0] dark:bg-[#050505] transition-colors duration-500 selection:bg-pink-500 selection:text-white">
 
   <!-- ================= HEADER ================= -->
-  <header class="fixed top-0 left-0 w-full z-50 px-4 py-3 flex justify-between items-center bg-black/40 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+  <header class="fixed top-0 left-0 w-full z-50 px-4 py-3 flex justify-between items-start bg-black/40 backdrop-blur-md border-b border-white/10 transition-all duration-300">
     
     <!-- Logo Area -->
-    <div class="relative w-12 h-12 rounded-full border-2 border-cyan-400 flex items-center justify-center overflow-hidden shadow-[0_0_6px_rgba(0,243,255,0.5)] group cursor-pointer bg-black">
-      <!-- TODO: GitHubに画像をアップロード後、以下の img タグのコメント(<!-- と -->)を外してURLを設定してください -->
-      <!-- <img src="YOUR_IMAGE_URL.png" alt="Logo" class="w-full h-full object-cover z-10 relative" /> -->
-      <span class="text-cyan-400 font-black text-[10px] leading-tight text-center z-0">IMG<br/>HERE</span>
-      <div class="absolute inset-0 rounded-full border-[3px] border-pink-500 opacity-50 shadow-[inset_0_0_6px_rgba(255,0,255,0.5)]"></div>
-    </div>
+    <img 
+      src="icon.PNG" 
+      alt="FHW Logo" 
+      class="relative w-[100px] translate-y-[10px] -rotate-[5deg] transition-all duration-300 cursor-pointer hover:-rotate-[12deg] hover:scale-110 active:-rotate-[12deg] active:scale-110 z-10 origin-center"
+    />
 
     <!-- Right Controls -->
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-3 mt-1">
       
       <!-- Language Toggle -->
       <div id="btn-lang" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/80 border border-gray-600 cursor-pointer transition-all duration-300 hover:border-cyan-400 hover:shadow-[0_0_8px_rgba(0,243,255,0.6),inset_0_0_3px_rgba(0,243,255,0.3)]">
@@ -79,28 +78,23 @@
   <main>
     <!-- ================= HERO SECTION ================= -->
     <section class="relative min-h-screen flex flex-col items-center justify-center p-6 pb-32 overflow-hidden pt-24">
-      <!-- Background Neon Glows -->
       <div class="absolute top-0 left-[-10%] w-64 h-64 bg-fuchsia-600 rounded-full mix-blend-screen filter blur-[100px] animate-pulse opacity-20 dark:opacity-40"></div>
       <div class="absolute bottom-[-10%] right-[-10%] w-72 h-72 bg-cyan-600 rounded-full mix-blend-screen filter blur-[120px] opacity-10 dark:opacity-30"></div>
       
-      <!-- Brand Header -->
       <div class="absolute top-24 left-0 w-full flex justify-center z-10">
-        <div class="px-4 py-1 border-2 border-yellow-400 text-yellow-400 font-black tracking-widest uppercase transform -skew-x-12 text-sm neon-box-cyan bg-gray-900 dark:bg-black">
+        <div class="px-4 py-1 border-2 border-[#ccff00] text-[#ccff00] font-black tracking-widest uppercase transform -skew-x-12 text-sm neon-box-cyan bg-gray-900 dark:bg-black">
           FHW // Funky Hotdog Works
         </div>
       </div>
 
       <div class="relative z-10 flex flex-col items-center text-center w-full max-w-lg mt-16">
-        <!-- Main Headline -->
         <h1 class="text-5xl sm:text-7xl font-black uppercase leading-[1.1] mb-8 transform -skew-x-6">
           <span id="t-hero-welcome" class="block drop-shadow-md text-slate-900 dark:text-white">Welcome</span>
           <span id="t-hero-toThe" class="block drop-shadow-md text-slate-900 dark:text-white">To The</span>
           <span id="t-hero-madGarage" class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-pink-500 to-yellow-400 neon-text-cyan mt-2 text-6xl sm:text-8xl">MAD GARAGE.</span>
         </h1>
 
-        <!-- Sub Copy -->
         <div class="space-y-8 mb-12 w-full flex flex-col items-center">
-          
           <div class="flex flex-col items-center gap-4 transform skew-x-3 text-slate-700 dark:text-gray-300">
             <div class="flex flex-wrap justify-center items-baseline gap-x-3 gap-y-1">
               <span id="t-hero-loud1" class="text-lg sm:text-xl font-bold tracking-widest">Machines are</span>
@@ -112,24 +106,20 @@
             </div>
           </div>
           
-          <!-- 3色グラデーションライン -->
           <div class="h-[2px] w-40 sm:w-48 bg-gradient-to-r from-cyan-500 via-[#ccff00] to-pink-500 mx-auto rounded-full opacity-80"></div>
 
           <div class="flex flex-col items-center gap-1 font-black italic text-cyan-600 dark:text-cyan-300">
             <span id="t-hero-funky1" class="text-xl sm:text-2xl tracking-widest">And everything is</span>
             <span id="t-hero-funky2" class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 neon-text-yellow uppercase text-6xl sm:text-7xl tracking-widest leading-tight pb-1">FUNKY</span>
           </div>
-
         </div>
 
-        <!-- Crafted in Japan Badge -->
         <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full border-2 backdrop-blur-sm border-black/20 bg-black/5 text-slate-900 dark:border-white/20 dark:bg-white/5 dark:text-white">
           <span id="t-hero-crafted" class="font-black tracking-widest uppercase text-sm">Crafted in Japan</span>
           <span class="text-2xl">🇯🇵</span>
         </div>
       </div>
       
-      <!-- Scroll Down Indicator -->
       <div class="absolute bottom-6 sm:bottom-8 animate-bounce flex flex-col items-center opacity-80">
         <span class="text-pink-500 text-xs font-black tracking-widest mb-2 uppercase">Scroll</span>
         <div class="w-1 h-8 bg-gradient-to-b from-pink-500 to-transparent rounded-full"></div>
@@ -139,7 +129,6 @@
     <!-- ================= COMIC SECTION ================= -->
     <section class="py-24 relative overflow-hidden border-t-2 bg-[#cbd5e1] border-black/10 dark:bg-[#0a0a0a] dark:border-white/10 transition-colors duration-500">
       
-      <!-- Section Header -->
       <div class="px-6 mb-10 text-center relative z-10 flex flex-col items-center">
         <h2 id="t-comic-title" class="text-[6vw] sm:text-4xl md:text-5xl font-black text-yellow-400 uppercase transform skew-x-3 mb-2 neon-text-yellow whitespace-nowrap tracking-tighter">
           Too Funky Comic
@@ -159,76 +148,101 @@
       <!-- HORIZONTAL SWIPE CONTAINER -->
       <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-8 hide-scrollbar pt-4" style="scroll-behavior: smooth;">
         
-        <!-- Comic Card 1 -->
-        <div class="relative min-w-[85vw] sm:min-w-[320px] h-[60vh] sm:h-[500px] snap-center rounded-[2rem] border-4 border-pink-500 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
+        <!-- ================= カード 1 ================= -->
+        <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-pink-500 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
+          <!-- FUNKY と ★01(ライムイエロー) に変更 -->
           <div class="p-4 border-b-4 border-pink-500 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
-            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">Episode <span class="text-yellow-500">★01</span></span>
+            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">
+              FUNKY <span class="text-[#ccff00] neon-text-yellow">★01</span>
+            </span>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
           </div>
-          <div class="flex-1 relative flex items-center justify-center p-6 overflow-hidden bg-slate-50 dark:bg-zinc-950">
+          
+          <div class="relative w-full aspect-[4/5] flex flex-col items-center justify-center p-4 overflow-hidden bg-slate-50 dark:bg-zinc-950">
+            <!-- <img src="YOUR_IMAGE_URL.jpg" class="absolute inset-0 w-full h-full object-cover z-0" alt="Episode 1" /> -->
             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
-            <div class="relative z-10 flex flex-col items-center">
-              <div class="w-32 h-32 rounded-full border-8 border-pink-500 border-dashed flex items-center justify-center mb-6 animate-[spin_10s_linear_infinite_reverse]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-pink-500"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            <div class="relative z-10 flex flex-col items-center w-full px-2">
+              <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-8 border-pink-500 border-dashed flex items-center justify-center mb-4 sm:mb-6 animate-[spin_10s_linear_infinite_reverse]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 sm:w-16 sm:h-16 text-pink-500"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
               </div>
-              <h3 id="t-ep1-title" class="text-3xl font-black text-center uppercase transform -skew-x-6 leading-none text-slate-900 dark:text-white">The Neon Engine</h3>
-              <div class="t-comic-series mt-4 px-4 py-1 text-xs font-bold uppercase tracking-widest bg-pink-500/20 text-pink-500 rounded-full">Wild Machine Series</div>
+              <h3 id="t-ep1-title" class="text-2xl sm:text-3xl font-black text-center uppercase transform -skew-x-6 leading-tight text-slate-900 dark:text-white">The Neon Engine</h3>
+              <div class="t-comic-series mt-4 px-4 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-widest bg-pink-500/20 text-pink-500 rounded-full text-center">Wild Machine Series</div>
             </div>
           </div>
         </div>
 
-        <!-- Comic Card 2 -->
-        <div class="relative min-w-[85vw] sm:min-w-[320px] h-[60vh] sm:h-[500px] snap-center rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
+        <!-- ================= カード 2 ================= -->
+        <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
           <div class="p-4 border-b-4 border-cyan-400 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
-            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">Episode <span class="text-yellow-500">★02</span></span>
+            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">
+              FUNKY <span class="text-[#ccff00] neon-text-yellow">★02</span>
+            </span>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M13 2 3 14 12 14 11 22 21 10 12 10 13 2"></path></svg>
           </div>
-          <div class="flex-1 relative flex items-center justify-center p-6 overflow-hidden bg-slate-50 dark:bg-zinc-950">
+          <div class="relative w-full aspect-[4/5] flex flex-col items-center justify-center p-4 overflow-hidden bg-slate-50 dark:bg-zinc-950">
+            <!-- <img src="YOUR_IMAGE_URL.jpg" class="absolute inset-0 w-full h-full object-cover z-0" alt="Episode 2" /> -->
             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
-            <div class="relative z-10 flex flex-col items-center">
-              <div class="w-32 h-32 rounded-full border-8 border-cyan-400 border-dashed flex items-center justify-center mb-6 animate-[spin_10s_linear_infinite_reverse]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-cyan-400"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <div class="relative z-10 flex flex-col items-center w-full px-2">
+              <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-8 border-cyan-400 border-dashed flex items-center justify-center mb-4 sm:mb-6 animate-[spin_10s_linear_infinite_reverse]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 sm:w-16 sm:h-16 text-cyan-400"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
               </div>
-              <h3 id="t-ep2-title" class="text-3xl font-black text-center uppercase transform -skew-x-6 leading-none text-slate-900 dark:text-white">Cyber Exhaust</h3>
-              <div class="t-comic-series mt-4 px-4 py-1 text-xs font-bold uppercase tracking-widest bg-cyan-400/20 text-cyan-400 rounded-full">Wild Machine Series</div>
+              <h3 id="t-ep2-title" class="text-2xl sm:text-3xl font-black text-center uppercase transform -skew-x-6 leading-tight text-slate-900 dark:text-white">Cyber Exhaust</h3>
+              <div class="t-comic-series mt-4 px-4 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-widest bg-cyan-400/20 text-cyan-400 rounded-full text-center">Wild Machine Series</div>
             </div>
           </div>
         </div>
 
-        <!-- Comic Card 3 -->
-        <div class="relative min-w-[85vw] sm:min-w-[320px] h-[60vh] sm:h-[500px] snap-center rounded-[2rem] border-4 border-yellow-400 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
+        <!-- ================= カード 3 ================= -->
+        <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-yellow-400 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
           <div class="p-4 border-b-4 border-yellow-400 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
-            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">Episode <span class="text-yellow-500">★03</span></span>
+            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">
+              FUNKY <span class="text-[#ccff00] neon-text-yellow">★03</span>
+            </span>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
           </div>
-          <div class="flex-1 relative flex items-center justify-center p-6 overflow-hidden bg-slate-50 dark:bg-zinc-950">
+          <div class="relative w-full aspect-[4/5] flex flex-col items-center justify-center p-4 overflow-hidden bg-slate-50 dark:bg-zinc-950">
+            <!-- <img src="YOUR_IMAGE_URL.jpg" class="absolute inset-0 w-full h-full object-cover z-0" alt="Episode 3" /> -->
             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
-            <div class="relative z-10 flex flex-col items-center">
-              <div class="w-32 h-32 rounded-full border-8 border-yellow-400 border-dashed flex items-center justify-center mb-6 animate-[spin_10s_linear_infinite_reverse]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-yellow-400"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <div class="relative z-10 flex flex-col items-center w-full px-2">
+              <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-8 border-yellow-400 border-dashed flex items-center justify-center mb-4 sm:mb-6 animate-[spin_10s_linear_infinite_reverse]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 sm:w-16 sm:h-16 text-yellow-400"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
               </div>
-              <h3 id="t-ep3-title" class="text-3xl font-black text-center uppercase transform -skew-x-6 leading-none text-slate-900 dark:text-white">Turbo Hotdog</h3>
-              <div class="t-comic-series mt-4 px-4 py-1 text-xs font-bold uppercase tracking-widest bg-yellow-400/20 text-yellow-400 rounded-full">Wild Machine Series</div>
+              <h3 id="t-ep3-title" class="text-2xl sm:text-3xl font-black text-center uppercase transform -skew-x-6 leading-tight text-slate-900 dark:text-white">Turbo Hotdog</h3>
+              <div class="t-comic-series mt-4 px-4 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-widest bg-yellow-400/20 text-yellow-400 rounded-full text-center">Wild Machine Series</div>
             </div>
           </div>
         </div>
 
-        <!-- Comic Card 4 -->
-        <div class="relative min-w-[85vw] sm:min-w-[320px] h-[60vh] sm:h-[500px] snap-center rounded-[2rem] border-4 border-fuchsia-500 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
+        <!-- ================= カード 4 ================= -->
+        <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-fuchsia-500 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
           <div class="p-4 border-b-4 border-fuchsia-500 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
-            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">Episode <span class="text-yellow-500">★04</span></span>
+            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">
+              FUNKY <span class="text-[#ccff00] neon-text-yellow">★04</span>
+            </span>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M13 2 3 14 12 14 11 22 21 10 12 10 13 2"></path></svg>
           </div>
-          <div class="flex-1 relative flex items-center justify-center p-6 overflow-hidden bg-slate-50 dark:bg-zinc-950">
+          <div class="relative w-full aspect-[4/5] flex flex-col items-center justify-center p-4 overflow-hidden bg-slate-50 dark:bg-zinc-950">
+            <!-- <img src="YOUR_IMAGE_URL.jpg" class="absolute inset-0 w-full h-full object-cover z-0" alt="Episode 4" /> -->
             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
-            <div class="relative z-10 flex flex-col items-center">
-              <div class="w-32 h-32 rounded-full border-8 border-fuchsia-500 border-dashed flex items-center justify-center mb-6 animate-[spin_10s_linear_infinite_reverse]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-fuchsia-500"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <div class="relative z-10 flex flex-col items-center w-full px-2">
+              <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-8 border-fuchsia-500 border-dashed flex items-center justify-center mb-4 sm:mb-6 animate-[spin_10s_linear_infinite_reverse]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 sm:w-16 sm:h-16 text-fuchsia-500"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
               </div>
-              <h3 id="t-ep4-title" class="text-3xl font-black text-center uppercase transform -skew-x-6 leading-none text-slate-900 dark:text-white">Mecha-Bite</h3>
-              <div class="t-comic-series mt-4 px-4 py-1 text-xs font-bold uppercase tracking-widest bg-fuchsia-500/20 text-fuchsia-500 rounded-full">Wild Machine Series</div>
+              <h3 id="t-ep4-title" class="text-2xl sm:text-3xl font-black text-center uppercase transform -skew-x-6 leading-tight text-slate-900 dark:text-white">Mecha-Bite</h3>
+              <div class="t-comic-series mt-4 px-4 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-widest bg-fuchsia-500/20 text-fuchsia-500 rounded-full text-center">Wild Machine Series</div>
             </div>
           </div>
+        </div>
+
+        <!-- ================= カード 5 (予告プレースホルダー) ================= -->
+        <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-dashed border-gray-400 dark:border-gray-700 flex flex-col items-center justify-center bg-transparent group p-6">
+          <div class="animate-pulse text-gray-400 dark:text-gray-600 mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20 sm:w-24 sm:h-24 animate-[spin_8s_linear_infinite]"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </div>
+          <h3 id="t-comic-more" class="text-xl sm:text-2xl font-black text-center uppercase tracking-widest text-slate-500 dark:text-gray-400 whitespace-pre-line leading-relaxed transform -skew-x-3">
+            THE GARAGE NEVER SLEEPS.
+            NEXT MACHINE IS BREWING... ∞
+          </h3>
         </div>
 
         <!-- Spacer for nice centering at the end -->
@@ -294,7 +308,8 @@
         comic: {
           title: "Too Funky Comic", subtitle: "Wild & Crazy Machines",
           from: "Funky Comics from Japan", series: "Wild Machine Series", swipe: "SWIPE",
-          episodes: ['The Neon Engine', 'Cyber Exhaust', 'Turbo Hotdog', 'Mecha-Bite']
+          episodes: ['The Neon Engine', 'Cyber Exhaust', 'Turbo Hotdog', 'Mecha-Bite'],
+          more: "THE GARAGE NEVER SLEEPS.\nNEXT MACHINE IS BREWING... ∞"
         },
         details: {
           title1: "Building the ", title2: "impossible", title3: " since 20XX",
@@ -312,7 +327,8 @@
         comic: {
           title: "最高にファンキーなコミック", subtitle: "ワイルドでクレイジーなマシン",
           from: "日本発のファンキーコミック", series: "ワイルドマシンシリーズ", swipe: "スワイプ",
-          episodes: ['ネオンエンジン', 'サイバーエキゾースト', 'ターボホットドッグ', 'メカバイト']
+          episodes: ['ネオンエンジン', 'サイバーエキゾースト', 'ターボホットドッグ', 'メカバイト'],
+          more: "ガレージは眠らない。\n次のバケモノを仕込み中... ∞"
         },
         details: {
           title1: "不可能を", title2: "創り出す ", title3: "20XX年から",
@@ -350,6 +366,7 @@
       document.getElementById('t-ep2-title').innerText = t.comic.episodes[1];
       document.getElementById('t-ep3-title').innerText = t.comic.episodes[2];
       document.getElementById('t-ep4-title').innerText = t.comic.episodes[3];
+      document.getElementById('t-comic-more').innerText = t.comic.more;
       document.querySelectorAll('.t-comic-series').forEach(el => el.innerText = t.comic.series);
 
       document.getElementById('t-details-title1').innerText = t.details.title1;
