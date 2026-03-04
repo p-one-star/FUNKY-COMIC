@@ -34,6 +34,21 @@
     .neon-text-yellow { text-shadow: 0 0 4px rgba(204, 255, 0, 0.8), 0 0 10px rgba(204, 255, 0, 0.4); } /* ライムイエロー */
     .neon-box-cyan { box-shadow: 0 0 6px rgba(0, 243, 255, 0.4), inset 0 0 2px rgba(0, 243, 255, 0.2); }
     
+    /* ボタンのホタル発光アニメーション (6秒ループ) */
+    @keyframes firefly-glow {
+      0%, 100% { box-shadow: 0 0 5px rgba(204, 255, 0, 0.3); }
+      50% { box-shadow: 0 0 25px rgba(204, 255, 0, 0.9), 0 0 10px rgba(204, 255, 0, 0.5); }
+    }
+    .btn-firefly {
+      background-color: #ccff00;
+      animation: firefly-glow 6s infinite ease-in-out;
+    }
+    .btn-firefly:hover {
+      animation: none; /* ホバー時はアニメーションを止める */
+      box-shadow: 0 0 35px rgba(204, 255, 0, 1), 0 0 15px rgba(204, 255, 0, 0.8) !important;
+      background-color: #d4ff33; /* ホバー時に少し明るいライムに */
+    }
+
     html, body {
       font-family: 'Inter', system-ui, sans-serif;
       overflow-x: hidden;
@@ -44,11 +59,9 @@
 <body class="bg-[#e2e8f0] dark:bg-[#050505] transition-colors duration-500 selection:bg-pink-500 selection:text-white">
 
   <!-- ================= HEADER ================= -->
-  <!-- 高さを h-[80px] に広げ、items-center で右側ボタンを中央に配置 -->
   <header class="fixed top-0 left-0 w-full z-50 px-4 h-[80px] flex justify-between items-center bg-black/40 backdrop-blur-md border-b border-white/10 transition-all duration-300">
     
     <!-- Logo Area -->
-    <!-- translate-y-[16px] で下方向にずらし、ヘッダー枠からはみ出させる -->
     <img 
       src="icon.PNG" 
       alt="FHW Logo" 
@@ -56,7 +69,6 @@
     />
 
     <!-- Right Controls -->
-    <!-- mt-1 を外し、完全に縦方向の中央に揃えました -->
     <div class="flex items-center gap-3">
       
       <!-- Language Toggle -->
@@ -80,31 +92,25 @@
 
   <main>
     <!-- ================= HERO SECTION ================= -->
-    <!-- pt-32 にして最初の余白を増やし、ヘッダーに文字が隠れないように調整 -->
     <section class="relative min-h-screen flex flex-col items-center justify-center p-6 pb-32 overflow-hidden pt-32">
-      <!-- Background Neon Glows -->
       <div class="absolute top-0 left-[-10%] w-64 h-64 bg-fuchsia-600 rounded-full mix-blend-screen filter blur-[100px] animate-pulse opacity-20 dark:opacity-40"></div>
       <div class="absolute bottom-[-10%] right-[-10%] w-72 h-72 bg-cyan-600 rounded-full mix-blend-screen filter blur-[120px] opacity-10 dark:opacity-30"></div>
       
       <div class="relative z-10 flex flex-col items-center text-center w-full max-w-lg mt-4">
         
-        <!-- Brand Header (ライムイエローのバッジ) -->
         <div class="mb-8">
           <div class="px-4 py-1 border-2 border-[#ccff00] text-[#ccff00] font-black tracking-widest uppercase transform -skew-x-12 text-sm sm:text-base neon-box-cyan bg-gray-900 dark:bg-black">
             FHW // FUNKY HOTDOG WORKS
           </div>
         </div>
 
-        <!-- Main Headline -->
         <h1 class="text-5xl sm:text-7xl font-black uppercase leading-[1.1] mb-8 transform -skew-x-6">
           <span id="t-hero-welcome" class="block drop-shadow-md text-slate-900 dark:text-white">Welcome</span>
           <span id="t-hero-toThe" class="block drop-shadow-md text-slate-900 dark:text-white">To The</span>
           <span id="t-hero-madGarage" class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-pink-500 to-yellow-400 neon-text-cyan mt-2 text-6xl sm:text-8xl">MAD GARAGE.</span>
         </h1>
 
-        <!-- Sub Copy -->
         <div class="space-y-8 mb-12 w-full flex flex-col items-center">
-          
           <div class="flex flex-col items-center gap-4 transform skew-x-3 text-slate-700 dark:text-gray-300">
             <div class="flex flex-wrap justify-center items-baseline gap-x-3 gap-y-1">
               <span id="t-hero-loud1" class="text-lg sm:text-xl font-bold tracking-widest">Machines are</span>
@@ -116,24 +122,20 @@
             </div>
           </div>
           
-          <!-- 3色グラデーションライン -->
           <div class="h-[2px] w-40 sm:w-48 bg-gradient-to-r from-cyan-500 via-[#ccff00] to-pink-500 mx-auto rounded-full opacity-80"></div>
 
           <div class="flex flex-col items-center gap-1 font-black italic text-cyan-600 dark:text-cyan-300">
             <span id="t-hero-funky1" class="text-xl sm:text-2xl tracking-widest">And everything is</span>
             <span id="t-hero-funky2" class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 neon-text-yellow uppercase text-6xl sm:text-7xl tracking-widest leading-tight pb-1">FUNKY</span>
           </div>
-
         </div>
 
-        <!-- Crafted in Japan Badge -->
         <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full border-2 backdrop-blur-sm border-black/20 bg-black/5 text-slate-900 dark:border-white/20 dark:bg-white/5 dark:text-white">
           <span id="t-hero-crafted" class="font-black tracking-widest uppercase text-sm">Crafted in Japan</span>
           <span class="text-2xl">🇯🇵</span>
         </div>
       </div>
       
-      <!-- Scroll Down Indicator -->
       <div class="absolute bottom-6 sm:bottom-8 animate-bounce flex flex-col items-center opacity-80">
         <span class="text-pink-500 text-xs font-black tracking-widest mb-2 uppercase">Scroll</span>
         <div class="w-1 h-8 bg-gradient-to-b from-pink-500 to-transparent rounded-full"></div>
@@ -141,7 +143,7 @@
     </section>
 
     <!-- ================= COMIC SECTION ================= -->
-    <section class="py-24 relative overflow-hidden border-t-2 bg-[#cbd5e1] border-black/10 dark:bg-[#0a0a0a] dark:border-white/10 transition-colors duration-500">
+    <section class="pt-24 pb-8 relative overflow-hidden border-t-2 bg-[#cbd5e1] border-black/10 dark:bg-[#0a0a0a] dark:border-white/10 transition-colors duration-500">
       
       <div class="px-6 mb-10 text-center relative z-10 flex flex-col items-center">
         <h2 id="t-comic-title" class="text-[6vw] sm:text-4xl md:text-5xl font-black text-yellow-400 uppercase transform skew-x-3 mb-2 neon-text-yellow whitespace-nowrap tracking-tighter">
@@ -159,20 +161,18 @@
         COMIC
       </div>
 
-      <!-- HORIZONTAL SWIPE CONTAINER -->
-      <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-8 hide-scrollbar pt-4" style="scroll-behavior: smooth;">
+      <div id="comic-scroll-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-4 hide-scrollbar pt-4" style="scroll-behavior: smooth;">
         
-        <!-- ================= カード 1 ================= -->
+        <!-- カード 1 -->
         <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-pink-500 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
           <div class="p-4 border-b-4 border-pink-500 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
-            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">
-              FUNKY <span class="text-[#ccff00] neon-text-yellow">★01</span>
+            <span class="font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-baseline gap-2">
+              <span class="text-xl">FUNKY</span> 
+              <span class="text-3xl text-[#ccff00]">★01</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
           </div>
-          
           <div class="relative w-full aspect-[4/5] flex flex-col items-center justify-center p-4 overflow-hidden bg-slate-50 dark:bg-zinc-950">
-            <!-- <img src="YOUR_IMAGE_URL.jpg" class="absolute inset-0 w-full h-full object-cover z-0" alt="Episode 1" /> -->
             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
             <div class="relative z-10 flex flex-col items-center w-full px-2">
               <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-8 border-pink-500 border-dashed flex items-center justify-center mb-4 sm:mb-6 animate-[spin_10s_linear_infinite_reverse]">
@@ -184,16 +184,16 @@
           </div>
         </div>
 
-        <!-- ================= カード 2 ================= -->
+        <!-- カード 2 -->
         <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
           <div class="p-4 border-b-4 border-cyan-400 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
-            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">
-              FUNKY <span class="text-[#ccff00] neon-text-yellow">★02</span>
+            <span class="font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-baseline gap-2">
+              <span class="text-xl">FUNKY</span> 
+              <span class="text-3xl text-[#ccff00]">★02</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M13 2 3 14 12 14 11 22 21 10 12 10 13 2"></path></svg>
           </div>
           <div class="relative w-full aspect-[4/5] flex flex-col items-center justify-center p-4 overflow-hidden bg-slate-50 dark:bg-zinc-950">
-            <!-- <img src="YOUR_IMAGE_URL.jpg" class="absolute inset-0 w-full h-full object-cover z-0" alt="Episode 2" /> -->
             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
             <div class="relative z-10 flex flex-col items-center w-full px-2">
               <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-8 border-cyan-400 border-dashed flex items-center justify-center mb-4 sm:mb-6 animate-[spin_10s_linear_infinite_reverse]">
@@ -205,16 +205,16 @@
           </div>
         </div>
 
-        <!-- ================= カード 3 ================= -->
+        <!-- カード 3 -->
         <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-yellow-400 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
           <div class="p-4 border-b-4 border-yellow-400 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
-            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">
-              FUNKY <span class="text-[#ccff00] neon-text-yellow">★03</span>
+            <span class="font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-baseline gap-2">
+              <span class="text-xl">FUNKY</span> 
+              <span class="text-3xl text-[#ccff00]">★03</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
           </div>
           <div class="relative w-full aspect-[4/5] flex flex-col items-center justify-center p-4 overflow-hidden bg-slate-50 dark:bg-zinc-950">
-            <!-- <img src="YOUR_IMAGE_URL.jpg" class="absolute inset-0 w-full h-full object-cover z-0" alt="Episode 3" /> -->
             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
             <div class="relative z-10 flex flex-col items-center w-full px-2">
               <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-8 border-yellow-400 border-dashed flex items-center justify-center mb-4 sm:mb-6 animate-[spin_10s_linear_infinite_reverse]">
@@ -226,16 +226,16 @@
           </div>
         </div>
 
-        <!-- ================= カード 4 ================= -->
+        <!-- カード 4 -->
         <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-fuchsia-500 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
           <div class="p-4 border-b-4 border-fuchsia-500 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
-            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">
-              FUNKY <span class="text-[#ccff00] neon-text-yellow">★04</span>
+            <span class="font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-baseline gap-2">
+              <span class="text-xl">FUNKY</span> 
+              <span class="text-3xl text-[#ccff00]">★04</span>
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M13 2 3 14 12 14 11 22 21 10 12 10 13 2"></path></svg>
           </div>
           <div class="relative w-full aspect-[4/5] flex flex-col items-center justify-center p-4 overflow-hidden bg-slate-50 dark:bg-zinc-950">
-            <!-- <img src="YOUR_IMAGE_URL.jpg" class="absolute inset-0 w-full h-full object-cover z-0" alt="Episode 4" /> -->
             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
             <div class="relative z-10 flex flex-col items-center w-full px-2">
               <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-8 border-fuchsia-500 border-dashed flex items-center justify-center mb-4 sm:mb-6 animate-[spin_10s_linear_infinite_reverse]">
@@ -247,7 +247,7 @@
           </div>
         </div>
 
-        <!-- ================= カード 5 (予告プレースホルダー) ================= -->
+        <!-- カード 5 (予告プレースホルダー) -->
         <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-dashed border-gray-400 dark:border-gray-700 flex flex-col items-center justify-center bg-transparent group p-6">
           <div class="animate-pulse text-gray-400 dark:text-gray-600 mb-6">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20 sm:w-24 sm:h-24 animate-[spin_8s_linear_infinite]"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -258,24 +258,20 @@
           </h3>
         </div>
 
-        <!-- Spacer for nice centering at the end -->
         <div class="min-w-[5vw] sm:min-w-[100px] flex-shrink-0"></div>
       </div>
 
       <!-- Swipe Hint Animation -->
-      <div class="mt-4 flex justify-center items-center gap-3 font-black tracking-widest uppercase text-lg animate-pulse py-3 px-8 rounded-full border mx-auto w-max text-cyan-600 bg-cyan-100 border-cyan-400 dark:text-cyan-400 dark:bg-cyan-900/20 dark:border-cyan-500/30 neon-box-cyan">
-        <span class="flex gap-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[bounce_1s_infinite_horizontal]"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[bounce_1s_infinite_horizontal] delay-75"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[bounce_1s_infinite_horizontal] delay-150"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </span>
-        <span id="t-comic-swipe">SWIPE</span>
+      <div id="swipe-hint" class="mt-4 flex justify-center items-center font-black tracking-widest uppercase text-base text-gray-500 dark:text-gray-400 transition-opacity duration-500 opacity-40">
+        <span class="animate-pulse">▶▷▶</span>
+        <span id="t-comic-swipe" class="mx-3">SWIPE</span>
+        <span class="animate-pulse">▶▷▶</span>
       </div>
     </section>
 
     <!-- ================= DETAILS SECTION ================= -->
-    <section class="py-32 px-6 relative flex flex-col items-center justify-center text-center transition-colors duration-500 bg-[#e2e8f0] dark:bg-[#050505]">
-      <div class="max-w-xl">
+    <section class="pt-12 pb-32 px-6 relative flex flex-col items-center justify-center text-center transition-colors duration-500 bg-[#e2e8f0] dark:bg-[#050505]">
+      <div class="max-w-xl flex flex-col items-center w-full">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-pink-500 mx-auto mb-8 animate-pulse opacity-80"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
         
         <h2 class="text-2xl sm:text-3xl font-black uppercase mb-6 leading-tight transform -skew-x-3 text-slate-900 dark:text-white">
@@ -286,21 +282,67 @@
           Deep in the neon-lit alleys of Japan, we wrench on the wildest, most surreal machines known to humanity. It doesn't have to make sense. It just has to be FUNKY.
         </p>
         
-        <button id="t-details-btn" class="bg-yellow-400 text-black font-black uppercase tracking-widest px-8 py-4 rounded-full text-lg hover:bg-yellow-300 transition-colors transform hover:scale-105 active:scale-95 border-4 border-black shadow-[0_0_10px_rgba(204,255,0,0.4)]">
+        <a href="https://p-one-star.github.io/GARAGE-01/" id="t-details-btn" class="inline-block btn-firefly text-black font-black uppercase tracking-widest px-8 py-4 rounded-full text-lg transition-all transform hover:scale-105 active:scale-95 border-4 border-black cursor-pointer">
           Join the Garage
-        </button>
+        </a>
+
+        <!-- ★★★ BACK TO FHW ＆ SNSアイコン群 ★★★ -->
+        <div class="mt-16 flex flex-col items-center gap-8 w-full">
+          
+          <a href="https://p-one-star.github.io/" class="relative px-8 py-3 group cursor-pointer block">
+            <div class="absolute inset-0 border-2 border-gray-500 dark:border-gray-400 transform -skew-x-12 transition-all duration-300 group-hover:border-white group-hover:shadow-[0_0_15px_rgba(255,255,255,0.6),inset_0_0_10px_rgba(255,255,255,0.4)]"></div>
+            <span class="relative z-10 flex items-center gap-3 font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase transition-all duration-300 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+              <span id="t-details-back">BACK TO FHW</span>
+            </span>
+          </a>
+
+          <div class="flex gap-10 mt-2">
+            <!-- Instagram -->
+            <a href="#" target="_blank" class="text-gray-500 dark:text-gray-400 transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] hover:scale-110">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+            
+            <!-- YouTube -->
+            <a href="#" target="_blank" class="text-gray-500 dark:text-gray-400 transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] hover:scale-110">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-5.273 3.568z"/>
+              </svg>
+            </a>
+
+            <!-- X (Twitter) -->
+            <a href="#" target="_blank" class="text-gray-500 dark:text-gray-400 transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] hover:scale-110">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7 mt-0.5">
+                <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+              </svg>
+            </a>
+
+            <!-- Pinterest -->
+            <a href="#" target="_blank" class="text-gray-500 dark:text-gray-400 transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] hover:scale-110">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.168 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.625 0 12.017 0z"/>
+              </svg>
+            </a>
+          </div>
+
+        </div>
+
       </div>
     </section>
   </main>
 
   <!-- ================= FOOTER ================= -->
   <footer class="py-8 border-t-2 text-center flex flex-col items-center transition-colors duration-500 bg-slate-200 border-slate-300 dark:bg-black dark:border-zinc-900">
-    <div class="text-2xl font-black tracking-tighter uppercase mb-2 text-slate-900 dark:text-white">
-      F<span class="text-pink-500">H</span>W
+    <div class="text-2xl font-black tracking-tighter uppercase mb-4">
+      <span class="text-cyan-400">F</span><span class="text-[#ccff00]">H</span><span class="text-pink-500">W</span>
     </div>
-    <p id="t-footer-copy" class="text-xs sm:text-sm font-bold uppercase tracking-widest mb-4 text-slate-500 dark:text-zinc-600">
-      Funky Hotdog Works ©
-    </p>
+    
+    <img src="header.jpg" alt="Funky Hotdog Works Header" class="w-[80vw] max-w-[300px] mb-6 object-contain rounded-xl" />
+
     <div class="flex gap-4 opacity-80">
       <div class="w-2 h-2 rounded-full bg-cyan-400"></div>
       <div class="w-2 h-2 rounded-full bg-pink-500"></div>
@@ -327,9 +369,8 @@
         details: {
           title1: "Building the ", title2: "impossible", title3: " since 20XX",
           desc: "Deep in the neon-lit alleys of Japan, we wrench on the wildest, most surreal machines known to humanity. It doesn't have to make sense. It just has to be FUNKY.",
-          btn: "Join the Garage"
-        },
-        footer: { copy: "Funky Hotdog Works ©" }
+          btn: "Join the Garage", back: "BACK TO FHW"
+        }
       },
       ja: {
         hero: {
@@ -346,9 +387,8 @@
         details: {
           title1: "不可能を", title2: "創り出す ", title3: "20XX年から",
           desc: "ネオン輝く日本の路地裏深くで、人類が知る限り最もワイルドで超現実的なマシンを組み立てている。意味なんてなくていい。ただファンキーであればいいんだ。",
-          btn: "ガレージに参加する"
-        },
-        footer: { copy: "ファンキーホットドッグワークス ©" }
+          btn: "ガレージに参加する", back: "BACK TO FHW"
+        }
       }
     };
 
@@ -387,8 +427,7 @@
       document.getElementById('t-details-title3').innerText = t.details.title3;
       document.getElementById('t-details-desc').innerText = t.details.desc;
       document.getElementById('t-details-btn').innerText = t.details.btn;
-
-      document.getElementById('t-footer-copy').innerText = t.footer.copy;
+      document.getElementById('t-details-back').innerText = t.details.back;
 
       if (currentLang === 'en') {
         document.getElementById('icon-en').className = "text-sm transition-opacity duration-300 opacity-100 grayscale-0";
@@ -425,6 +464,21 @@
 
     updateLanguage();
     updateTheme();
+
+    // --- スワイプヒントのフェードアウト処理 ---
+    const comicScrollContainer = document.getElementById('comic-scroll-container');
+    const swipeHint = document.getElementById('swipe-hint');
+
+    comicScrollContainer.addEventListener('scroll', () => {
+      if (comicScrollContainer.scrollLeft > 20) {
+        swipeHint.classList.remove('opacity-40');
+        swipeHint.classList.add('opacity-0');
+      } else {
+        swipeHint.classList.remove('opacity-0');
+        swipeHint.classList.add('opacity-40');
+      }
+    });
+
   </script>
 </body>
 </html>
