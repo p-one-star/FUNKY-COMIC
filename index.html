@@ -1,88 +1,25 @@
 <!DOCTYPE html>
-import React, { useState, useRef } from 'react';
-import { Settings, Zap, Wrench, ArrowRight } from 'lucide-react';
-
-// --- TRANSLATIONS (翻訳データ) ---
-const translations = {
-  en: {
-    hero: {
-      welcome: "Welcome",
-      toThe: "To The",
-      madGarage: "MAD GARAGE.",
-      loud1: "Machines are",
-      loud2: "LOUD",
-      stupid1: "Stories are",
-      stupid2: "STUPID",
-      funky1: "And everything is",
-      funky2: "FUNKY",
-      crafted: "Crafted in Japan"
-    },
-    comic: {
-      sectionTitle: "Too Funky Comic",
-      subTitle: "Wild & Crazy Machines",
-      fromJapan: "Funky Comics from Japan",
-      series: "Wild Machine Series",
-      swipe: "SWIPE",
-      episodes: [
-        { id: '01', title: 'The Neon Engine' },
-        { id: '02', title: 'Cyber Exhaust' },
-        { id: '03', title: 'Turbo Hotdog' },
-        { id: '04', title: 'Mecha-Bite' }
-      ]
-    },
-    details: {
-      title1: "Building the ",
-      title2: "impossible",
-      title3: " since 20XX",
-      desc: "Deep in the neon-lit alleys of Japan, we wrench on the wildest, most surreal machines known to humanity. It doesn't have to make sense. It just has to be FUNKY.",
-      btn: "Join the Garage"
-    },
-    footer: {
-      copyright: "Funky Hotdog Works ©"
+<html lang="ja" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FUNKY HOTDOG WORKS</title>
+  
+  <!-- Tailwind CSS を読み込む -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind のダークモード設定 -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {}
+      }
     }
-  },
-  ja: {
-    hero: {
-      welcome: "ようこそ",
-      toThe: "狂気の",
-      madGarage: "ガレージへ。",
-      loud1: "マシンは",
-      loud2: "爆音",
-      stupid1: "ストーリーは",
-      stupid2: "何でもあり",
-      funky1: "そして全てが",
-      funky2: "FUNKY",
-      crafted: "日本発祥"
-    },
-    comic: {
-      sectionTitle: "最高にファンキーなコミック",
-      subTitle: "ワイルドでクレイジーなマシン",
-      fromJapan: "日本発のファンキーコミック",
-      series: "ワイルドマシンシリーズ",
-      swipe: "スワイプ",
-      episodes: [
-        { id: '01', title: 'ネオンエンジン' },
-        { id: '02', title: 'サイバーエキゾースト' },
-        { id: '03', title: 'ターボホットドッグ' },
-        { id: '04', title: 'メカバイト' }
-      ]
-    },
-    details: {
-      title1: "不可能を",
-      title2: "創り出す ",
-      title3: "20XX年から",
-      desc: "ネオン輝く日本の路地裏深くで、人類が知る限り最もワイルドで超現実的なマシンを組み立てている。意味なんてなくていい。ただファンキーであればいいんだ。",
-      btn: "ガレージに参加する"
-    },
-    footer: {
-      copyright: "ファンキーホットドッグワークス ©"
-    }
-  }
-};
+  </script>
 
-// --- CUSTOM STYLES ---
-const GlobalStyles = () => (
-  <style>{`
+  <!-- カスタムCSS（発光エフェクトなど） -->
+  <style>
     .hide-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -94,285 +31,372 @@ const GlobalStyles = () => (
     /* 発光を控えめに調整 */
     .neon-text-cyan { text-shadow: 0 0 4px rgba(0, 243, 255, 0.8), 0 0 10px rgba(0, 243, 255, 0.4); }
     .neon-text-pink { text-shadow: 0 0 4px rgba(255, 0, 255, 0.8), 0 0 10px rgba(255, 0, 255, 0.4); }
-    .neon-text-yellow { text-shadow: 0 0 4px rgba(204, 255, 0, 0.8), 0 0 10px rgba(204, 255, 0, 0.4); }
+    .neon-text-yellow { text-shadow: 0 0 4px rgba(204, 255, 0, 0.8), 0 0 10px rgba(204, 255, 0, 0.4); } /* ライムイエロー */
     .neon-box-cyan { box-shadow: 0 0 6px rgba(0, 243, 255, 0.4), inset 0 0 2px rgba(0, 243, 255, 0.2); }
     
     html, body {
       font-family: 'Inter', system-ui, sans-serif;
       overflow-x: hidden;
     }
-  `}</style>
-);
+  </style>
+</head>
 
-// --- HEADER SECTION ---
-const Header = ({ isDark, setIsDark, lang, setLang }) => {
-  return (
-    <header className="fixed top-0 left-0 w-full z-50 px-4 py-3 flex justify-between items-center bg-black/40 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+<body class="bg-[#e2e8f0] dark:bg-[#050505] transition-colors duration-500 selection:bg-pink-500 selection:text-white">
+
+  <!-- ================= HEADER ================= -->
+  <header class="fixed top-0 left-0 w-full z-50 px-4 py-3 flex justify-between items-center bg-black/40 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+    
+    <!-- Logo Area -->
+    <div class="relative w-12 h-12 rounded-full border-2 border-cyan-400 flex items-center justify-center overflow-hidden shadow-[0_0_6px_rgba(0,243,255,0.5)] group cursor-pointer bg-black">
+      <!-- TODO: GitHubに画像をアップロード後、以下の img タグのコメント(<!-- と -->)を外してURLを設定してください -->
+      <!-- <img src="YOUR_IMAGE_URL.png" alt="Logo" class="w-full h-full object-cover z-10 relative" /> -->
+      <span class="text-cyan-400 font-black text-[10px] leading-tight text-center z-0">IMG<br/>HERE</span>
+      <div class="absolute inset-0 rounded-full border-[3px] border-pink-500 opacity-50 shadow-[inset_0_0_6px_rgba(255,0,255,0.5)]"></div>
+    </div>
+
+    <!-- Right Controls -->
+    <div class="flex items-center gap-3">
       
-      {/* Logo Area */}
-      <div className="relative w-12 h-12 rounded-full border-2 border-cyan-400 flex items-center justify-center overflow-hidden shadow-[0_0_6px_rgba(0,243,255,0.5)] group cursor-pointer bg-black">
-         {/* TODO: GitHubにアップロード後、以下のimgタグのsrcにURLを設定してください。 */}
-         <span className="text-cyan-400 font-black text-[10px] leading-tight text-center z-0">IMG<br/>HERE</span>
-         <div className="absolute inset-0 rounded-full border-[3px] border-pink-500 opacity-50 shadow-[inset_0_0_6px_rgba(255,0,255,0.5)]"></div>
+      <!-- Language Toggle -->
+      <div id="btn-lang" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/80 border border-gray-600 cursor-pointer transition-all duration-300 hover:border-cyan-400 hover:shadow-[0_0_8px_rgba(0,243,255,0.6),inset_0_0_3px_rgba(0,243,255,0.3)]">
+        <span id="icon-en" class="text-sm transition-opacity duration-300 opacity-100 grayscale-0">🇺🇸</span>
+        <span class="text-gray-500 text-xs font-bold">|</span>
+        <span id="icon-ja" class="text-sm transition-opacity duration-300 opacity-40 grayscale">🇯🇵</span>
       </div>
 
-      {/* Right Controls */}
-      <div className="flex items-center gap-3">
-        
-        {/* Language Toggle */}
-        <div 
-          onClick={() => setLang(lang === 'en' ? 'ja' : 'en')}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/80 border border-gray-600 cursor-pointer transition-all duration-300 hover:border-cyan-400 hover:shadow-[0_0_8px_rgba(0,243,255,0.6),inset_0_0_3px_rgba(0,243,255,0.3)]"
-        >
-          <span className={`text-sm transition-opacity duration-300 ${lang === 'en' ? 'opacity-100 grayscale-0' : 'opacity-40 grayscale'}`}>🇺🇸</span>
-          <span className="text-gray-500 text-xs font-bold">|</span>
-          <span className={`text-sm transition-opacity duration-300 ${lang === 'ja' ? 'opacity-100 grayscale-0' : 'opacity-40 grayscale'}`}>🇯🇵</span>
-        </div>
-
-        {/* Theme Toggle */}
-        <div 
-          onClick={() => setIsDark(!isDark)}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/80 border border-gray-600 cursor-pointer transition-all duration-300 hover:border-cyan-400 hover:shadow-[0_0_8px_rgba(0,243,255,0.6),inset_0_0_3px_rgba(0,243,255,0.3)]"
-        >
-          <span className={`text-sm transition-opacity duration-300 ${isDark ? 'opacity-100' : 'opacity-40'}`}>🌙</span>
-          <span className="text-gray-500 text-xs font-bold">|</span>
-          <span className={`text-sm transition-opacity duration-300 ${!isDark ? 'opacity-100' : 'opacity-40'}`}>☀️</span>
-        </div>
-
-        {/* Hotdog Shortcut */}
-        <button 
-          className="text-2xl hover:scale-110 transition-transform origin-center ml-1 filter drop-shadow-[0_0_4px_rgba(255,255,255,0.3)]"
-          title="Shortcut"
-        >
-          🌭
-        </button>
+      <!-- Theme Toggle -->
+      <div id="btn-theme" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/80 border border-gray-600 cursor-pointer transition-all duration-300 hover:border-cyan-400 hover:shadow-[0_0_8px_rgba(0,243,255,0.6),inset_0_0_3px_rgba(0,243,255,0.3)]">
+        <span id="icon-dark" class="text-sm transition-opacity duration-300 opacity-100">🌙</span>
+        <span class="text-gray-500 text-xs font-bold">|</span>
+        <span id="icon-light" class="text-sm transition-opacity duration-300 opacity-40">☀️</span>
       </div>
-    </header>
-  );
-};
 
-// --- HERO SECTION ---
-const Hero = ({ isDark, t }) => {
-  return (
-    // pb-32 を追加してスクロールインジケーターとバッジが被らないようにスペースを確保
-    <section className={`relative min-h-screen flex flex-col items-center justify-center p-6 pb-32 overflow-hidden transition-colors duration-500 pt-24 ${isDark ? 'bg-[#050505]' : 'bg-[#e2e8f0]'}`}>
-      {/* Background Neon Glows */}
-      <div className={`absolute top-0 left-[-10%] w-64 h-64 bg-fuchsia-600 rounded-full mix-blend-screen filter blur-[100px] animate-pulse ${isDark ? 'opacity-40' : 'opacity-20'}`}></div>
-      <div className={`absolute bottom-[-10%] right-[-10%] w-72 h-72 bg-cyan-600 rounded-full mix-blend-screen filter blur-[120px] ${isDark ? 'opacity-30' : 'opacity-10'}`}></div>
+      <!-- Hotdog Shortcut -->
+      <button class="text-2xl hover:scale-110 transition-transform origin-center ml-1 filter drop-shadow-[0_0_4px_rgba(255,255,255,0.3)]" title="Shortcut">🌭</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= HERO SECTION ================= -->
+    <section class="relative min-h-screen flex flex-col items-center justify-center p-6 pb-32 overflow-hidden pt-24">
+      <!-- Background Neon Glows -->
+      <div class="absolute top-0 left-[-10%] w-64 h-64 bg-fuchsia-600 rounded-full mix-blend-screen filter blur-[100px] animate-pulse opacity-20 dark:opacity-40"></div>
+      <div class="absolute bottom-[-10%] right-[-10%] w-72 h-72 bg-cyan-600 rounded-full mix-blend-screen filter blur-[120px] opacity-10 dark:opacity-30"></div>
       
-      {/* Brand Header */}
-      <div className="absolute top-24 left-0 w-full flex justify-center z-10">
-        <div className={`px-4 py-1 border-2 border-yellow-400 text-yellow-400 font-black tracking-widest uppercase transform -skew-x-12 text-sm neon-box-cyan ${isDark ? 'bg-black' : 'bg-gray-900'}`}>
+      <!-- Brand Header -->
+      <div class="absolute top-24 left-0 w-full flex justify-center z-10">
+        <div class="px-4 py-1 border-2 border-yellow-400 text-yellow-400 font-black tracking-widest uppercase transform -skew-x-12 text-sm neon-box-cyan bg-gray-900 dark:bg-black">
           FHW // Funky Hotdog Works
         </div>
       </div>
 
-      <div className="relative z-10 flex flex-col items-center text-center w-full max-w-lg mt-16">
-        {/* Main Headline */}
-        <h1 className="text-5xl sm:text-7xl font-black uppercase leading-[1.1] mb-8 transform -skew-x-6">
-          <span className={`block drop-shadow-md ${isDark ? 'text-white' : 'text-slate-900'}`}>{t.hero.welcome}</span>
-          <span className={`block drop-shadow-md ${isDark ? 'text-white' : 'text-slate-900'}`}>{t.hero.toThe}</span>
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-pink-500 to-yellow-400 neon-text-cyan mt-2 text-6xl sm:text-8xl">
-            {t.hero.madGarage}
-          </span>
+      <div class="relative z-10 flex flex-col items-center text-center w-full max-w-lg mt-16">
+        <!-- Main Headline -->
+        <h1 class="text-5xl sm:text-7xl font-black uppercase leading-[1.1] mb-8 transform -skew-x-6">
+          <span id="t-hero-welcome" class="block drop-shadow-md text-slate-900 dark:text-white">Welcome</span>
+          <span id="t-hero-toThe" class="block drop-shadow-md text-slate-900 dark:text-white">To The</span>
+          <span id="t-hero-madGarage" class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-pink-500 to-yellow-400 neon-text-cyan mt-2 text-6xl sm:text-8xl">MAD GARAGE.</span>
         </h1>
 
-        {/* --- Sub Copy --- */}
-        <div className="space-y-8 mb-12 w-full flex flex-col items-center">
+        <!-- Sub Copy -->
+        <div class="space-y-8 mb-12 w-full flex flex-col items-center">
           
-          <div className={`flex flex-col items-center gap-4 transform skew-x-3 ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
-            <div className="flex flex-wrap justify-center items-baseline gap-x-3 gap-y-1">
-              <span className="text-lg sm:text-xl font-bold tracking-widest">{t.hero.loud1}</span>
-              <span className="text-yellow-400 neon-text-yellow uppercase text-4xl sm:text-5xl font-black">{t.hero.loud2}</span>
+          <div class="flex flex-col items-center gap-4 transform skew-x-3 text-slate-700 dark:text-gray-300">
+            <div class="flex flex-wrap justify-center items-baseline gap-x-3 gap-y-1">
+              <span id="t-hero-loud1" class="text-lg sm:text-xl font-bold tracking-widest">Machines are</span>
+              <span id="t-hero-loud2" class="text-[#ccff00] neon-text-yellow uppercase text-4xl sm:text-5xl font-black">LOUD</span>
             </div>
-            <div className="flex flex-wrap justify-center items-baseline gap-x-3 gap-y-1">
-              <span className="text-lg sm:text-xl font-bold tracking-widest">{t.hero.stupid1}</span>
-              <span className="text-pink-400 neon-text-pink uppercase text-4xl sm:text-5xl font-black">{t.hero.stupid2}</span>
+            <div class="flex flex-wrap justify-center items-baseline gap-x-3 gap-y-1">
+              <span id="t-hero-stupid1" class="text-lg sm:text-xl font-bold tracking-widest">Stories are</span>
+              <span id="t-hero-stupid2" class="text-pink-400 neon-text-pink uppercase text-4xl sm:text-5xl font-black">STUPID</span>
             </div>
           </div>
           
-          <div className="h-1 w-24 bg-gradient-to-r from-cyan-500 to-pink-500 mx-auto rounded-full opacity-80"></div>
+          <!-- 3色グラデーションライン -->
+          <div class="h-[2px] w-40 sm:w-48 bg-gradient-to-r from-cyan-500 via-[#ccff00] to-pink-500 mx-auto rounded-full opacity-80"></div>
 
-          <div className={`flex flex-col items-center gap-1 font-black italic ${isDark ? 'text-cyan-300' : 'text-cyan-600'}`}>
-            <span className="text-xl sm:text-2xl tracking-widest">{t.hero.funky1}</span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 neon-text-yellow uppercase text-6xl sm:text-7xl tracking-widest leading-tight pb-1">
-              {t.hero.funky2}
-            </span>
+          <div class="flex flex-col items-center gap-1 font-black italic text-cyan-600 dark:text-cyan-300">
+            <span id="t-hero-funky1" class="text-xl sm:text-2xl tracking-widest">And everything is</span>
+            <span id="t-hero-funky2" class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 neon-text-yellow uppercase text-6xl sm:text-7xl tracking-widest leading-tight pb-1">FUNKY</span>
           </div>
 
         </div>
 
-        {/* Crafted in Japan Badge */}
-        <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-full border-2 backdrop-blur-sm ${isDark ? 'border-white/20 bg-white/5 text-white' : 'border-black/20 bg-black/5 text-slate-900'}`}>
-          <span className="font-black tracking-widest uppercase text-sm">{t.hero.crafted}</span>
-          <span className="text-2xl">🇯🇵</span>
+        <!-- Crafted in Japan Badge -->
+        <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full border-2 backdrop-blur-sm border-black/20 bg-black/5 text-slate-900 dark:border-white/20 dark:bg-white/5 dark:text-white">
+          <span id="t-hero-crafted" class="font-black tracking-widest uppercase text-sm">Crafted in Japan</span>
+          <span class="text-2xl">🇯🇵</span>
         </div>
       </div>
       
-      {/* Scroll Down Indicator */}
-      <div className="absolute bottom-6 sm:bottom-8 animate-bounce flex flex-col items-center opacity-80">
-        <span className="text-pink-500 text-xs font-black tracking-widest mb-2 uppercase">Scroll</span>
-        <div className="w-1 h-8 bg-gradient-to-b from-pink-500 to-transparent rounded-full"></div>
+      <!-- Scroll Down Indicator -->
+      <div class="absolute bottom-6 sm:bottom-8 animate-bounce flex flex-col items-center opacity-80">
+        <span class="text-pink-500 text-xs font-black tracking-widest mb-2 uppercase">Scroll</span>
+        <div class="w-1 h-8 bg-gradient-to-b from-pink-500 to-transparent rounded-full"></div>
       </div>
     </section>
-  );
-};
 
-// --- COMIC CARD COMPONENT ---
-const ComicCard = ({ episode, title, colorClass, icon: Icon, isDark, t }) => (
-  <div className={`relative min-w-[85vw] sm:min-w-[320px] h-[60vh] sm:h-[500px] snap-center rounded-[2rem] border-4 ${colorClass} overflow-hidden flex flex-col group transition-colors duration-500 ${isDark ? 'bg-black' : 'bg-white'}`}>
-    {/* Comic Header */}
-    <div className={`p-4 border-b-4 ${colorClass} flex justify-between items-center ${isDark ? 'bg-zinc-900' : 'bg-slate-100'}`}>
-      <span className={`font-black text-xl uppercase tracking-wider ${isDark ? 'text-white' : 'text-slate-900'}`}>
-        Episode <span className="text-yellow-500">★{episode}</span>
-      </span>
-      <Settings className={`w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 ${isDark ? 'text-white' : 'text-slate-900'}`} />
-    </div>
-    
-    {/* Abstract Machine Cover Image */}
-    <div className={`flex-1 relative flex items-center justify-center p-6 overflow-hidden ${isDark ? 'bg-zinc-950' : 'bg-slate-50'}`}>
-      {/* Background grid */}
-      <div className={`absolute inset-0 opacity-20 ${isDark ? 'bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]' : 'bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)]'}`} style={{ backgroundSize: '20px 20px' }}></div>
+    <!-- ================= COMIC SECTION ================= -->
+    <section class="py-24 relative overflow-hidden border-t-2 bg-[#cbd5e1] border-black/10 dark:bg-[#0a0a0a] dark:border-white/10 transition-colors duration-500">
       
-      <div className="relative z-10 flex flex-col items-center">
-        <div className={`w-32 h-32 rounded-full border-8 ${colorClass} border-dashed flex items-center justify-center mb-6 animate-[spin_10s_linear_infinite_reverse]`}>
-          <Icon className={`w-16 h-16 ${colorClass.replace('border-', 'text-')}`} />
-        </div>
-        <h3 className={`text-3xl font-black text-center uppercase transform -skew-x-6 leading-none ${isDark ? 'text-white' : 'text-slate-900'}`}>
-          {title}
-        </h3>
-        <div className={`mt-4 px-4 py-1 text-xs font-bold uppercase tracking-widest ${colorClass.replace('border-', 'bg-').replace('500', '500/20')} ${colorClass.replace('border-', 'text-')} rounded-full`}>
-          {t.comic.series}
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
-// --- COMIC SECTION ---
-const ComicSection = ({ isDark, t }) => {
-  const scrollContainerRef = useRef(null);
-
-  const icons = [Wrench, Zap, Settings, Zap];
-  const colors = ['border-pink-500', 'border-cyan-400', 'border-yellow-400', 'border-fuchsia-500'];
-
-  return (
-    <section className={`py-24 relative overflow-hidden border-t-2 transition-colors duration-500 ${isDark ? 'bg-[#0a0a0a] border-white/10' : 'bg-[#cbd5e1] border-black/10'}`}>
-      {/* Section Header */}
-      <div className="px-6 mb-10 text-center relative z-10 flex flex-col items-center">
-        {/* ★1行に収まるように text-[6vw] と whitespace-nowrap を追加 */}
-        <h2 className="text-[6vw] sm:text-4xl md:text-5xl font-black text-yellow-400 uppercase transform skew-x-3 mb-2 neon-text-yellow whitespace-nowrap tracking-tighter">
-          {t.comic.sectionTitle}
+      <!-- Section Header -->
+      <div class="px-6 mb-10 text-center relative z-10 flex flex-col items-center">
+        <h2 id="t-comic-title" class="text-[6vw] sm:text-4xl md:text-5xl font-black text-yellow-400 uppercase transform skew-x-3 mb-2 neon-text-yellow whitespace-nowrap tracking-tighter">
+          Too Funky Comic
         </h2>
-        <p className={`text-lg sm:text-xl font-bold mb-1 uppercase tracking-wider ${isDark ? 'text-white' : 'text-slate-800'}`}>
-          {t.comic.subTitle}
+        <p id="t-comic-subtitle" class="text-lg sm:text-xl font-bold mb-1 uppercase tracking-wider text-slate-800 dark:text-white">
+          Wild & Crazy Machines
         </p>
-        <p className={`font-medium uppercase tracking-widest text-xs sm:text-sm flex items-center justify-center gap-2 ${isDark ? 'text-cyan-400' : 'text-cyan-700'}`}>
-          {t.comic.fromJapan} <span className="text-xl">🇯🇵</span>
+        <p class="font-medium uppercase tracking-widest text-xs sm:text-sm flex items-center justify-center gap-2 text-cyan-700 dark:text-cyan-400">
+          <span id="t-comic-from">Funky Comics from Japan</span> <span class="text-xl">🇯🇵</span>
         </p>
       </div>
 
-      {/* Background decorative text */}
-      <div className={`absolute top-0 right-0 text-9xl font-black transform rotate-90 translate-x-1/4 -translate-y-1/4 pointer-events-none ${isDark ? 'text-white/5' : 'text-black/5'}`}>
+      <div class="absolute top-0 right-0 text-9xl font-black transform rotate-90 translate-x-1/4 -translate-y-1/4 pointer-events-none text-black/5 dark:text-white/5">
         COMIC
       </div>
 
-      {/* HORIZONTAL SWIPE CONTAINER */}
-      <div 
-        ref={scrollContainerRef}
-        className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-8 hide-scrollbar pt-4"
-        style={{ scrollBehavior: 'smooth' }}
-      >
-        {t.comic.episodes.map((comic, index) => (
-          <ComicCard 
-            key={comic.id}
-            episode={comic.id} 
-            title={comic.title} 
-            colorClass={colors[index % colors.length]}
-            icon={icons[index % icons.length]}
-            isDark={isDark}
-            t={t}
-          />
-        ))}
-        <div className="min-w-[5vw] sm:min-w-[100px] flex-shrink-0"></div>
+      <!-- HORIZONTAL SWIPE CONTAINER -->
+      <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-8 hide-scrollbar pt-4" style="scroll-behavior: smooth;">
+        
+        <!-- Comic Card 1 -->
+        <div class="relative min-w-[85vw] sm:min-w-[320px] h-[60vh] sm:h-[500px] snap-center rounded-[2rem] border-4 border-pink-500 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
+          <div class="p-4 border-b-4 border-pink-500 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
+            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">Episode <span class="text-yellow-500">★01</span></span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          </div>
+          <div class="flex-1 relative flex items-center justify-center p-6 overflow-hidden bg-slate-50 dark:bg-zinc-950">
+            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
+            <div class="relative z-10 flex flex-col items-center">
+              <div class="w-32 h-32 rounded-full border-8 border-pink-500 border-dashed flex items-center justify-center mb-6 animate-[spin_10s_linear_infinite_reverse]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-pink-500"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+              </div>
+              <h3 id="t-ep1-title" class="text-3xl font-black text-center uppercase transform -skew-x-6 leading-none text-slate-900 dark:text-white">The Neon Engine</h3>
+              <div class="t-comic-series mt-4 px-4 py-1 text-xs font-bold uppercase tracking-widest bg-pink-500/20 text-pink-500 rounded-full">Wild Machine Series</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comic Card 2 -->
+        <div class="relative min-w-[85vw] sm:min-w-[320px] h-[60vh] sm:h-[500px] snap-center rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
+          <div class="p-4 border-b-4 border-cyan-400 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
+            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">Episode <span class="text-yellow-500">★02</span></span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M13 2 3 14 12 14 11 22 21 10 12 10 13 2"></path></svg>
+          </div>
+          <div class="flex-1 relative flex items-center justify-center p-6 overflow-hidden bg-slate-50 dark:bg-zinc-950">
+            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
+            <div class="relative z-10 flex flex-col items-center">
+              <div class="w-32 h-32 rounded-full border-8 border-cyan-400 border-dashed flex items-center justify-center mb-6 animate-[spin_10s_linear_infinite_reverse]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-cyan-400"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </div>
+              <h3 id="t-ep2-title" class="text-3xl font-black text-center uppercase transform -skew-x-6 leading-none text-slate-900 dark:text-white">Cyber Exhaust</h3>
+              <div class="t-comic-series mt-4 px-4 py-1 text-xs font-bold uppercase tracking-widest bg-cyan-400/20 text-cyan-400 rounded-full">Wild Machine Series</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comic Card 3 -->
+        <div class="relative min-w-[85vw] sm:min-w-[320px] h-[60vh] sm:h-[500px] snap-center rounded-[2rem] border-4 border-yellow-400 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
+          <div class="p-4 border-b-4 border-yellow-400 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
+            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">Episode <span class="text-yellow-500">★03</span></span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </div>
+          <div class="flex-1 relative flex items-center justify-center p-6 overflow-hidden bg-slate-50 dark:bg-zinc-950">
+            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
+            <div class="relative z-10 flex flex-col items-center">
+              <div class="w-32 h-32 rounded-full border-8 border-yellow-400 border-dashed flex items-center justify-center mb-6 animate-[spin_10s_linear_infinite_reverse]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-yellow-400"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </div>
+              <h3 id="t-ep3-title" class="text-3xl font-black text-center uppercase transform -skew-x-6 leading-none text-slate-900 dark:text-white">Turbo Hotdog</h3>
+              <div class="t-comic-series mt-4 px-4 py-1 text-xs font-bold uppercase tracking-widest bg-yellow-400/20 text-yellow-400 rounded-full">Wild Machine Series</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comic Card 4 -->
+        <div class="relative min-w-[85vw] sm:min-w-[320px] h-[60vh] sm:h-[500px] snap-center rounded-[2rem] border-4 border-fuchsia-500 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500">
+          <div class="p-4 border-b-4 border-fuchsia-500 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
+            <span class="font-black text-xl uppercase tracking-wider text-slate-900 dark:text-white">Episode <span class="text-yellow-500">★04</span></span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M13 2 3 14 12 14 11 22 21 10 12 10 13 2"></path></svg>
+          </div>
+          <div class="flex-1 relative flex items-center justify-center p-6 overflow-hidden bg-slate-50 dark:bg-zinc-950">
+            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
+            <div class="relative z-10 flex flex-col items-center">
+              <div class="w-32 h-32 rounded-full border-8 border-fuchsia-500 border-dashed flex items-center justify-center mb-6 animate-[spin_10s_linear_infinite_reverse]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-fuchsia-500"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </div>
+              <h3 id="t-ep4-title" class="text-3xl font-black text-center uppercase transform -skew-x-6 leading-none text-slate-900 dark:text-white">Mecha-Bite</h3>
+              <div class="t-comic-series mt-4 px-4 py-1 text-xs font-bold uppercase tracking-widest bg-fuchsia-500/20 text-fuchsia-500 rounded-full">Wild Machine Series</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spacer for nice centering at the end -->
+        <div class="min-w-[5vw] sm:min-w-[100px] flex-shrink-0"></div>
       </div>
 
-      {/* Swipe Hint Animation */}
-      <div className={`mt-4 flex justify-center items-center gap-3 font-black tracking-widest uppercase text-lg animate-pulse py-3 px-8 rounded-full border mx-auto w-max neon-box-cyan ${isDark ? 'text-cyan-400 bg-cyan-900/20 border-cyan-500/30' : 'text-cyan-600 bg-cyan-100 border-cyan-400'}`}>
-        <span className="flex gap-1">
-          <ArrowRight className="w-6 h-6 animate-[bounce_1s_infinite_horizontal]" />
-          <ArrowRight className="w-6 h-6 animate-[bounce_1s_infinite_horizontal] delay-75" />
-          <ArrowRight className="w-6 h-6 animate-[bounce_1s_infinite_horizontal] delay-150" />
+      <!-- Swipe Hint Animation -->
+      <div class="mt-4 flex justify-center items-center gap-3 font-black tracking-widest uppercase text-lg animate-pulse py-3 px-8 rounded-full border mx-auto w-max text-cyan-600 bg-cyan-100 border-cyan-400 dark:text-cyan-400 dark:bg-cyan-900/20 dark:border-cyan-500/30 neon-box-cyan">
+        <span class="flex gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[bounce_1s_infinite_horizontal]"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[bounce_1s_infinite_horizontal] delay-75"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[bounce_1s_infinite_horizontal] delay-150"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </span>
-        {t.comic.swipe}
+        <span id="t-comic-swipe">SWIPE</span>
       </div>
     </section>
-  );
-};
 
-// --- DETAILS SECTION ---
-const DetailsSection = ({ isDark, t }) => (
-  <section className={`py-32 px-6 relative flex flex-col items-center justify-center text-center transition-colors duration-500 ${isDark ? 'bg-[#050505]' : 'bg-[#e2e8f0]'}`}>
-    <div className="max-w-xl">
-      <Wrench className="w-16 h-16 text-pink-500 mx-auto mb-8 animate-pulse opacity-80" />
-      <h2 className={`text-2xl sm:text-3xl font-black uppercase mb-6 leading-tight transform -skew-x-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-        {t.details.title1}<span className="text-pink-400 neon-text-pink">{t.details.title2}</span>{t.details.title3}
-      </h2>
-      <p className={`font-medium leading-relaxed mb-10 text-base sm:text-lg ${isDark ? 'text-gray-400' : 'text-slate-600'}`}>
-        {t.details.desc}
-      </p>
-      <button className="bg-yellow-400 text-black font-black uppercase tracking-widest px-8 py-4 rounded-full text-lg hover:bg-yellow-300 transition-colors transform hover:scale-105 active:scale-95 border-4 border-black shadow-[0_0_10px_rgba(204,255,0,0.4)]">
-        {t.details.btn}
-      </button>
-    </div>
-  </section>
-);
+    <!-- ================= DETAILS SECTION ================= -->
+    <section class="py-32 px-6 relative flex flex-col items-center justify-center text-center transition-colors duration-500 bg-[#e2e8f0] dark:bg-[#050505]">
+      <div class="max-w-xl">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-pink-500 mx-auto mb-8 animate-pulse opacity-80"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+        
+        <h2 class="text-2xl sm:text-3xl font-black uppercase mb-6 leading-tight transform -skew-x-3 text-slate-900 dark:text-white">
+          <span id="t-details-title1">Building the </span><span id="t-details-title2" class="text-pink-400 neon-text-pink">impossible</span><span id="t-details-title3"> since 20XX</span>
+        </h2>
+        
+        <p id="t-details-desc" class="font-medium leading-relaxed mb-10 text-base sm:text-lg text-slate-600 dark:text-gray-400">
+          Deep in the neon-lit alleys of Japan, we wrench on the wildest, most surreal machines known to humanity. It doesn't have to make sense. It just has to be FUNKY.
+        </p>
+        
+        <button id="t-details-btn" class="bg-yellow-400 text-black font-black uppercase tracking-widest px-8 py-4 rounded-full text-lg hover:bg-yellow-300 transition-colors transform hover:scale-105 active:scale-95 border-4 border-black shadow-[0_0_10px_rgba(204,255,0,0.4)]">
+          Join the Garage
+        </button>
+      </div>
+    </section>
+  </main>
 
-// --- FOOTER ---
-const Footer = ({ isDark, t }) => (
-  <footer className={`py-8 border-t-2 text-center flex flex-col items-center transition-colors duration-500 ${isDark ? 'bg-black border-zinc-900' : 'bg-slate-200 border-slate-300'}`}>
-    <div className={`text-2xl font-black tracking-tighter uppercase mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-      F<span className="text-pink-500">H</span>W
+  <!-- ================= FOOTER ================= -->
+  <footer class="py-8 border-t-2 text-center flex flex-col items-center transition-colors duration-500 bg-slate-200 border-slate-300 dark:bg-black dark:border-zinc-900">
+    <div class="text-2xl font-black tracking-tighter uppercase mb-2 text-slate-900 dark:text-white">
+      F<span class="text-pink-500">H</span>W
     </div>
-    <p className={`text-xs sm:text-sm font-bold uppercase tracking-widest mb-4 ${isDark ? 'text-zinc-600' : 'text-slate-500'}`}>
-      {t.footer.copyright}
+    <p id="t-footer-copy" class="text-xs sm:text-sm font-bold uppercase tracking-widest mb-4 text-slate-500 dark:text-zinc-600">
+      Funky Hotdog Works ©
     </p>
-    <div className="flex gap-4 opacity-80">
-      <div className="w-2 h-2 rounded-full bg-cyan-400"></div>
-      <div className="w-2 h-2 rounded-full bg-pink-500"></div>
-      <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+    <div class="flex gap-4 opacity-80">
+      <div class="w-2 h-2 rounded-full bg-cyan-400"></div>
+      <div class="w-2 h-2 rounded-full bg-pink-500"></div>
+      <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
     </div>
   </footer>
-);
 
-// --- MAIN APP COMPONENT ---
-export default function App() {
-  const [lang, setLang] = useState('en');
-  const [isDark, setIsDark] = useState(true);
+  <!-- ================= JAVASCRIPT (ロジック部分) ================= -->
+  <script>
+    // 翻訳データ
+    const translations = {
+      en: {
+        hero: {
+          welcome: "Welcome", toThe: "To The", madGarage: "MAD GARAGE.",
+          loud1: "Machines are", loud2: "LOUD", stupid1: "Stories are", stupid2: "STUPID",
+          funky1: "And everything is", funky2: "FUNKY", crafted: "Crafted in Japan"
+        },
+        comic: {
+          title: "Too Funky Comic", subtitle: "Wild & Crazy Machines",
+          from: "Funky Comics from Japan", series: "Wild Machine Series", swipe: "SWIPE",
+          episodes: ['The Neon Engine', 'Cyber Exhaust', 'Turbo Hotdog', 'Mecha-Bite']
+        },
+        details: {
+          title1: "Building the ", title2: "impossible", title3: " since 20XX",
+          desc: "Deep in the neon-lit alleys of Japan, we wrench on the wildest, most surreal machines known to humanity. It doesn't have to make sense. It just has to be FUNKY.",
+          btn: "Join the Garage"
+        },
+        footer: { copy: "Funky Hotdog Works ©" }
+      },
+      ja: {
+        hero: {
+          welcome: "ようこそ", toThe: "狂気の", madGarage: "ガレージへ。",
+          loud1: "マシンは", loud2: "爆音", stupid1: "ストーリーは", stupid2: "何でもあり",
+          funky1: "そして全てが", funky2: "FUNKY", crafted: "日本発祥"
+        },
+        comic: {
+          title: "最高にファンキーなコミック", subtitle: "ワイルドでクレイジーなマシン",
+          from: "日本発のファンキーコミック", series: "ワイルドマシンシリーズ", swipe: "スワイプ",
+          episodes: ['ネオンエンジン', 'サイバーエキゾースト', 'ターボホットドッグ', 'メカバイト']
+        },
+        details: {
+          title1: "不可能を", title2: "創り出す ", title3: "20XX年から",
+          desc: "ネオン輝く日本の路地裏深くで、人類が知る限り最もワイルドで超現実的なマシンを組み立てている。意味なんてなくていい。ただファンキーであればいいんだ。",
+          btn: "ガレージに参加する"
+        },
+        footer: { copy: "ファンキーホットドッグワークス ©" }
+      }
+    };
 
-  const t = translations[lang];
+    // 初期状態 (英語・ダークモード)
+    let currentLang = 'en';
+    let isDark = true;
 
-  return (
-    <div className={`w-full min-h-screen font-sans selection:bg-pink-500 selection:text-white transition-colors duration-500 ${isDark ? 'bg-[#050505]' : 'bg-[#e2e8f0]'}`}>
-      <GlobalStyles />
+    // --- テキストを更新する関数 ---
+    function updateLanguage() {
+      const t = translations[currentLang];
       
-      <Header 
-        isDark={isDark} 
-        setIsDark={setIsDark} 
-        lang={lang} 
-        setLang={setLang} 
-      />
+      document.getElementById('t-hero-welcome').innerText = t.hero.welcome;
+      document.getElementById('t-hero-toThe').innerText = t.hero.toThe;
+      document.getElementById('t-hero-madGarage').innerText = t.hero.madGarage;
+      document.getElementById('t-hero-loud1').innerText = t.hero.loud1;
+      document.getElementById('t-hero-loud2').innerText = t.hero.loud2;
+      document.getElementById('t-hero-stupid1').innerText = t.hero.stupid1;
+      document.getElementById('t-hero-stupid2').innerText = t.hero.stupid2;
+      document.getElementById('t-hero-funky1').innerText = t.hero.funky1;
+      document.getElementById('t-hero-funky2').innerText = t.hero.funky2;
+      document.getElementById('t-hero-crafted').innerText = t.hero.crafted;
 
-      <main>
-        <Hero isDark={isDark} t={t} />
-        <ComicSection isDark={isDark} t={t} />
-        <DetailsSection isDark={isDark} t={t} />
-      </main>
-      
-      <Footer isDark={isDark} t={t} />
-    </div>
-  );
-}
+      document.getElementById('t-comic-title').innerText = t.comic.title;
+      document.getElementById('t-comic-subtitle').innerText = t.comic.subtitle;
+      document.getElementById('t-comic-from').innerText = t.comic.from;
+      document.getElementById('t-comic-swipe').innerText = t.comic.swipe;
+      document.getElementById('t-ep1-title').innerText = t.comic.episodes[0];
+      document.getElementById('t-ep2-title').innerText = t.comic.episodes[1];
+      document.getElementById('t-ep3-title').innerText = t.comic.episodes[2];
+      document.getElementById('t-ep4-title').innerText = t.comic.episodes[3];
+      document.querySelectorAll('.t-comic-series').forEach(el => el.innerText = t.comic.series);
+
+      document.getElementById('t-details-title1').innerText = t.details.title1;
+      document.getElementById('t-details-title2').innerText = t.details.title2;
+      document.getElementById('t-details-title3').innerText = t.details.title3;
+      document.getElementById('t-details-desc').innerText = t.details.desc;
+      document.getElementById('t-details-btn').innerText = t.details.btn;
+
+      document.getElementById('t-footer-copy').innerText = t.footer.copy;
+
+      if (currentLang === 'en') {
+        document.getElementById('icon-en').className = "text-sm transition-opacity duration-300 opacity-100 grayscale-0";
+        document.getElementById('icon-ja').className = "text-sm transition-opacity duration-300 opacity-40 grayscale";
+      } else {
+        document.getElementById('icon-en').className = "text-sm transition-opacity duration-300 opacity-40 grayscale";
+        document.getElementById('icon-ja').className = "text-sm transition-opacity duration-300 opacity-100 grayscale-0";
+      }
+    }
+
+    // --- ダークモードを更新する関数 ---
+    function updateTheme() {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        document.getElementById('icon-dark').className = "text-sm transition-opacity duration-300 opacity-100";
+        document.getElementById('icon-light').className = "text-sm transition-opacity duration-300 opacity-40";
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.getElementById('icon-dark').className = "text-sm transition-opacity duration-300 opacity-40";
+        document.getElementById('icon-light').className = "text-sm transition-opacity duration-300 opacity-100";
+      }
+    }
+
+    // --- イベントリスナーの登録 ---
+    document.getElementById('btn-lang').addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'ja' : 'en';
+      updateLanguage();
+    });
+
+    document.getElementById('btn-theme').addEventListener('click', () => {
+      isDark = !isDark;
+      updateTheme();
+    });
+
+    updateLanguage();
+    updateTheme();
+  </script>
+</body>
+</html>
 
 
-   
