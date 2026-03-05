@@ -83,10 +83,9 @@
       text-shadow: 0 0 15px rgba(204, 255, 0, 0.6); 
     }
     
-    /* ★変更：白文字＋黒縁＋裏シアン発光（文字潰れ防止版） */
+    /* 白文字＋黒縁＋裏シアン発光（文字潰れ防止版） */
     .text-outline-cyan {
       color: #ffffff; 
-      /* ストロークだと文字が潰れるので、四方に黒い影を落として縁取りを作る */
       text-shadow: 
         -1.5px -1.5px 0 #000,  
          1.5px -1.5px 0 #000,
@@ -248,22 +247,22 @@
               
               <!-- 1. 画像エリア -->
               <div class="relative w-full aspect-[3/2] flex-shrink-0 bg-zinc-900 overflow-hidden">
-                <img id="img-ep1" src="01en.jpg" alt="Episode 1" class="w-full h-full object-cover object-top transition-opacity duration-300" />
+                <img id="img-ep1" src="01en.jpg" alt="Episode 1" class="w-full h-full object-cover object-top" />
               </div>
 
-              <!-- 境界線: ライムイエローの極細ライン -->
-              <div class="w-full z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
+              <!-- ★変更: ライムイエローの極細ラインを12px下に下げる -->
+              <div class="w-full z-10 flex-shrink-0 relative top-[12px]" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
 
               <!-- 2. 下部の真っ黒なスペース ＆ テキスト ＆ ボタン -->
               <div class="relative flex-1 flex flex-col items-center justify-around p-3 pb-4 bg-black">
                 
                 <!-- キャッチコピー -->
-                <div id="t-ep1-phrase" class="text-outline-cyan text-center font-black leading-[1.1] text-[6.5vw] sm:text-[26px] pt-1 tracking-wider w-full">
+                <div id="t-ep1-phrase" class="text-outline-cyan text-center font-black leading-[1.1] text-[6.5vw] sm:text-[26px] pt-2 tracking-wider w-full">
                   ANYONE FASTER<br>THAN ME?
                 </div>
 
                 <!-- 「本を読む」ボタン -->
-                <a href="#" class="relative z-10 inline-block px-8 py-2.5 rounded-full border-2 border-cyan-400 text-cyan-400 font-black uppercase tracking-widest text-sm transition-all duration-300 hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_15px_rgba(0,243,255,0.6)] active:scale-95">
+                <a href="#" class="relative z-10 inline-block px-8 py-2.5 rounded-full border-2 border-[#ccff00] text-cyan-400 font-black uppercase tracking-widest text-sm transition-all duration-300 hover:bg-[#ccff00] hover:text-black hover:shadow-[0_0_15px_rgba(204,255,0,0.6)] active:scale-95">
                   <span id="t-btn-read1">READ COMIC</span>
                 </a>
               </div>
@@ -500,8 +499,6 @@
       document.getElementById('t-comic-from').innerText = t.comic.from;
       document.getElementById('t-comic-swipe').innerText = t.comic.swipe;
       
-      // ★ エラー原因修正：t-ep1-title はHTMLに存在しない場合があるので、if文で囲む
-      const ep1 = document.getElementById('t-ep1-title'); if(ep1) ep1.innerText = t.comic.episodes[0];
       const ep2 = document.getElementById('t-ep2-title'); if(ep2) ep2.innerText = t.comic.episodes[1];
       const ep3 = document.getElementById('t-ep3-title'); if(ep3) ep3.innerText = t.comic.episodes[2];
       const ep4 = document.getElementById('t-ep4-title'); if(ep4) ep4.innerText = t.comic.episodes[3];
@@ -518,15 +515,14 @@
       
       document.getElementById('t-toast-msg').innerText = t.toast;
       
-      // ボタンテキスト切り替え
+      // ボタンテキスト
       const btnRead1 = document.getElementById('t-btn-read1');
       if(btnRead1) btnRead1.innerText = t.comic.read;
       
-      // ★ キャッチコピーのテキスト切り替え
+      // キャッチコピー
       const phrase1 = document.getElementById('t-ep1-phrase');
       if (phrase1) {
         phrase1.innerHTML = currentLang === 'en' ? t.comic.phrase1.replace('\n', '<br>') : t.comic.phrase1;
-        // 英語の時だけスピード感を出すために斜体(italic)にする
         if (currentLang === 'en') {
           phrase1.classList.add('italic');
         } else {
@@ -534,18 +530,12 @@
         }
       }
 
-      // ★ 画像切り替え
+      // 画像切り替え (キャッシュバスターを削除し、シンプルに)
       const ep1Img = document.getElementById('img-ep1');
       if (ep1Img) {
-        ep1Img.style.opacity = '0.5'; 
-        setTimeout(() => {
-          const cacheBuster = "?v=" + new Date().getTime(); 
-          ep1Img.src = currentLang === 'en' ? '01en.jpg' + cacheBuster : '01jp.jpg' + cacheBuster;
-          ep1Img.style.opacity = '1';
-        }, 150);
+        ep1Img.src = currentLang === 'en' ? '01en.jpg' : '01jp.jpg';
       }
 
-      // ヘッダーアイコン切り替え
       if (currentLang === 'en') {
         document.getElementById('icon-en').className = "text-sm transition-opacity duration-300 opacity-100 grayscale-0";
         document.getElementById('icon-ja').className = "text-sm transition-opacity duration-300 opacity-40 grayscale";
