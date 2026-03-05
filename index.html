@@ -224,7 +224,7 @@
 
         <div id="comic-scroll-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-4 hide-scrollbar pt-4 relative z-10" style="scroll-behavior: smooth;">
           
-          <!-- ★★★ カード 1 (画像＋ボタン仕様に改修) ★★★ -->
+          <!-- ★★★ カード 1 (画像＋ボタン仕様) ★★★ -->
           <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-black transition-colors duration-500 shadow-lg">
             
             <!-- ヘッダー部分 -->
@@ -236,16 +236,15 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
             </div>
             
-            <!-- コンテンツエリア (他のカードと高さを揃えるための aspect-[4/5] ) -->
+            <!-- コンテンツエリア -->
             <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
               
               <!-- 1. 画像エリア (正方形) -->
               <div class="relative w-full aspect-square flex-shrink-0">
                 <img id="img-ep1" src="01en.jpg" alt="Episode 1" class="w-full h-full object-cover" />
                 
-                <!-- ライムイエローの細ライン (下から24%の位置。両端が消えるグラデーション) -->
-                <!-- ※位置を微調整したい場合は、下の style="bottom: 24%;" の数字を変えてください -->
-                <div class="absolute left-0 w-full z-10" style="bottom: 24%; height: 2px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%); box-shadow: 0 0 8px #ccff00;"></div>
+                <!-- ★変更: ライムイエローの細ライン (より上へ、より細く、発光なし) -->
+                <div class="absolute left-0 w-full z-10" style="bottom: 28%; height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
               </div>
 
               <!-- 2. 下部の真っ黒なスペース ＆ 「本を読む」ボタン -->
@@ -359,7 +358,6 @@
             Deep in the neon-lit alleys of Japan, we wrench on the wildest, most surreal machines known to humanity. It doesn't have to make sense. It just has to be FUNKY.
           </p>
           
-          <!-- GARAGE行きボタン -->
           <a href="#" onclick="goToGarage(event, 'https://p-one-star.github.io/GARAGE-01/'); return false;" id="t-details-btn" class="inline-block btn-firefly text-black font-black uppercase tracking-widest px-8 py-4 rounded-full text-lg transition-all transform hover:scale-105 active:scale-95 border-4 border-black cursor-pointer">
             Join the Garage
           </a>
@@ -385,7 +383,7 @@
                 </svg>
               </a>
               
-              <!-- YouTube (トースト通知) -->
+              <!-- YouTube -->
               <a href="#" id="btn-youtube" class="block text-gray-500 dark:text-gray-400 transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] hover:scale-110 cursor-pointer">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 pointer-events-none">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-5.273 3.568z"/>
@@ -440,7 +438,7 @@
           from: "UNLIMITED DIFFUSION", series: "Wild Machine Series", swipe: "SWIPE",
           episodes: ['The Neon Engine', 'Cyber Exhaust', 'Turbo Hotdog', 'Mecha-Bite'],
           more: "THE GARAGE NEVER SLEEPS.\nNEXT MACHINE IS BREWING... ∞",
-          read: "READ COMIC" // ★ 追加
+          read: "READ COMIC"
         },
         details: {
           title1: "Building the ", title2: "impossible", title3: " since 20XX",
@@ -459,7 +457,7 @@
           from: "止められるもんなら\n止めてみな！", series: "ワイルドマシンシリーズ", swipe: "スワイプ",
           episodes: ['ネオンエンジン', 'サイバーエキゾースト', 'ターボホットドッグ', 'メカバイト'],
           more: "ガレージは眠らない。\n次のバケモノを仕込み中... ∞",
-          read: "本を読む" // ★ 追加
+          read: "本を読む"
         },
         details: {
           title1: "不可能を", title2: "創り出す ", title3: "20XX年から",
@@ -504,7 +502,6 @@
       
       document.getElementById('t-toast-msg').innerText = t.toast;
       
-      // ★ 画像と言語の切り替え
       document.getElementById('t-btn-read1').innerText = t.comic.read;
       document.getElementById('img-ep1').src = currentLang === 'en' ? '01en.jpg' : '01jp.jpg';
 
@@ -555,7 +552,6 @@
       }
     });
 
-    // YouTube アイコントースト演出
     const ytBtn = document.getElementById('btn-youtube');
     const toast = document.getElementById('funky-toast');
     let toastTimeout;
@@ -572,7 +568,7 @@
       }, 3000);
     });
 
-    // ★★★ GARAGE行き 鉄の扉スライド演出 ★★★
+    // GARAGE行き 鉄の扉演出
     function goToGarage(e, targetUrl) {
       e.preventDefault(); 
       const ironDoor = document.getElementById('iron-door');
@@ -591,7 +587,7 @@
       }, 1000); 
     }
 
-    // ★★★ BACK TO FHW 砂時計のように溶ける(スネーク状)ワープ演出 ★★★
+    // BACK TO FHW サラサラ溶ける演出
     function goBackFhw(e, targetUrl) {
       e.preventDefault(); 
       document.body.style.overflow = 'hidden';
