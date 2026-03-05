@@ -96,47 +96,30 @@
          0 0 24px rgba(0, 243, 255, 0.8); 
     }
 
-    /* ★★★ 変更：ホタルのように「左から右へ」流れる明滅アニメーション ★★★ */
+    /* ホタルのように「左から右へ」流れる明滅アニメーション */
     @keyframes firefly-sweep {
-      0% {
-        /* 背景画像を右側にセット（光が左端の少し外にある状態） */
-        background-position: 150% center;
-        /* 全体の発光は弱く */
-        filter: drop-shadow(0 0 2px rgba(0, 243, 255, 0.2));
-      }
-      50% {
-        /* 真ん中を通る時に一番強く発光（ホタルのようなポワッとした光） */
-        filter: drop-shadow(0 0 12px rgba(0, 243, 255, 1));
-      }
-      100% {
-        /* 背景画像を左側にセット（光が右端へ抜け切る） */
-        background-position: -50% center;
-        /* 再び発光が弱まる */
-        filter: drop-shadow(0 0 2px rgba(0, 243, 255, 0.2));
-      }
+      0% { background-position: 150% center; filter: drop-shadow(0 0 2px rgba(0, 243, 255, 0.2)); }
+      50% { filter: drop-shadow(0 0 12px rgba(0, 243, 255, 1)); }
+      100% { background-position: -50% center; filter: drop-shadow(0 0 2px rgba(0, 243, 255, 0.2)); }
     }
     .btn-text-glow {
       background: linear-gradient(
         to right,
-        rgba(0, 243, 255, 0.4) 0%,     /* ベースのシアン */
+        rgba(0, 243, 255, 0.4) 0%,
         rgba(0, 243, 255, 0.4) 40%,
-        rgba(0, 243, 255, 1) 48%,      /* 光の塊の輪郭 */
-        #ffffff 50%,                   /* 強い閃光（白） */
+        rgba(0, 243, 255, 1) 48%,
+        #ffffff 50%,
         rgba(0, 243, 255, 1) 52%,
         rgba(0, 243, 255, 0.4) 60%,
         rgba(0, 243, 255, 0.4) 100%
       );
-      /* 背景サイズを広げて、光の塊が一つだけになるように調整 */
       background-size: 200% auto;
       color: transparent;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      /* 3.5秒周期の滑らかなループ */
       animation: firefly-sweep 3.5s ease-in-out infinite;
     }
-    
-    /* ホバー(タップ)時は、文字を黒で固定する */
     .group:hover .btn-text-glow {
       background: none;
       -webkit-text-fill-color: #000 !important;
@@ -279,58 +262,89 @@
 
         <div id="comic-scroll-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-4 hide-scrollbar pt-4 relative z-10" style="scroll-behavior: smooth;">
           
-          <!-- ★★★ カード 1 (スペシャル仕様) ★★★ -->
+          <!-- ★★★ カード 1 ★★★ -->
           <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-black transition-colors duration-500 shadow-lg">
             
-            <!-- ヘッダー部分 -->
-            <div class="p-4 flex justify-between items-center bg-black relative z-20">
+            <div class="p-4 flex justify-between items-center bg-black relative z-30">
               <span class="font-black uppercase tracking-wider text-white flex items-baseline gap-2">
                 <span class="text-xl">FUNKY</span> 
                 <span class="text-3xl text-[#ccff00]">★01</span>
               </span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-white"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
               
-              <!-- ヘッダー下部のライムイエロー極細ライン -->
+              <!-- シェアメニュー -->
+              <div class="relative">
+                <button class="btn-share text-white hover:text-[#ccff00] transition-colors p-1" data-target="menu-share-1">
+                  <!-- Share Icon -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                    <circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                  </svg>
+                </button>
+                <div id="menu-share-1" class="menu-share-dropdown absolute top-full right-0 mt-2 w-48 bg-zinc-900 border border-cyan-400 rounded-lg shadow-[0_0_15px_rgba(0,243,255,0.3)] opacity-0 pointer-events-none transition-all duration-300 transform translate-y-[-10px] flex flex-col overflow-hidden">
+                  <!-- ★変更: アイコンを全てSVGに統一し、gap-3で間隔を整えました -->
+                  <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-cyan-900/50 hover:text-cyan-400 border-b border-white/10 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                    <span class="t-share-copy">Copy Link</span>
+                  </button>
+                  <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-cyan-900/50 hover:text-cyan-400 border-b border-white/10 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.168 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.625 0 12.017 0z"/></svg>
+                    <span class="t-share-pin">Share on Pinterest</span>
+                  </button>
+                  <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-cyan-900/50 hover:text-cyan-400 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                    <span class="t-share-x">Share on X</span>
+                  </button>
+                </div>
+              </div>
+              
               <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[85%]" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
             </div>
             
             <!-- コンテンツエリア -->
             <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
-              
-              <!-- 1. 画像エリア -->
               <div class="relative w-full aspect-[3/2] flex-shrink-0 bg-black overflow-hidden">
                 <img id="img-ep1" src="01en.jpg" alt="Episode 1" class="w-full h-full object-cover object-top" />
               </div>
 
-              <!-- 画像下のライムイエロー極細ライン -->
               <div class="w-[85%] mx-auto z-10 flex-shrink-0 relative top-[12px]" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
 
-              <!-- 2. 下部の真っ黒なスペース ＆ テキスト ＆ ボタン -->
-              <div class="relative flex-1 flex flex-col items-center justify-around p-3 pb-4 bg-black">
-                
-                <!-- キャッチコピー -->
+              <div class="relative flex-1 flex flex-col items-center justify-center gap-3 p-3 pb-4 bg-black">
                 <div id="t-ep1-phrase" class="text-outline-cyan text-center font-black leading-[1.1] text-[6.5vw] sm:text-[26px] pt-2 tracking-wider w-full">
                   ANYONE FASTER<br>THAN ME?
                 </div>
 
-                <!-- ★変更: ボタン (枠のパディングを削ってタイトにし、文字サイズを大きく) -->
-                <!-- px-4 py-1.25 で枠を狭くし、text-[14px] で文字を大きくしました -->
-                <a href="#" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:text-black hover:shadow-[0_0_15px_rgba(204,255,0,0.6)] active:scale-95 group">
+                <a href="#" class="btn-show-toast relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group">
                   <span id="t-btn-read1" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
                 </a>
               </div>
-              
             </div>
           </div>
 
-          <!-- カード 2 -->
+          <!-- ★★★ カード 2 ★★★ -->
           <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-[#ccff00] overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500 shadow-lg">
-            <div class="p-4 border-b-4 border-[#ccff00] flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
+            <div class="p-4 border-b-4 border-[#ccff00] flex justify-between items-center bg-slate-100 dark:bg-zinc-900 relative z-30">
               <span class="font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-baseline gap-2">
                 <span class="text-xl">FUNKY</span> 
                 <span class="text-3xl text-[#ccff00]">★02</span>
               </span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M13 2 3 14 12 14 11 22 21 10 12 10 13 2"></path></svg>
+              <div class="relative">
+                <button class="btn-share text-slate-900 dark:text-white hover:text-[#ccff00] dark:hover:text-[#ccff00] transition-colors p-1" data-target="menu-share-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                </button>
+                <div id="menu-share-2" class="menu-share-dropdown absolute top-full right-0 mt-2 w-48 bg-zinc-900 border border-[#ccff00] rounded-lg shadow-[0_0_15px_rgba(204,255,0,0.3)] opacity-0 pointer-events-none transition-all duration-300 transform translate-y-[-10px] flex flex-col overflow-hidden">
+                  <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-[#ccff00]/20 hover:text-[#ccff00] border-b border-white/10 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                    <span class="t-share-copy">Copy Link</span>
+                  </button>
+                  <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-[#ccff00]/20 hover:text-[#ccff00] border-b border-white/10 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.168 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.625 0 12.017 0z"/></svg>
+                    <span class="t-share-pin">Share on Pinterest</span>
+                  </button>
+                  <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-[#ccff00]/20 hover:text-[#ccff00] font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                    <span class="t-share-x">Share on X</span>
+                  </button>
+                </div>
+              </div>
             </div>
             <div class="relative w-full aspect-[4/5] flex flex-col items-center justify-center p-4 overflow-hidden bg-slate-50 dark:bg-zinc-950">
               <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
@@ -344,14 +358,32 @@
             </div>
           </div>
 
-          <!-- カード 3 -->
+          <!-- ★★★ カード 3 ★★★ -->
           <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-pink-500 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500 shadow-lg">
-            <div class="p-4 border-b-4 border-pink-500 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
+            <div class="p-4 border-b-4 border-pink-500 flex justify-between items-center bg-slate-100 dark:bg-zinc-900 relative z-30">
               <span class="font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-baseline gap-2">
                 <span class="text-xl">FUNKY</span> 
                 <span class="text-3xl text-[#ccff00]">★03</span>
               </span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <div class="relative">
+                <button class="btn-share text-slate-900 dark:text-white hover:text-pink-500 dark:hover:text-pink-500 transition-colors p-1" data-target="menu-share-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                </button>
+                <div id="menu-share-3" class="menu-share-dropdown absolute top-full right-0 mt-2 w-48 bg-zinc-900 border border-pink-500 rounded-lg shadow-[0_0_15px_rgba(255,0,255,0.3)] opacity-0 pointer-events-none transition-all duration-300 transform translate-y-[-10px] flex flex-col overflow-hidden">
+                  <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-pink-900/50 hover:text-pink-400 border-b border-white/10 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                    <span class="t-share-copy">Copy Link</span>
+                  </button>
+                  <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-pink-900/50 hover:text-pink-400 border-b border-white/10 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.168 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.625 0 12.017 0z"/></svg>
+                    <span class="t-share-pin">Share on Pinterest</span>
+                  </button>
+                  <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-pink-900/50 hover:text-pink-400 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                    <span class="t-share-x">Share on X</span>
+                  </button>
+                </div>
+              </div>
             </div>
             <div class="relative w-full aspect-[4/5] flex flex-col items-center justify-center p-4 overflow-hidden bg-slate-50 dark:bg-zinc-950">
               <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
@@ -365,14 +397,32 @@
             </div>
           </div>
 
-          <!-- カード 4 -->
+          <!-- ★★★ カード 4 ★★★ -->
           <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500 shadow-lg">
-            <div class="p-4 border-b-4 border-cyan-400 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
+            <div class="p-4 border-b-4 border-cyan-400 flex justify-between items-center bg-slate-100 dark:bg-zinc-900 relative z-30">
               <span class="font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-baseline gap-2">
                 <span class="text-xl">FUNKY</span> 
                 <span class="text-3xl text-[#ccff00]">★04</span>
               </span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M13 2 3 14 12 14 11 22 21 10 12 10 13 2"></path></svg>
+              <div class="relative">
+                <button class="btn-share text-slate-900 dark:text-white hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors p-1" data-target="menu-share-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                </button>
+                <div id="menu-share-4" class="menu-share-dropdown absolute top-full right-0 mt-2 w-48 bg-zinc-900 border border-cyan-400 rounded-lg shadow-[0_0_15px_rgba(0,243,255,0.3)] opacity-0 pointer-events-none transition-all duration-300 transform translate-y-[-10px] flex flex-col overflow-hidden">
+                  <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-cyan-900/50 hover:text-cyan-400 border-b border-white/10 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                    <span class="t-share-copy">Copy Link</span>
+                  </button>
+                  <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-cyan-900/50 hover:text-cyan-400 border-b border-white/10 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.168 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.625 0 12.017 0z"/></svg>
+                    <span class="t-share-pin">Share on Pinterest</span>
+                  </button>
+                  <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-cyan-900/50 hover:text-cyan-400 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                    <span class="t-share-x">Share on X</span>
+                  </button>
+                </div>
+              </div>
             </div>
             <div class="relative w-full aspect-[4/5] flex flex-col items-center justify-center p-4 overflow-hidden bg-slate-50 dark:bg-zinc-950">
               <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
@@ -447,7 +497,7 @@
               </a>
               
               <!-- YouTube -->
-              <a href="#" id="btn-youtube" class="block text-gray-500 dark:text-gray-400 transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] hover:scale-110 cursor-pointer">
+              <a href="#" class="btn-show-toast block text-gray-500 dark:text-gray-400 transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] hover:scale-110 cursor-pointer">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 pointer-events-none">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-5.273 3.568z"/>
                 </svg>
@@ -502,7 +552,10 @@
           episodes: ['The Neon Engine', 'Cyber Exhaust', 'Turbo Hotdog', 'Mecha-Bite'],
           more: "THE GARAGE NEVER SLEEPS.\nNEXT MACHINE IS BREWING... ∞",
           read: "PROCEED IF YOU DARE.", 
-          phrase1: "ANYONE FASTER\nTHAN ME?"
+          phrase1: "ANYONE FASTER\nTHAN ME?",
+          shareCopy: "Copy Link",
+          sharePin: "Share on Pinterest",
+          shareX: "Share on X"
         },
         details: {
           title1: "Building the ", title2: "impossible", title3: " since 20XX",
@@ -522,7 +575,10 @@
           episodes: ['ネオンエンジン', 'サイバーエキゾースト', 'ターボホットドッグ', 'メカバイト'],
           more: "ガレージは眠らない。\n次のバケモノを仕込み中... ∞",
           read: "心して進め。",
-          phrase1: "俺より速いやついる？" 
+          phrase1: "俺より速いやついる？",
+          shareCopy: "リンクをコピー",
+          sharePin: "Pinterestでシェア",
+          shareX: "Xでシェア"
         },
         details: {
           title1: "不可能を", title2: "創り出す ", title3: "20XX年から",
@@ -583,6 +639,11 @@
         }
       }
 
+      // シェアメニューテキスト
+      document.querySelectorAll('.t-share-copy').forEach(el => el.innerText = t.comic.shareCopy);
+      document.querySelectorAll('.t-share-pin').forEach(el => el.innerText = t.comic.sharePin);
+      document.querySelectorAll('.t-share-x').forEach(el => el.innerText = t.comic.shareX);
+
       // 画像切り替え
       const ep1Img = document.getElementById('img-ep1');
       if (ep1Img) {
@@ -636,20 +697,51 @@
       }
     });
 
-    const ytBtn = document.getElementById('btn-youtube');
-    const toast = document.getElementById('funky-toast');
-    let toastTimeout;
-
-    ytBtn.addEventListener('click', (e) => {
-      e.preventDefault();
+    // ★★★ カミングスーン（工事中）トースト共通関数 ★★★
+    function showComingSoonToast() {
+      const toast = document.getElementById('funky-toast');
       toast.classList.remove('opacity-0', 'translate-y-10');
       toast.classList.add('opacity-100', 'translate-y-0');
       
-      clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
+      clearTimeout(window.toastTimeout);
+      window.toastTimeout = setTimeout(() => {
         toast.classList.remove('opacity-100', 'translate-y-0');
         toast.classList.add('opacity-0', 'translate-y-10');
       }, 3000);
+    }
+
+    document.querySelectorAll('.btn-show-toast').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        showComingSoonToast();
+      });
+    });
+
+    // ★★★ シェアドロップダウンメニューの開閉ロジック ★★★
+    document.querySelectorAll('.btn-share').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation(); 
+        
+        const targetId = btn.getAttribute('data-target');
+        const menu = document.getElementById(targetId);
+        
+        document.querySelectorAll('.menu-share-dropdown').forEach(m => {
+          if (m.id !== targetId) {
+            m.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
+          }
+        });
+
+        menu.classList.toggle('opacity-0');
+        menu.classList.toggle('pointer-events-none');
+        menu.classList.toggle('translate-y-[-10px]');
+      });
+    });
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.menu-share-dropdown').forEach(m => {
+        m.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
+      });
     });
 
     // GARAGE行き 鉄の扉演出
