@@ -96,6 +96,55 @@
          0 0 24px rgba(0, 243, 255, 0.8); 
     }
 
+    /* ★★★ 変更：ホタルのように「左から右へ」流れる明滅アニメーション ★★★ */
+    @keyframes firefly-sweep {
+      0% {
+        /* 背景画像を右側にセット（光が左端の少し外にある状態） */
+        background-position: 150% center;
+        /* 全体の発光は弱く */
+        filter: drop-shadow(0 0 2px rgba(0, 243, 255, 0.2));
+      }
+      50% {
+        /* 真ん中を通る時に一番強く発光（ホタルのようなポワッとした光） */
+        filter: drop-shadow(0 0 12px rgba(0, 243, 255, 1));
+      }
+      100% {
+        /* 背景画像を左側にセット（光が右端へ抜け切る） */
+        background-position: -50% center;
+        /* 再び発光が弱まる */
+        filter: drop-shadow(0 0 2px rgba(0, 243, 255, 0.2));
+      }
+    }
+    .btn-text-glow {
+      background: linear-gradient(
+        to right,
+        rgba(0, 243, 255, 0.4) 0%,     /* ベースのシアン */
+        rgba(0, 243, 255, 0.4) 40%,
+        rgba(0, 243, 255, 1) 48%,      /* 光の塊の輪郭 */
+        #ffffff 50%,                   /* 強い閃光（白） */
+        rgba(0, 243, 255, 1) 52%,
+        rgba(0, 243, 255, 0.4) 60%,
+        rgba(0, 243, 255, 0.4) 100%
+      );
+      /* 背景サイズを広げて、光の塊が一つだけになるように調整 */
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      /* 3.5秒周期の滑らかなループ */
+      animation: firefly-sweep 3.5s ease-in-out infinite;
+    }
+    
+    /* ホバー(タップ)時は、文字を黒で固定する */
+    .group:hover .btn-text-glow {
+      background: none;
+      -webkit-text-fill-color: #000 !important;
+      color: #000;
+      filter: none;
+      animation: none;
+    }
+
     html, body {
       font-family: 'Inter', system-ui, sans-serif;
       overflow-x: hidden;
@@ -241,7 +290,7 @@
               </span>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-white"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
               
-              <!-- ★変更: ヘッダー下部のライムイエロー極細ライン (幅を85%にして下と長さを揃える) -->
+              <!-- ヘッダー下部のライムイエロー極細ライン -->
               <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[85%]" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
             </div>
             
@@ -253,7 +302,7 @@
                 <img id="img-ep1" src="01en.jpg" alt="Episode 1" class="w-full h-full object-cover object-top" />
               </div>
 
-              <!-- ★変更: 画像下のライムイエロー極細ライン (幅を85%にして上と長さを揃える) -->
+              <!-- 画像下のライムイエロー極細ライン -->
               <div class="w-[85%] mx-auto z-10 flex-shrink-0 relative top-[12px]" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
 
               <!-- 2. 下部の真っ黒なスペース ＆ テキスト ＆ ボタン -->
@@ -264,9 +313,10 @@
                   ANYONE FASTER<br>THAN ME?
                 </div>
 
-                <!-- 「本を読む」ボタン -->
-                <a href="#" class="relative z-10 inline-block px-8 py-2.5 rounded-full border-2 border-[#ccff00] text-cyan-400 font-black uppercase tracking-widest text-sm transition-all duration-300 hover:bg-[#ccff00] hover:text-black hover:shadow-[0_0_15px_rgba(204,255,0,0.6)] active:scale-95">
-                  <span id="t-btn-read1">READ COMIC</span>
+                <!-- ★変更: ボタン (枠のパディングを削ってタイトにし、文字サイズを大きく) -->
+                <!-- px-4 py-1.25 で枠を狭くし、text-[14px] で文字を大きくしました -->
+                <a href="#" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:text-black hover:shadow-[0_0_15px_rgba(204,255,0,0.6)] active:scale-95 group">
+                  <span id="t-btn-read1" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
                 </a>
               </div>
               
@@ -371,7 +421,6 @@
             Deep in the neon-lit alleys of Japan, we wrench on the wildest, most surreal machines known to humanity. It doesn't have to make sense. It just has to be FUNKY.
           </p>
           
-          <!-- GARAGE行きボタン -->
           <a href="#" onclick="goToGarage(event, 'https://p-one-star.github.io/GARAGE-01/'); return false;" id="t-details-btn" class="inline-block btn-firefly text-black font-black uppercase tracking-widest px-8 py-4 rounded-full text-lg transition-all transform hover:scale-105 active:scale-95 border-4 border-black cursor-pointer">
             Join the Garage
           </a>
@@ -452,7 +501,7 @@
           from: "UNLIMITED DIFFUSION", series: "Wild Machine Series", swipe: "SWIPE",
           episodes: ['The Neon Engine', 'Cyber Exhaust', 'Turbo Hotdog', 'Mecha-Bite'],
           more: "THE GARAGE NEVER SLEEPS.\nNEXT MACHINE IS BREWING... ∞",
-          read: "READ COMIC",
+          read: "PROCEED IF YOU DARE.", 
           phrase1: "ANYONE FASTER\nTHAN ME?"
         },
         details: {
@@ -472,7 +521,7 @@
           from: "止められるもんなら\n止めてみな！", series: "ワイルドマシンシリーズ", swipe: "スワイプ",
           episodes: ['ネオンエンジン', 'サイバーエキゾースト', 'ターボホットドッグ', 'メカバイト'],
           more: "ガレージは眠らない。\n次のバケモノを仕込み中... ∞",
-          read: "本を読む",
+          read: "心して進め。",
           phrase1: "俺より速いやついる？" 
         },
         details: {
@@ -534,7 +583,7 @@
         }
       }
 
-      // 画像切り替え (キャッシュバスター削除版)
+      // 画像切り替え
       const ep1Img = document.getElementById('img-ep1');
       if (ep1Img) {
         ep1Img.src = currentLang === 'en' ? '01en.jpg' : '01jp.jpg';
@@ -587,7 +636,6 @@
       }
     });
 
-    // YouTube アイコントースト演出
     const ytBtn = document.getElementById('btn-youtube');
     const toast = document.getElementById('funky-toast');
     let toastTimeout;
