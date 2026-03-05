@@ -73,7 +73,7 @@
       animation: hinomaru-pulse 20s infinite ease-in-out;
     }
 
-    /* ★★★ ステンシルフォントと縁取りテキストのスタイル ★★★ */
+    /* ステンシルフォントと縁取りテキストのスタイル */
     .font-stencil {
       font-family: 'Black Ops One', system-ui, cursive;
     }
@@ -92,7 +92,7 @@
 
 <body class="bg-black transition-colors duration-500 selection:bg-pink-500 selection:text-white overflow-x-hidden">
 
-  <!-- ★★★ 鉄の扉オーバーレイ (GARAGE行き) 警告仕様！ ★★★ -->
+  <!-- ★★★ 鉄の扉オーバーレイ (GARAGE行き) ★★★ -->
   <div id="iron-door" class="fixed top-0 left-0 w-full h-full z-[9999] translate-x-full transition-transform duration-[600ms] ease-in pointer-events-none flex flex-col items-center justify-center bg-zinc-900 shadow-[-30px_0_50px_rgba(0,0,0,1)] overflow-hidden">
     <!-- 鉄板の継ぎ目ディテール -->
     <div class="absolute inset-0 opacity-30 bg-[repeating-linear-gradient(0deg,transparent,transparent_49px,#000_50px)]"></div>
@@ -224,24 +224,40 @@
 
         <div id="comic-scroll-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-4 hide-scrollbar pt-4 relative z-10" style="scroll-behavior: smooth;">
           
-          <!-- カード 1 -->
-          <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-white dark:bg-black transition-colors duration-500 shadow-lg">
-            <div class="p-4 border-b-4 border-cyan-400 flex justify-between items-center bg-slate-100 dark:bg-zinc-900">
+          <!-- ★★★ カード 1 (画像＋ボタン仕様に改修) ★★★ -->
+          <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-black transition-colors duration-500 shadow-lg">
+            
+            <!-- ヘッダー部分 -->
+            <div class="p-4 border-b-4 border-cyan-400 flex justify-between items-center bg-slate-100 dark:bg-zinc-900 relative z-20">
               <span class="font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-baseline gap-2">
                 <span class="text-xl">FUNKY</span> 
                 <span class="text-3xl text-[#ccff00]">★01</span>
               </span>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-[spin_4s_linear_infinite] opacity-50 text-slate-900 dark:text-white"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
             </div>
-            <div class="relative w-full aspect-[4/5] flex flex-col items-center justify-center p-4 overflow-hidden bg-slate-50 dark:bg-zinc-950">
-              <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#000000_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
-              <div class="relative z-10 flex flex-col items-center w-full px-2">
-                <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-8 border-cyan-400 border-dashed flex items-center justify-center mb-4 sm:mb-6 animate-[spin_10s_linear_infinite_reverse]">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 sm:w-16 sm:h-16 text-cyan-400"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-                </div>
-                <h3 id="t-ep1-title" class="text-2xl sm:text-3xl font-black text-center uppercase transform -skew-x-6 leading-tight text-slate-900 dark:text-white">The Neon Engine</h3>
-                <div class="t-comic-series mt-4 px-4 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-widest bg-cyan-400/20 text-cyan-400 rounded-full text-center">Wild Machine Series</div>
+            
+            <!-- コンテンツエリア (他のカードと高さを揃えるための aspect-[4/5] ) -->
+            <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
+              
+              <!-- 1. 画像エリア (正方形) -->
+              <div class="relative w-full aspect-square flex-shrink-0">
+                <img id="img-ep1" src="01en.jpg" alt="Episode 1" class="w-full h-full object-cover" />
+                
+                <!-- ライムイエローの細ライン (下から24%の位置。両端が消えるグラデーション) -->
+                <!-- ※位置を微調整したい場合は、下の style="bottom: 24%;" の数字を変えてください -->
+                <div class="absolute left-0 w-full z-10" style="bottom: 24%; height: 2px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%); box-shadow: 0 0 8px #ccff00;"></div>
               </div>
+
+              <!-- 2. 下部の真っ黒なスペース ＆ 「本を読む」ボタン -->
+              <div class="relative flex-1 flex flex-col items-center justify-center p-4">
+                <!-- うっすらドット背景 -->
+                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
+                
+                <a href="#" class="relative z-10 inline-block px-8 py-3 rounded-full border-2 border-cyan-400 text-cyan-400 font-black uppercase tracking-widest text-sm transition-all duration-300 hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_15px_rgba(0,243,255,0.6)] active:scale-95">
+                  <span id="t-btn-read1">READ COMIC</span>
+                </a>
+              </div>
+              
             </div>
           </div>
 
@@ -343,7 +359,7 @@
             Deep in the neon-lit alleys of Japan, we wrench on the wildest, most surreal machines known to humanity. It doesn't have to make sense. It just has to be FUNKY.
           </p>
           
-          <!-- ★ 絶対にJSで制御するため、href="#" に変更し、onclickを追加！ -->
+          <!-- GARAGE行きボタン -->
           <a href="#" onclick="goToGarage(event, 'https://p-one-star.github.io/GARAGE-01/'); return false;" id="t-details-btn" class="inline-block btn-firefly text-black font-black uppercase tracking-widest px-8 py-4 rounded-full text-lg transition-all transform hover:scale-105 active:scale-95 border-4 border-black cursor-pointer">
             Join the Garage
           </a>
@@ -351,7 +367,6 @@
           <!-- ★★★ BACK TO FHW ＆ SNSアイコン群 ★★★ -->
           <div class="mt-16 flex flex-col items-center gap-8 w-full">
             
-            <!-- ★ リンク先を正しい公式URLに修正し、onclickを追加して絶対演出させる！ -->
             <a href="#" onclick="goBackFhw(event, 'https://p-one-star.github.io/FUNKY-HOTDOG-WORKS/'); return false;" id="btn-back-to-fhw" class="relative px-8 py-3 group cursor-pointer block">
               <div class="absolute inset-0 border-2 border-gray-500 dark:border-gray-400 transform -skew-x-12 transition-all duration-300 group-hover:border-white group-hover:shadow-[0_0_15px_rgba(255,255,255,0.6),inset_0_0_10px_rgba(255,255,255,0.4)]"></div>
               <span class="relative z-10 flex items-center gap-3 font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase transition-all duration-300 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
@@ -370,7 +385,7 @@
                 </svg>
               </a>
               
-              <!-- YouTube -->
+              <!-- YouTube (トースト通知) -->
               <a href="#" id="btn-youtube" class="block text-gray-500 dark:text-gray-400 transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] hover:scale-110 cursor-pointer">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 pointer-events-none">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-5.273 3.568z"/>
@@ -424,7 +439,8 @@
           title: "Too Funky Comic", subtitle: "Wild & Crazy Machines",
           from: "UNLIMITED DIFFUSION", series: "Wild Machine Series", swipe: "SWIPE",
           episodes: ['The Neon Engine', 'Cyber Exhaust', 'Turbo Hotdog', 'Mecha-Bite'],
-          more: "THE GARAGE NEVER SLEEPS.\nNEXT MACHINE IS BREWING... ∞"
+          more: "THE GARAGE NEVER SLEEPS.\nNEXT MACHINE IS BREWING... ∞",
+          read: "READ COMIC" // ★ 追加
         },
         details: {
           title1: "Building the ", title2: "impossible", title3: " since 20XX",
@@ -442,7 +458,8 @@
           title: "最高にファンキーなコミック", subtitle: "ワイルドでクレイジーなマシン",
           from: "止められるもんなら\n止めてみな！", series: "ワイルドマシンシリーズ", swipe: "スワイプ",
           episodes: ['ネオンエンジン', 'サイバーエキゾースト', 'ターボホットドッグ', 'メカバイト'],
-          more: "ガレージは眠らない。\n次のバケモノを仕込み中... ∞"
+          more: "ガレージは眠らない。\n次のバケモノを仕込み中... ∞",
+          read: "本を読む" // ★ 追加
         },
         details: {
           title1: "不可能を", title2: "創り出す ", title3: "20XX年から",
@@ -486,6 +503,10 @@
       document.getElementById('t-details-back').innerText = t.details.back;
       
       document.getElementById('t-toast-msg').innerText = t.toast;
+      
+      // ★ 画像と言語の切り替え
+      document.getElementById('t-btn-read1').innerText = t.comic.read;
+      document.getElementById('img-ep1').src = currentLang === 'en' ? '01en.jpg' : '01jp.jpg';
 
       if (currentLang === 'en') {
         document.getElementById('icon-en').className = "text-sm transition-opacity duration-300 opacity-100 grayscale-0";
@@ -551,46 +572,38 @@
       }, 3000);
     });
 
-
-    // ★★★ 絶対に強制発動させるための遷移関数 ★★★
-
-    // 1. GARAGE行き 鉄の扉演出
+    // ★★★ GARAGE行き 鉄の扉スライド演出 ★★★
     function goToGarage(e, targetUrl) {
-      e.preventDefault(); // デフォルトのリンク移動を完全にブロック
+      e.preventDefault(); 
       const ironDoor = document.getElementById('iron-door');
       
-      // 画面スクロールロック
       document.body.style.overflow = 'hidden';
       ironDoor.classList.remove('pointer-events-none');
       ironDoor.classList.add('pointer-events-auto');
       
-      // 確実な描画のため requestAnimationFrame で実行
       requestAnimationFrame(() => {
         ironDoor.classList.remove('translate-x-full');
         ironDoor.classList.add('translate-x-0');
       });
       
-      // 0.6秒で閉まり、0.4秒待機 (合計1.0秒後) 
       setTimeout(() => {
         window.location.href = targetUrl;
       }, 1000); 
     }
 
-    // 2. BACK TO FHW 砂時計のように溶ける(スネーク状)ワープ演出
+    // ★★★ BACK TO FHW 砂時計のように溶ける(スネーク状)ワープ演出 ★★★
     function goBackFhw(e, targetUrl) {
-      e.preventDefault(); // デフォルトのリンク移動を完全にブロック
+      e.preventDefault(); 
       document.body.style.overflow = 'hidden';
       
       const meltContainer = document.createElement('div');
       meltContainer.className = 'fixed top-0 left-0 w-full h-full z-[9999] pointer-events-none';
       document.body.appendChild(meltContainer);
       
-      // 列数を8に減らしてスマホでも動作を軽くし、粒を大きくして視認性を上げる
       const cols = 8;
       const cellSizeX = window.innerWidth / cols;
       const rows = Math.ceil(window.innerHeight / cellSizeX);
       
-      // 全体の溶ける時間を 1.8秒 に設定
       const totalDuration = 1800; 
       const timePerCell = totalDuration / (rows * cols);
       
@@ -607,13 +620,11 @@
           cell.style.height = `${100 / rows + 1}%`;
           cell.style.backgroundColor = 'black';
           
-          // 初期状態：透明で、小さく丸い状態
           cell.style.opacity = '0';
           cell.style.transform = 'scale(0.5)';
           cell.style.borderRadius = '20%';
           cell.style.transition = 'all 0.2s ease-out';
           
-          // 右下からスネーク状に計算
           const reverseR = rows - 1 - r;
           const isRightToLeft = (reverseR % 2 === 0);
           const order = reverseR * cols + (isRightToLeft ? (cols - 1 - c) : c);
@@ -625,11 +636,9 @@
         }
       }
       
-      // 確実な描画のため requestAnimationFrame で実行
       requestAnimationFrame(() => {
         setTimeout(() => {
           cells.forEach(cell => {
-            // パッと黒くなり、四角く膨らんで隙間を埋める
             cell.style.opacity = '1';
             cell.style.transform = 'scale(1.1)';
             cell.style.borderRadius = '0%';
@@ -637,7 +646,6 @@
         }, 50);
       });
       
-      // 1.8秒(展開完了) + 0.2秒(アニメ終了) + 0.4秒(静寂) = 2.4秒後にジャンプ！
       setTimeout(() => {
         window.location.href = targetUrl;
       }, 2400); 
