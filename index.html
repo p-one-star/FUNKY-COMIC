@@ -73,7 +73,7 @@
       animation: hinomaru-pulse 20s infinite ease-in-out;
     }
 
-    /* ステンシルフォントと縁取りテキストのスタイル */
+    /* ステンシルフォントと各種テキストのアウトラインスタイル */
     .font-stencil {
       font-family: 'Black Ops One', system-ui, cursive;
     }
@@ -81,6 +81,20 @@
       color: black; 
       -webkit-text-stroke: 2px #ccff00; 
       text-shadow: 0 0 15px rgba(204, 255, 0, 0.6); 
+    }
+    
+    /* ★変更：白文字＋黒縁＋裏シアン発光（文字潰れ防止版） */
+    .text-outline-cyan {
+      color: #ffffff; 
+      /* ストロークだと文字が潰れるので、四方に黒い影を落として縁取りを作る */
+      text-shadow: 
+        -1.5px -1.5px 0 #000,  
+         1.5px -1.5px 0 #000,
+        -1.5px  1.5px 0 #000,
+         1.5px  1.5px 0 #000,
+         0px    2px   0 #000,
+         0 0 12px rgba(0, 243, 255, 1), 
+         0 0 24px rgba(0, 243, 255, 0.8); 
     }
 
     html, body {
@@ -94,24 +108,17 @@
 
   <!-- ★★★ 鉄の扉オーバーレイ (GARAGE行き) ★★★ -->
   <div id="iron-door" class="fixed top-0 left-0 w-full h-full z-[9999] translate-x-full transition-transform duration-[600ms] ease-in pointer-events-none flex flex-col items-center justify-center bg-zinc-900 shadow-[-30px_0_50px_rgba(0,0,0,1)] overflow-hidden">
-    <!-- 鉄板の継ぎ目ディテール -->
     <div class="absolute inset-0 opacity-30 bg-[repeating-linear-gradient(0deg,transparent,transparent_49px,#000_50px)]"></div>
-    <!-- 左端の警戒ストライプ -->
     <div class="absolute left-0 top-0 h-full w-6 sm:w-10 bg-[repeating-linear-gradient(45deg,#ccff00,#ccff00_15px,#000_15px,#000_30px)] border-r-4 border-black z-10 shadow-[5px_0_15px_rgba(0,0,0,0.8)]"></div>
-
-    <!-- 警告テキストエリア -->
     <div class="relative z-20 flex flex-col items-center transform -skew-x-6 drop-shadow-[0_10px_20px_rgba(0,0,0,1)] w-full px-8">
-      <!-- WARNING -->
       <div class="font-stencil text-outline-lime text-[18vw] sm:text-8xl md:text-9xl tracking-widest leading-none mb-2">
         WARNING
       </div>
-      <!-- 激しめの心拍数（心電図）ゲージ -->
       <div class="w-full max-w-[280px] sm:max-w-[400px] h-10 sm:h-14 mb-6 sm:mb-8 text-[#ccff00] drop-shadow-[0_0_12px_rgba(204,255,0,1)]">
         <svg viewBox="0 0 200 40" preserveAspectRatio="none" class="w-full h-full overflow-visible animate-pulse">
           <polyline points="0,20 40,20 45,5 55,35 65,0 75,40 85,15 90,25 95,20 200,20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </div>
-      <!-- ARE YOU READY? -->
       <div class="font-stencil text-white text-[7vw] sm:text-4xl md:text-5xl tracking-widest text-center drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]">
         ARE YOU READY?
       </div>
@@ -224,7 +231,7 @@
 
         <div id="comic-scroll-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-4 hide-scrollbar pt-4 relative z-10" style="scroll-behavior: smooth;">
           
-          <!-- ★★★ カード 1 (画像＋ボタン仕様) ★★★ -->
+          <!-- ★★★ カード 1 (画像＋シアン文字＋ボタン仕様) ★★★ -->
           <div class="relative w-[80vw] sm:w-[340px] flex-shrink-0 snap-center rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-black transition-colors duration-500 shadow-lg">
             
             <!-- ヘッダー部分 -->
@@ -239,19 +246,24 @@
             <!-- コンテンツエリア -->
             <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
               
-              <!-- 1. 画像エリア (正方形) -->
-              <!-- 画像の切り替え時にフワッとするように transition-opacity を追加 -->
-              <div class="relative w-full aspect-square flex-shrink-0 bg-zinc-900">
-                <img id="img-ep1" src="01en.jpg" alt="Episode 1" class="w-full h-full object-cover transition-opacity duration-300" />
-                
-                <!-- ライムイエローの細ライン (より細く、発光なし) -->
-                <div class="absolute left-0 w-full z-10" style="bottom: 28%; height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
+              <!-- 1. 画像エリア -->
+              <div class="relative w-full aspect-[3/2] flex-shrink-0 bg-zinc-900 overflow-hidden">
+                <img id="img-ep1" src="01en.jpg" alt="Episode 1" class="w-full h-full object-cover object-top transition-opacity duration-300" />
               </div>
 
-              <!-- 2. 下部の真っ黒なスペース ＆ 「本を読む」ボタン -->
-              <div class="relative flex-1 flex flex-col items-center justify-center p-4">
-                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)]" style="background-size: 20px 20px;"></div>
-                <a href="#" class="relative z-10 inline-block px-8 py-3 rounded-full border-2 border-cyan-400 text-cyan-400 font-black uppercase tracking-widest text-sm transition-all duration-300 hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_15px_rgba(0,243,255,0.6)] active:scale-95">
+              <!-- 境界線: ライムイエローの極細ライン -->
+              <div class="w-full z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
+
+              <!-- 2. 下部の真っ黒なスペース ＆ テキスト ＆ ボタン -->
+              <div class="relative flex-1 flex flex-col items-center justify-around p-3 pb-4 bg-black">
+                
+                <!-- キャッチコピー -->
+                <div id="t-ep1-phrase" class="text-outline-cyan text-center font-black leading-[1.1] text-[6.5vw] sm:text-[26px] pt-1 tracking-wider w-full">
+                  ANYONE FASTER<br>THAN ME?
+                </div>
+
+                <!-- 「本を読む」ボタン -->
+                <a href="#" class="relative z-10 inline-block px-8 py-2.5 rounded-full border-2 border-cyan-400 text-cyan-400 font-black uppercase tracking-widest text-sm transition-all duration-300 hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_15px_rgba(0,243,255,0.6)] active:scale-95">
                   <span id="t-btn-read1">READ COMIC</span>
                 </a>
               </div>
@@ -357,7 +369,6 @@
             Deep in the neon-lit alleys of Japan, we wrench on the wildest, most surreal machines known to humanity. It doesn't have to make sense. It just has to be FUNKY.
           </p>
           
-          <!-- GARAGE行きボタン -->
           <a href="#" onclick="goToGarage(event, 'https://p-one-star.github.io/GARAGE-01/'); return false;" id="t-details-btn" class="inline-block btn-firefly text-black font-black uppercase tracking-widest px-8 py-4 rounded-full text-lg transition-all transform hover:scale-105 active:scale-95 border-4 border-black cursor-pointer">
             Join the Garage
           </a>
@@ -438,7 +449,8 @@
           from: "UNLIMITED DIFFUSION", series: "Wild Machine Series", swipe: "SWIPE",
           episodes: ['The Neon Engine', 'Cyber Exhaust', 'Turbo Hotdog', 'Mecha-Bite'],
           more: "THE GARAGE NEVER SLEEPS.\nNEXT MACHINE IS BREWING... ∞",
-          read: "READ COMIC"
+          read: "READ COMIC",
+          phrase1: "ANYONE FASTER\nTHAN ME?"
         },
         details: {
           title1: "Building the ", title2: "impossible", title3: " since 20XX",
@@ -457,7 +469,8 @@
           from: "止められるもんなら\n止めてみな！", series: "ワイルドマシンシリーズ", swipe: "スワイプ",
           episodes: ['ネオンエンジン', 'サイバーエキゾースト', 'ターボホットドッグ', 'メカバイト'],
           more: "ガレージは眠らない。\n次のバケモノを仕込み中... ∞",
-          read: "本を読む"
+          read: "本を読む",
+          phrase1: "俺より速いやついる？" 
         },
         details: {
           title1: "不可能を", title2: "創り出す ", title3: "20XX年から",
@@ -486,10 +499,13 @@
       document.getElementById('t-comic-subtitle').innerText = t.comic.subtitle;
       document.getElementById('t-comic-from').innerText = t.comic.from;
       document.getElementById('t-comic-swipe').innerText = t.comic.swipe;
-      document.getElementById('t-ep1-title').innerText = t.comic.episodes[0];
-      document.getElementById('t-ep2-title').innerText = t.comic.episodes[1];
-      document.getElementById('t-ep3-title').innerText = t.comic.episodes[2];
-      document.getElementById('t-ep4-title').innerText = t.comic.episodes[3];
+      
+      // ★ エラー原因修正：t-ep1-title はHTMLに存在しない場合があるので、if文で囲む
+      const ep1 = document.getElementById('t-ep1-title'); if(ep1) ep1.innerText = t.comic.episodes[0];
+      const ep2 = document.getElementById('t-ep2-title'); if(ep2) ep2.innerText = t.comic.episodes[1];
+      const ep3 = document.getElementById('t-ep3-title'); if(ep3) ep3.innerText = t.comic.episodes[2];
+      const ep4 = document.getElementById('t-ep4-title'); if(ep4) ep4.innerText = t.comic.episodes[3];
+
       document.getElementById('t-comic-more').innerText = t.comic.more;
       document.querySelectorAll('.t-comic-series').forEach(el => el.innerText = t.comic.series);
 
@@ -502,18 +518,34 @@
       
       document.getElementById('t-toast-msg').innerText = t.toast;
       
-      // ★ 画像と言語の切り替え (キャッシュ対策パラメータとフェード効果を追加)
-      document.getElementById('t-btn-read1').innerText = t.comic.read;
+      // ボタンテキスト切り替え
+      const btnRead1 = document.getElementById('t-btn-read1');
+      if(btnRead1) btnRead1.innerText = t.comic.read;
+      
+      // ★ キャッチコピーのテキスト切り替え
+      const phrase1 = document.getElementById('t-ep1-phrase');
+      if (phrase1) {
+        phrase1.innerHTML = currentLang === 'en' ? t.comic.phrase1.replace('\n', '<br>') : t.comic.phrase1;
+        // 英語の時だけスピード感を出すために斜体(italic)にする
+        if (currentLang === 'en') {
+          phrase1.classList.add('italic');
+        } else {
+          phrase1.classList.remove('italic');
+        }
+      }
+
+      // ★ 画像切り替え
       const ep1Img = document.getElementById('img-ep1');
       if (ep1Img) {
-        ep1Img.style.opacity = '0.5'; // 切り替え時に一瞬暗くする
+        ep1Img.style.opacity = '0.5'; 
         setTimeout(() => {
-          const cacheBuster = "?v=" + new Date().getTime(); // 強制的に最新を読み込む
+          const cacheBuster = "?v=" + new Date().getTime(); 
           ep1Img.src = currentLang === 'en' ? '01en.jpg' + cacheBuster : '01jp.jpg' + cacheBuster;
           ep1Img.style.opacity = '1';
         }, 150);
       }
 
+      // ヘッダーアイコン切り替え
       if (currentLang === 'en') {
         document.getElementById('icon-en').className = "text-sm transition-opacity duration-300 opacity-100 grayscale-0";
         document.getElementById('icon-ja').className = "text-sm transition-opacity duration-300 opacity-40 grayscale";
