@@ -304,23 +304,30 @@
                 <img id="img-ep1" src="01en.jpg" alt="Episode 1" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/600x400/222/FFF?text=EPISODE+01'" />
               </div>
 
-              <!-- ★修正ポイント1: ラインに付いていた上下の余白(my-2)を無くし、ピタッと固定します -->
-              <div class="w-[85%] mx-auto z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
-
-              <!-- ★修正ポイント2: 下部のコンテナ。文字(my-auto) と ボタン(一番下) でレイアウトします -->
-              <div class="relative flex-1 flex flex-col items-center px-3 pb-5 sm:pb-6 bg-black">
+              <!-- ★修正ポイント: 画像と下部コンテナを完全に分離し、隙間を正確にコントロールします -->
+              <div class="relative flex-1 flex flex-col bg-black w-full">
                 
-                <!-- ★文字を上下の余白(my-auto)を使って、ラインとボタンの「ちょうど真ん中」に配置 -->
-                <div class="my-auto w-full flex justify-center items-center">
-                  <div id="t-ep1-phrase" class="text-outline-cyan text-center font-black leading-[1.1] text-[6.5vw] sm:text-[26px] tracking-wider">
-                    WHO’S FASTER<br>THAN ME?
+                <!-- イラストより少し下(mt-3.5)にラインを配置 -->
+                <div class="w-[85%] mx-auto z-10 flex-shrink-0 mt-3.5" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
+
+                <!-- ラインから下のスペースで文字とボタンをレイアウト -->
+                <div class="flex-1 flex flex-col px-3 pb-4 sm:pb-5 relative w-full">
+                  
+                  <!-- 文字エリア：flex-1で残り高さをすべて使い、中央配置 -->
+                  <!-- 視覚的な中央（フォントのベースラインのズレ）を直すために -translate-y-1 で少し上へ -->
+                  <div class="flex-1 flex items-center justify-center w-full">
+                    <div id="t-ep1-phrase" class="text-outline-cyan text-center font-black leading-[1.1] text-[6.5vw] sm:text-[26px] tracking-wider transform -translate-y-1">
+                      WHO’S FASTER<br>THAN ME?
+                    </div>
+                  </div>
+
+                  <!-- ボタンエリア：flex-shrink-0で一番下に固定 -->
+                  <div class="flex-shrink-0 flex justify-center w-full">
+                    <a href="#" class="btn-show-toast relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group">
+                      <span id="t-btn-read1" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
+                    </a>
                   </div>
                 </div>
-
-                <!-- ボタンはコンテナの一番下に留まります -->
-                <a href="#" class="btn-show-toast flex-shrink-0 relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group">
-                  <span id="t-btn-read1" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
-                </a>
               </div>
             </div>
           </div>
