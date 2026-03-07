@@ -120,7 +120,7 @@
         to right,
         rgba(0, 243, 255, 0.4) 0%,
         rgba(0, 243, 255, 0.4) 40%,
-        rgba(204, 255, 255, 1) 48%, /* 少しシアンを強調 */
+        rgba(0, 243, 255, 1) 48%,
         #ffffff 50%,
         rgba(0, 243, 255, 1) 52%,
         rgba(0, 243, 255, 0.4) 60%,
@@ -346,13 +346,13 @@
               <!-- コンテンツエリア -->
               <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
                 
-                <!-- ★修正ポイント: 画像の高さを確実に保つため、301.jpgの absolute を外してベースにしました -->
+                <!-- ★修正ポイント: 画像の高さを確実に保つため、absolute inset-0 を全てに付与しました -->
                 <div class="relative w-full aspect-[3/2] flex-shrink-0 bg-black overflow-hidden">
                   <!-- 基準となる背景画像 -->
-                  <img src="301.jpg" alt="Episode 1 BG" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/600x400/222/FFF?text=301.jpg'" />
+                  <img src="301.jpg" alt="Episode 1 BG" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/600x400/222/FFF?text=301.jpg'" />
                   
-                  <!-- 重ねる透過PNG画像 (scaleで縮小し、origin-bottomでタイヤの接地感を維持) -->
-                  <img src="302.PNG" alt="Episode 1 FG" class="absolute inset-0 w-full h-full object-contain object-bottom transform scale-[0.88] origin-bottom z-10" onerror="this.style.display='none'" />
+                  <!-- 重ねる透過PNG画像 (scaleを95%に調整し、origin-bottomでタイヤの接地感を維持) -->
+                  <img src="302.PNG" alt="Episode 1 FG" class="absolute inset-0 w-full h-full object-cover object-bottom transform scale-95 origin-bottom z-10" onerror="this.style.display='none'" />
                 </div>
 
                 <div class="relative flex-1 flex flex-col bg-black w-full">
@@ -410,7 +410,7 @@
               
               <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
                 <div class="relative w-full aspect-[3/2] flex-shrink-0 bg-black overflow-hidden">
-                  <img id="img-ep2" src="02.jpg" alt="Episode 2" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/600x400/222/FFF?text=EPISODE+02'" />
+                  <img id="img-ep2" src="02.jpg" alt="Episode 2" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/600x400/222/FFF?text=EPISODE+02'" />
                 </div>
 
                 <div class="relative flex-1 flex flex-col bg-black w-full">
@@ -468,7 +468,7 @@
             <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
               <div class="relative w-full aspect-[3/2] flex-shrink-0 bg-black overflow-hidden">
                 <!-- 画像は仮 -->
-                <img id="img-ep3" src="" alt="Episode 3" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/600x400/222/FFF?text=EPISODE+03'" />
+                <img id="img-ep3" src="" alt="Episode 3" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/600x400/222/FFF?text=EPISODE+03'" />
               </div>
 
               <div class="relative flex-1 flex flex-col bg-black w-full">
@@ -530,7 +530,7 @@
             <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
               <div class="relative w-full aspect-[3/2] flex-shrink-0 bg-black overflow-hidden">
                 <!-- 画像は仮 -->
-                <img id="img-ep4" src="" alt="Episode 4" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/600x400/222/FFF?text=EPISODE+04'" />
+                <img id="img-ep4" src="" alt="Episode 4" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/600x400/222/FFF?text=EPISODE+04'" />
               </div>
 
               <div class="relative flex-1 flex flex-col bg-black w-full">
@@ -619,7 +619,7 @@
               <!-- YouTube -->
               <a href="#" class="btn-show-toast block text-gray-500 dark:text-gray-400 transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] hover:scale-110 cursor-pointer">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 pointer-events-none">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122-2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-5.273 3.568z"/>
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-5.273 3.568z"/>
                 </svg>
               </a>
 
