@@ -346,9 +346,11 @@
               <!-- コンテンツエリア -->
               <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
                 
-                <!-- ★完全修正ポイント: 基準画像を通常配置し、高さを確保。透過画像は absolute で object-contain にして 92% で重ねる -->
                 <div class="relative w-full aspect-[3/2] flex-shrink-0 bg-black overflow-hidden">
-                  <img src="301.jpg" alt="Episode 1 BG" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/600x400/222/FFF?text=301.jpg'" />
+                  <!-- ★修正ポイント: 画像の高さを確実に保つため、303.jpgをベースに。 -->
+                  <img src="303.jpg" alt="Episode 1 BG" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/600x400/222/FFF?text=303.jpg'" />
+                  
+                  <!-- ★修正ポイント: 重ねる透過PNG画像 (scaleを92%に微調整) -->
                   <img src="302.PNG" alt="Episode 1 FG" class="absolute inset-0 w-full h-full object-contain object-bottom transform scale-[0.92] origin-bottom z-10" onerror="this.style.display='none'" />
                 </div>
 
@@ -404,10 +406,10 @@
                 <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[85%]" style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0,243,255,1) 20%, rgba(0,243,255,1) 80%, transparent 100%);"></div>
               </div>
               
-              <!-- ★完全修正ポイント: 02の画像も元の安全な設定に戻しました -->
               <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
+                <!-- ★修正ポイント: 02の画像も元の安全な設定(ベース指定)に戻しました -->
                 <div class="relative w-full aspect-[3/2] flex-shrink-0 bg-black overflow-hidden">
-                  <img id="img-ep2" src="02.jpg" alt="Episode 2" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/600x400/222/FFF?text=EPISODE+02'" />
+                  <img id="img-ep2" src="304.jpg" alt="Episode 2" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/600x400/222/FFF?text=304.jpg'" />
                 </div>
 
                 <div class="relative flex-1 flex flex-col bg-black w-full">
@@ -419,6 +421,7 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
+                      <!-- ★02は「ページめくり＆元に戻る」演出(turnPageAndReturn)を適用★ -->
                       <a href="#" onclick="turnPageAndReturn(event, 'card-ep2')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read2" class="btn-text-glow-lime transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
@@ -462,9 +465,9 @@
                 <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[85%]" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
               </div>
               
-              <!-- ★完全修正ポイント: 03の画像も元の安全な設定に戻しました -->
               <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
                 <div class="relative w-full aspect-[3/2] flex-shrink-0 bg-black overflow-hidden">
+                  <!-- 画像は仮 -->
                   <img id="img-ep3" src="" alt="Episode 3" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/600x400/222/FFF?text=EPISODE+03'" />
                 </div>
 
@@ -477,6 +480,7 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
+                      <!-- ★03は未完成なのでトーストを出します★ -->
                       <a href="#" class="btn-show-toast relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read3" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
@@ -521,22 +525,27 @@
                 <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[85%]" style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0,243,255,1) 20%, rgba(0,243,255,1) 80%, transparent 100%);"></div>
               </div>
               
-              <!-- ★完全修正ポイント: 04の画像も元の安全な設定に戻しました -->
               <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
                 <div class="relative w-full aspect-[3/2] flex-shrink-0 bg-black overflow-hidden">
+                  <!-- 画像は仮 -->
                   <img id="img-ep4" src="" alt="Episode 4" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/600x400/222/FFF?text=EPISODE+04'" />
                 </div>
 
                 <div class="relative flex-1 flex flex-col bg-black w-full">
+                  
                   <div class="w-[85%] mx-auto z-10 flex-shrink-0 mt-3.5" style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0,243,255,1) 20%, rgba(0,243,255,1) 80%, transparent 100%);"></div>
+
                   <div class="flex-1 flex flex-col px-3 pb-4 sm:pb-5 relative w-full">
+                    
                     <div class="flex-1 flex items-center justify-center w-full">
                       <div id="t-ep4-phrase" class="text-outline-lime-glow text-center font-black leading-[1.1] text-[6.5vw] sm:text-[26px] tracking-wider transform -translate-y-1">
                         STILL<br>BREWING...
                       </div>
                     </div>
+
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <a href="#" class="btn-show-toast relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group cursor-pointer">
+                      <!-- ★04は未完成なのでトーストを出します★ -->
+                      <a href="#" class="btn-show-toast relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group">
                         <span id="t-btn-read4" class="btn-text-glow-lime transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
                     </div>
@@ -609,7 +618,7 @@
               <!-- YouTube -->
               <a href="#" class="btn-show-toast block text-gray-500 dark:text-gray-400 transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] hover:scale-110 cursor-pointer">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 pointer-events-none">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122-2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-5.273 3.568z"/>
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-5.273 3.568z"/>
                 </svg>
               </a>
 
@@ -656,8 +665,8 @@
         url: 'https://p-one-star.github.io/FUNKY-01/',
         xTextEn: 'Too much confidence. Not enough reality.\nFUNKY ★01.\n#FHW #FUNKYHOTDOGWORKS\n',
         xTextJa: '過剰な自信。追いつかない現実。\nFUNKY ★01.\n#FHW #FUNKYHOTDOGWORKS\n',
-        mediaEn: 'https://p-one-star.github.io/FUNKY-HOTDOG-WORKS/301.jpg', 
-        mediaJa: 'https://p-one-star.github.io/FUNKY-HOTDOG-WORKS/301.jpg'  
+        mediaEn: 'https://p-one-star.github.io/FUNKY-HOTDOG-WORKS/303.jpg', 
+        mediaJa: 'https://p-one-star.github.io/FUNKY-HOTDOG-WORKS/303.jpg'  
       }
     };
 
