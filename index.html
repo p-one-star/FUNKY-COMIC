@@ -182,7 +182,7 @@
 
 <body class="bg-black transition-colors duration-500 selection:bg-pink-500 selection:text-white overflow-x-hidden">
 
-  <!-- ★★★ カードめくり・飛び出し後の暗転用オーバーレイ ★★★ -->
+  <!-- ★★★ カード演出後の暗転用オーバーレイ ★★★ -->
   <div id="blackout-overlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none z-[10000]" style="transition: opacity 1.0s ease-in-out;"></div>
 
   <!-- ★★★ 鉄の扉オーバーレイ (GARAGE行き) ★★★ -->
@@ -310,7 +310,7 @@
 
         <div id="comic-scroll-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-4 hide-scrollbar pt-4 relative z-10" style="scroll-behavior: smooth;">
           
-          <!-- ★★★ カード 1 (奇数パターン: シアン枠) ★★★ -->
+          <!-- ★★★ カード 1 (NASCAR) ★★★ -->
           <div style="perspective: 2500px;" class="flex-shrink-0 snap-center">
             <div id="card-ep1" class="relative w-[80vw] sm:w-[340px] rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-black shadow-lg" style="transform-style: preserve-3d;">
               
@@ -353,7 +353,7 @@
                   <div id="ep1-img-container" class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)] transition-all duration-300">
                     <img id="ep1-bg" src="303.jpg" alt="Episode 1 BG" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=303.jpg'" />
                     
-                    <!-- ★ズバッと下げる修正: scale-[1.15] に拡大し、translate-y-[50px] で下に50pxズラす。 -->
+                    <!-- 透過PNG (初期状態のベストポジション) -->
                     <img id="ep1-fg" src="302.PNG" alt="Episode 1 FG" class="absolute inset-0 w-full h-full object-contain object-bottom transform scale-[1.15] translate-x-[4%] translate-y-[50px] origin-bottom z-10" onerror="this.style.display='none'" />
                   </div>
                 </div>
@@ -368,8 +368,8 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <!-- ★01専用「車が飛び出して走る演出」を適用！★ -->
-                      <a href="#" onclick="engineRoarAndGo(event, 'card-ep1', 'https://p-one-star.github.io/FUNKY-01/')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
+                      <!-- ★01専用「車が左下へ飛び出して走り去る超ヤバい演出」を適用！★ -->
+                      <a href="#" onclick="nascarDriveByAndGo(event, 'card-ep1', 'https://p-one-star.github.io/FUNKY-01/')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read1" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
                     </div>
@@ -379,7 +379,7 @@
             </div>
           </div>
 
-          <!-- ★★★ カード 2 (偶数パターン: ライムイエロー枠) ★★★ -->
+          <!-- ★★★ カード 2 (モンスタートラック) ★★★ -->
           <div style="perspective: 2500px;" class="flex-shrink-0 snap-center">
             <div id="card-ep2" class="relative w-[80vw] sm:w-[340px] rounded-[2rem] border-4 border-[#ccff00] overflow-hidden flex flex-col group bg-black transition-colors duration-500 shadow-lg" style="transform-style: preserve-3d;">
               
@@ -414,10 +414,12 @@
               
               <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
                 
-                <!-- ★画像エリア(完全統一版): 01と同じ w-[92%] に修正 -->
+                <!-- 画像エリア -->
                 <div class="w-full flex-shrink-0 flex items-center justify-center py-3">
-                  <div class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
-                    <img id="img-ep2" src="304.jpg" alt="Episode 2" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=304.jpg'" />
+                  <!-- ★02用にIDを付与 -->
+                  <div id="ep2-img-container" class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
+                    <!-- 現状は1枚絵。将来のガラス砕け散り演出の土台として、手前に迫ってくる演出を割り当てる -->
+                    <img id="ep2-img" src="304.jpg" alt="Episode 2" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=304.jpg'" />
                   </div>
                 </div>
 
@@ -430,8 +432,8 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <!-- ★02は「ページめくり＆元に戻る」演出(turnPageAndReturn)を適用★ -->
-                      <a href="#" onclick="turnPageAndReturn(event, 'card-ep2')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group cursor-pointer">
+                      <!-- ★02は「画面手前に大迫力で迫ってくる」演出(monsterSmashAndReturn)を適用★ -->
+                      <a href="#" onclick="monsterSmashAndReturn(event, 'card-ep2')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read2" class="btn-text-glow-lime transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
                     </div>
@@ -490,8 +492,8 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <!-- ★03は未完成なのでトーストを出します★ -->
-                      <a href="#" class="btn-show-toast relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
+                      <!-- ★03に力作の「ページめくり」演出(turnPageAndReturn)を退避！★ -->
+                      <a href="#" onclick="turnPageAndReturn(event, 'card-ep3')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read3" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
                     </div>
@@ -551,6 +553,7 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
+                      <!-- ★04は未完成なのでトーストを出します★ -->
                       <a href="#" class="btn-show-toast relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group">
                         <span id="t-btn-read4" class="btn-text-glow-lime transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
@@ -862,7 +865,7 @@
       }, 3000);
     }
 
-    // ★03, 04の未完成ボタン用
+    // ★04の未完成ボタン用
     document.querySelectorAll('.btn-show-toast').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault(); 
@@ -980,11 +983,11 @@
       });
     });
 
-    // ★★★ 【★01専用】 車が手前に飛び出して走り去る超ヤバい演出 ★★★
-    function engineRoarAndGo(e, cardId, targetUrl) {
+
+    // ★★★ 【★01専用】 左下へ猛スピードで走り去る演出 ★★★
+    function nascarDriveByAndGo(e, cardId, targetUrl) {
       e.preventDefault();
       
-      // 画面スクロールをロック
       document.body.style.overflow = 'hidden';
 
       const container = document.getElementById('ep1-img-container');
@@ -992,41 +995,86 @@
       const bg = document.getElementById('ep1-bg');
       const overlay = document.getElementById('blackout-overlay');
 
-      // 車が枠を突き破れるように overflow-hidden を外す
+      // 枠を突き破れるように設定
       container.classList.remove('overflow-hidden');
-      // 演出が他の要素に隠れないように最前面へ
       container.style.zIndex = '9999';
       document.getElementById(cardId).style.zIndex = '9999';
 
-      // アニメーションの時間とイージング（動きの滑らかさ）を設定
-      fg.style.transition = 'transform 0.6s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.4s ease-in 0.2s';
-      bg.style.transition = 'transform 0.8s ease-out, filter 0.8s ease-out, opacity 0.8s ease-out';
+      // アニメーションの時間とイージングを設定
+      // 車は急加速(ease-in)で走り去る
+      fg.style.transition = 'transform 0.4s cubic-bezier(0.5, 0, 1, 1)';
+      bg.style.transition = 'transform 0.5s ease-out, filter 0.5s ease-out';
 
-      // アニメーションの実行
       requestAnimationFrame(() => {
-        // 車：一気に巨大化（scale:4）しながら、手前下方向へ飛び出して消える！
-        fg.style.transform = 'scale(4) translateX(10%) translateY(100px)';
-        fg.style.opacity = '0';
-
-        // 背景：スピード感を出すために少し拡大し、強烈なモーションブラーをかけて消える！
-        bg.style.transform = 'scale(1.2)';
-        bg.style.filter = 'blur(10px)';
-        bg.style.opacity = '0';
+        // ★車：進行方向（左下）に猛スピードで移動！scale(1.15)は維持。
+        // X方向に大きくマイナス、Y方向にプラスで斜め左下に飛ばす
+        fg.style.transform = 'scale(1.15) translate(-150%, 150px)';
+        
+        // 背景：少し右上に引っ張られるような反作用とブラーでスピード感を出す
+        bg.style.transform = 'scale(1.1) translate(5%, -5%)';
+        bg.style.filter = 'blur(8px)';
       });
 
-      // 0.5秒後に暗転開始
+      // 車が消えた後（0.4秒後）に暗転開始
+      setTimeout(() => {
+        overlay.classList.remove('pointer-events-none');
+        overlay.style.opacity = '1';
+      }, 400);
+
+      // 1.4秒後にジャンプ
+      setTimeout(() => {
+        window.location.href = targetUrl;
+      }, 1400);
+    }
+
+    // ★★★ 【★02用】 将来のモンスタートラック用：画面手前に大迫力で迫ってくる演出 ★★★
+    function monsterSmashAndReturn(e, cardId) {
+      e.preventDefault();
+      
+      document.body.style.overflow = 'hidden';
+
+      const container = document.getElementById('ep2-img-container');
+      const img = document.getElementById('ep2-img');
+      const overlay = document.getElementById('blackout-overlay');
+
+      // 枠を突き破れるように設定
+      container.classList.remove('overflow-hidden');
+      container.style.zIndex = '9999';
+      document.getElementById(cardId).style.zIndex = '9999';
+
+      // 手前に迫ってくるアニメーション
+      img.style.transition = 'transform 0.6s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.5s ease-in 0.2s';
+
+      requestAnimationFrame(() => {
+        // 巨大化しながら手前下へ
+        img.style.transform = 'scale(5) translateY(100px)';
+        img.style.opacity = '0';
+      });
+
+      // 暗転開始
       setTimeout(() => {
         overlay.classList.remove('pointer-events-none');
         overlay.style.opacity = '1';
       }, 500);
 
-      // 1.5秒後にジャンプ！
+      // リセットして元に戻す（★02はまだジャンプ先がないため）
       setTimeout(() => {
-        window.location.href = targetUrl;
-      }, 1500);
+        img.style.transition = 'none'; 
+        img.style.transform = '';      
+        img.style.opacity = '1';       
+        
+        container.classList.add('overflow-hidden');
+        container.style.zIndex = '';
+        document.getElementById(cardId).style.zIndex = '';
+
+        overlay.style.opacity = '0';
+        overlay.classList.add('pointer-events-none');
+        
+        document.body.style.overflow = '';
+      }, 2000);
     }
 
-    // ★★★ 【★02用】 ページめくり＆暗転からの「元に戻る」演出 ★★★
+    // ★★★ 【★03用】 ページめくり＆暗転からの「元に戻る」演出 ★★★
     function turnPageAndReturn(e, cardId) {
       e.preventDefault();
       const card = document.getElementById(cardId);
