@@ -983,18 +983,19 @@
       document.getElementById(cardId).style.zIndex = '9999';
 
       // 🔊 【音声追加ポイント: エンジン吹かし音】
-      
       fg.classList.add('animate-engine-shake');
+
+      // ★ボタン押下から0.3秒後（0.7秒より0.4秒早い）にダッシュ音を再生
+      setTimeout(() => {
+        const dashAudio = new Audio('pn.m4a');
+        dashAudio.play().catch(err => console.log('音声の再生がブロックされました', err));
+      }, 300);
 
       setTimeout(() => {
         fg.classList.remove('animate-engine-shake');
 
         // 強制リフロー (アニメーションのスキップ防止)
         void fg.offsetWidth;
-
-        // 🔊 【音声追加ポイント: ダッシュ音（0.7秒後に再生）】
-        const dashAudio = new Audio('pn.m4a');
-        dashAudio.play().catch(err => console.log('音声の再生がブロックされました', err));
 
         fg.style.transition = 'transform 0.4s cubic-bezier(0.5, 0, 1, 1)';
         bg.style.transition = 'transform 0.5s ease-out, filter 0.5s ease-out';
