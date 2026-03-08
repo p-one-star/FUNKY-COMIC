@@ -375,15 +375,18 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                   </button>
                   <div id="menu-share-2" class="menu-share-dropdown absolute top-full right-0 mt-2 w-48 bg-zinc-900 border border-[#ccff00] rounded-lg shadow-[0_0_15px_rgba(204,255,0,0.3)] opacity-0 pointer-events-none transition-all duration-300 transform translate-y-[-10px] flex flex-col overflow-hidden">
-                    <button onclick="copyLinkInline(event, '#', this)" class="px-4 py-3 text-left text-sm text-white hover:bg-[#ccff00]/20 hover:text-[#ccff00] border-b border-white/10 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <!-- ★02のリンクをコピーするように変更 -->
+                    <button onclick="copyLinkInline(event, 'https://p-one-star.github.io/FUNKY-02/', this)" class="px-4 py-3 text-left text-sm text-white hover:bg-[#ccff00]/20 hover:text-[#ccff00] border-b border-white/10 font-bold tracking-wider transition-colors flex items-center gap-3">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
                       <span class="t-share-copy transition-colors duration-300">Copy Link</span>
                     </button>
-                    <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-[#ccff00]/20 hover:text-[#ccff00] border-b border-white/10 font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <!-- ★02のPinterestシェアに変更 -->
+                    <button onclick="shareOnPinterest(event, 'ep2')" class="px-4 py-3 text-left text-sm text-white hover:bg-[#ccff00]/20 hover:text-[#ccff00] border-b border-white/10 font-bold tracking-wider transition-colors flex items-center gap-3">
                       <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.168 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.625 0 12.017 0z"/></svg>
                       <span class="t-share-pin">Share on Pinterest</span>
                     </button>
-                    <button class="btn-show-toast px-4 py-3 text-left text-sm text-white hover:bg-[#ccff00]/20 hover:text-[#ccff00] font-bold tracking-wider transition-colors flex items-center gap-3">
+                    <!-- ★02のXシェアに変更 -->
+                    <button onclick="shareOnX(event, 'ep2')" class="px-4 py-3 text-left text-sm text-white hover:bg-[#ccff00]/20 hover:text-[#ccff00] font-bold tracking-wider transition-colors flex items-center gap-3">
                       <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
                       <span class="t-share-x">Share on X</span>
                     </button>
@@ -417,8 +420,8 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <!-- ★02専用アニメーションを起動★ -->
-                      <a href="#" onclick="monsterSmashAndReturn(event, 'card-ep2')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group cursor-pointer">
+                      <!-- ★02専用アニメーションを起動し、URLへ遷移させる -->
+                      <a href="#" onclick="monsterSmashAndReturn(event, 'card-ep2', 'https://p-one-star.github.io/FUNKY-02/')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read2" class="btn-text-glow-lime transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
                     </div>
@@ -660,6 +663,14 @@
         xTextJa: '過剰な自信。追いつかない現実。\nFUNKY ★01.\n#FHW #FUNKYHOTDOGWORKS\n',
         mediaEn: 'https://p-one-star.github.io/FUNKY-HOTDOG-WORKS/pe.jpg', 
         mediaJa: 'https://p-one-star.github.io/FUNKY-HOTDOG-WORKS/pj.jpg'  
+      },
+      // ★02のシェア用データを追加！
+      ep2: {
+        url: 'https://p-one-star.github.io/FUNKY-02/',
+        xTextEn: "A stupid illusion, but he's dead serious.\nFUNKY ★02.\n#FHW #FUNKYHOTDOGWORKS\n",
+        xTextJa: "おバカな勘違い、でも彼は本気だ。\nFUNKY ★02.\n#FHW #FUNKYHOTDOGWORKS\n",
+        mediaEn: 'https://p-one-star.github.io/FUNKY-HOTDOG-WORKS/02r.jpg', // 仮の画像URL
+        mediaJa: 'https://p-one-star.github.io/FUNKY-HOTDOG-WORKS/02r.jpg'  // 仮の画像URL
       }
     };
 
@@ -698,7 +709,7 @@
         comic: {
           title: "最高にファンキーなコミック", subtitle: "ワイルドでクレイジーなマシン",
           from: "止められるもんなら\n止めてみな！", series: "ワイルドマシンシリーズ", swipe: "スワイプ",
-          episodes: ['ネオンエンジン', 'サイバーエキゾースト', 'ターボホットドッグ', 'メカバイト'],
+          episodes: ['ネオンエンジン', 'サイバーエキゾースト', 'ターホットドッグ', 'メカバイト'],
           more: "ガレージは眠らない。\n次のバケモノを仕込み中... ∞",
           read: "心して進め。",
           phrase1: "俺より速いやついる？",
@@ -903,6 +914,10 @@
       if (episode === 'ep1') {
         text = currentLang === 'en' ? shareData.ep1.xTextEn : shareData.ep1.xTextJa;
         url = shareData.ep1.url;
+      } else if (episode === 'ep2') {
+        // ★02のテキストとURLを取得
+        text = currentLang === 'en' ? shareData.ep2.xTextEn : shareData.ep2.xTextJa;
+        url = shareData.ep2.url;
       }
       
       if (text && url) {
@@ -927,6 +942,11 @@
         text = currentLang === 'en' ? shareData.ep1.xTextEn : shareData.ep1.xTextJa;
         url = shareData.ep1.url;
         media = currentLang === 'en' ? shareData.ep1.mediaEn : shareData.ep1.mediaJa;
+      } else if (episode === 'ep2') {
+        // ★02のデータを使用
+        text = currentLang === 'en' ? shareData.ep2.xTextEn : shareData.ep2.xTextJa;
+        url = shareData.ep2.url;
+        media = currentLang === 'en' ? shareData.ep2.mediaEn : shareData.ep2.mediaJa;
       }
       
       if (url && media) {
@@ -1020,7 +1040,7 @@
     }
 
     // ★★★ 【★02用】 画面手前への大迫力突進 ＆ サブリミナルフルスクリーン演出 ★★★
-    function monsterSmashAndReturn(e, cardId) {
+    function monsterSmashAndReturn(e, cardId, targetUrl) {
       e.preventDefault();
       document.body.style.overflow = 'hidden';
 
@@ -1080,7 +1100,6 @@
             // カード内のマシンを隠す
             machineWrapper.style.opacity = '0';
             
-            // ★修正ポイント: フルスクリーン背景と引きのキャラ(scale-0.125)を準備
             subContainer.classList.remove('pointer-events-none');
             subContainer.style.opacity = '1';
             subImg.style.transition = 'none';
@@ -1102,36 +1121,40 @@
               whiteout.style.transition = 'opacity 0.3s ease-in';
               whiteout.style.opacity = '1';
 
-              // 7. リセットして元に戻る
+              // 7. ホワイトアウト完了後に遷移！
               setTimeout(() => {
-                subContainer.style.opacity = '0';
-                subContainer.classList.add('pointer-events-none');
-                subImg.style.transition = 'none';
-                subImg.style.transform = 'scale(0.125)'; // 初期値に戻す
+                
+                window.location.href = targetUrl; // ★指定したURLへジャンプ
 
-                machineWrapper.style.transition = 'none';
-                machineWrapper.style.transform = '';
-                machineWrapper.style.opacity = '1';
-
-                textArea.style.transition = 'none';
-                textArea.style.transform = '';
-                textArea.style.opacity = '1';
-
-                header.style.transition = 'none';
-                header.style.transform = '';
-                header.style.opacity = '1';
-
-                bg.style.filter = '';
-
-                container.classList.add('overflow-hidden');
-                card.style.zIndex = '';
-
-                whiteout.style.transition = 'opacity 0.8s ease-out';
-                whiteout.style.opacity = '0';
+                // 遷移の裏で一応要素をリセットしておく（ブラウザバックで戻ってきた時用）
                 setTimeout(() => {
+                  subContainer.style.opacity = '0';
+                  subContainer.classList.add('pointer-events-none');
+                  subImg.style.transition = 'none';
+                  subImg.style.transform = 'scale(0.125)'; // 初期値に戻す
+
+                  machineWrapper.style.transition = 'none';
+                  machineWrapper.style.transform = '';
+                  machineWrapper.style.opacity = '1';
+
+                  textArea.style.transition = 'none';
+                  textArea.style.transform = '';
+                  textArea.style.opacity = '1';
+
+                  header.style.transition = 'none';
+                  header.style.transform = '';
+                  header.style.opacity = '1';
+
+                  bg.style.filter = '';
+
+                  container.classList.add('overflow-hidden');
+                  card.style.zIndex = '';
+
+                  whiteout.style.transition = 'none';
+                  whiteout.style.opacity = '0';
                   whiteout.classList.add('pointer-events-none');
                   document.body.style.overflow = '';
-                }, 800);
+                }, 500); 
 
               }, 400);
 
