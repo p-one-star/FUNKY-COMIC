@@ -173,14 +173,14 @@
       animation: none;
     }
 
-    /* ★01用：発進前のエンジン吹かし（ブルブル）アニメーション */
+    /* ★01用：発進前のエンジン吹かし（ブルブル）アニメーションを控えめに微調整 */
     /* 基準となる translate-x-[4%] と translate-y-[50px] scale-[1.15] を維持しつつ揺らす */
     @keyframes engine-shake {
       0%, 100% { transform: scale(1.15) translate(4%, 50px) rotate(0deg); }
-      20% { transform: scale(1.15) translate(3.5%, 48px) rotate(-1deg); }
-      40% { transform: scale(1.15) translate(4.5%, 52px) rotate(1deg); }
-      60% { transform: scale(1.15) translate(3.8%, 51px) rotate(-0.5deg); }
-      80% { transform: scale(1.15) translate(4.2%, 49px) rotate(0.5deg); }
+      20% { transform: scale(1.15) translate(3.8%, 49px) rotate(-0.3deg); }
+      40% { transform: scale(1.15) translate(4.2%, 51px) rotate(0.3deg); }
+      60% { transform: scale(1.15) translate(3.9%, 50.5px) rotate(-0.2deg); }
+      80% { transform: scale(1.15) translate(4.1%, 49.5px) rotate(0.2deg); }
     }
     .animate-engine-shake {
       animation: engine-shake 0.08s infinite ease-in-out;
@@ -381,7 +381,7 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <!-- ★01専用「タメてから左下へ猛ダッシュ」演出を適用！★ -->
+                      <!-- ★01専用「0.7秒タメてから左下へ猛ダッシュ」演出を適用！★ -->
                       <a href="#" onclick="nascarDriveByAndGo(event, 'card-ep1', 'https://p-one-star.github.io/FUNKY-01/')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read1" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
@@ -430,7 +430,7 @@
                 <div class="w-full flex-shrink-0 flex items-center justify-center py-3">
                   <!-- ★02用にIDを付与 -->
                   <div id="ep2-img-container" class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
-                    <!-- 現状は1枚絵。画面手前に迫ってくる演出用 -->
+                    <!-- 現状は1枚絵。将来のガラス砕け散り演出の土台として、手前に迫ってくる演出を割り当てる -->
                     <img id="ep2-img" src="304.jpg" alt="Episode 2" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=304.jpg'" />
                   </div>
                 </div>
@@ -565,7 +565,6 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <!-- ★04は未完成なのでトーストを出します★ -->
                       <a href="#" class="btn-show-toast relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group">
                         <span id="t-btn-read4" class="btn-text-glow-lime transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
@@ -1011,10 +1010,10 @@
       container.style.zIndex = '9999';
       document.getElementById(cardId).style.zIndex = '9999';
 
-      // 1. ボタン押下直後：エンジンを吹かすブルブル演出（0.5秒間）
+      // 1. ボタン押下直後：エンジンを吹かすブルブル演出（0.7秒間）
       fg.classList.add('animate-engine-shake');
 
-      // 2. 0.5秒後にブルブルを止めて、一気に発進！
+      // 2. 0.7秒後にブルブルを止めて、一気に発進！
       setTimeout(() => {
         fg.classList.remove('animate-engine-shake');
 
@@ -1043,7 +1042,7 @@
           window.location.href = targetUrl;
         }, 1800);
 
-      }, 500); // 最初の0.5秒のタメ
+      }, 700); // 最初の0.7秒のタメ
     }
 
     // ★★★ 【★02用】 将来のモンスタートラック用：画面手前に大迫力で迫ってくる演出 ★★★
