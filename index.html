@@ -109,72 +109,32 @@
          0 0 24px rgba(204, 255, 0, 0.8); 
     }
 
-    /* ★奇数用：ホタルのように流れる明滅アニメーション（シアン） */
+    /* ホタルのように流れる明滅アニメーション */
     @keyframes firefly-sweep {
       0% { background-position: 150% center; filter: drop-shadow(0 0 2px rgba(0, 243, 255, 0.2)); }
       50% { filter: drop-shadow(0 0 12px rgba(0, 243, 255, 1)); }
       100% { background-position: -50% center; filter: drop-shadow(0 0 2px rgba(0, 243, 255, 0.2)); }
     }
     .btn-text-glow {
-      background: linear-gradient(
-        to right,
-        rgba(0, 243, 255, 0.4) 0%,
-        rgba(0, 243, 255, 0.4) 40%,
-        rgba(204, 255, 255, 1) 48%, 
-        #ffffff 50%,
-        rgba(0, 243, 255, 1) 52%,
-        rgba(0, 243, 255, 0.4) 60%,
-        rgba(0, 243, 255, 0.4) 100%
-      );
-      background-size: 200% auto;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      background: linear-gradient(to right, rgba(0, 243, 255, 0.4) 0%, rgba(0, 243, 255, 0.4) 40%, rgba(204, 255, 255, 1) 48%, #ffffff 50%, rgba(0, 243, 255, 1) 52%, rgba(0, 243, 255, 0.4) 60%, rgba(0, 243, 255, 0.4) 100%);
+      background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
       animation: firefly-sweep 3.5s ease-in-out infinite;
     }
-    .group:hover .btn-text-glow {
-      background: none;
-      -webkit-text-fill-color: #000 !important;
-      color: #000;
-      filter: none;
-      animation: none;
-    }
+    .group:hover .btn-text-glow { background: none; -webkit-text-fill-color: #000 !important; color: #000; filter: none; animation: none; }
 
-    /* ★偶数用：ホタルのように流れる明滅アニメーション（ライムイエロー） */
     @keyframes firefly-sweep-lime {
       0% { background-position: 150% center; filter: drop-shadow(0 0 2px rgba(204, 255, 0, 0.2)); }
       50% { filter: drop-shadow(0 0 12px rgba(204, 255, 0, 1)); }
       100% { background-position: -50% center; filter: drop-shadow(0 0 2px rgba(204, 255, 0, 0.2)); }
     }
     .btn-text-glow-lime {
-      background: linear-gradient(
-        to right,
-        rgba(204, 255, 0, 0.4) 0%,
-        rgba(204, 255, 0, 0.4) 40%,
-        rgba(204, 255, 0, 1) 48%,
-        #ffffff 50%,
-        rgba(204, 255, 0, 1) 52%,
-        rgba(204, 255, 0, 0.4) 60%,
-        rgba(204, 255, 0, 0.4) 100%
-      );
-      background-size: 200% auto;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      background: linear-gradient(to right, rgba(204, 255, 0, 0.4) 0%, rgba(204, 255, 0, 0.4) 40%, rgba(204, 255, 0, 1) 48%, #ffffff 50%, rgba(204, 255, 0, 1) 52%, rgba(204, 255, 0, 0.4) 60%, rgba(204, 255, 0, 0.4) 100%);
+      background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
       animation: firefly-sweep-lime 3.5s ease-in-out infinite;
     }
-    .group:hover .btn-text-glow-lime {
-      background: none;
-      -webkit-text-fill-color: #000 !important;
-      color: #000;
-      filter: none;
-      animation: none;
-    }
+    .group:hover .btn-text-glow-lime { background: none; -webkit-text-fill-color: #000 !important; color: #000; filter: none; animation: none; }
 
-    /* ★01用：発進前のエンジン吹かし（ブルブル）アニメーションを控えめに微調整 */
-    /* 基準となる translate-x-[4%] と translate-y-[50px] scale-[1.15] を維持しつつ揺らす */
+    /* ★01用：NASCARのブルブル（小刻み） */
     @keyframes engine-shake {
       0%, 100% { transform: scale(1.15) translate(4%, 50px) rotate(0deg); }
       20% { transform: scale(1.15) translate(3.8%, 49px) rotate(-0.3deg); }
@@ -182,9 +142,17 @@
       60% { transform: scale(1.15) translate(3.9%, 50.5px) rotate(-0.2deg); }
       80% { transform: scale(1.15) translate(4.1%, 49.5px) rotate(0.2deg); }
     }
-    .animate-engine-shake {
-      animation: engine-shake 0.08s infinite ease-in-out;
+    .animate-engine-shake { animation: engine-shake 0.08s infinite ease-in-out; }
+
+    /* ★02用：モンスタートラックのブルブル（重め） */
+    @keyframes engine-shake-heavy {
+      0%, 100% { transform: scale(1) translate(0, 0) rotate(0deg); }
+      20% { transform: scale(1) translate(-1px, 2px) rotate(-0.5deg); }
+      40% { transform: scale(1) translate(1px, -1px) rotate(0.5deg); }
+      60% { transform: scale(1) translate(-2px, 1px) rotate(-0.2deg); }
+      80% { transform: scale(1) translate(2px, -2px) rotate(0.2deg); }
     }
+    .animate-engine-shake-heavy { animation: engine-shake-heavy 0.08s infinite ease-in-out; }
 
     html, body {
       font-family: 'Inter', system-ui, sans-serif;
@@ -197,6 +165,9 @@
 
   <!-- ★★★ カード演出後の暗転用オーバーレイ ★★★ -->
   <div id="blackout-overlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none z-[10000]" style="transition: opacity 1.0s ease-in-out;"></div>
+  
+  <!-- ★★★ ★02用：ホワイトフラッシュ・サブリミナル用オーバーレイ ★★★ -->
+  <div id="whiteout-overlay" class="fixed inset-0 bg-white opacity-0 pointer-events-none z-[10000]"></div>
 
   <!-- ★★★ 鉄の扉オーバーレイ (GARAGE行き) ★★★ -->
   <div id="iron-door" class="fixed top-0 left-0 w-full h-full z-[9999] translate-x-full transition-transform duration-[600ms] ease-in pointer-events-none flex flex-col items-center justify-center bg-zinc-900 shadow-[-30px_0_50px_rgba(0,0,0,1)] overflow-hidden">
@@ -222,11 +193,7 @@
 
     <!-- ================= HEADER ================= -->
     <header class="fixed top-0 left-0 w-full z-50 px-4 h-[80px] flex justify-between items-center bg-black/40 backdrop-blur-md border-b border-white/10 transition-all duration-300">
-      <img 
-        src="icon.PNG" 
-        alt="FHW Logo" 
-        class="relative w-[100px] translate-y-[16px] -rotate-[5deg] transition-all duration-300 cursor-pointer hover:-rotate-[12deg] hover:scale-110 active:-rotate-[12deg] active:scale-110 z-20 origin-center"
-      />
+      <img src="icon.PNG" alt="FHW Logo" class="relative w-[100px] translate-y-[16px] -rotate-[5deg] transition-all duration-300 cursor-pointer hover:-rotate-[12deg] hover:scale-110 active:-rotate-[12deg] active:scale-110 z-20 origin-center" />
       <div class="flex items-center gap-3">
         <div id="btn-lang" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/80 border border-gray-600 cursor-pointer transition-all duration-300 hover:border-cyan-400 hover:shadow-[0_0_8px_rgba(0,243,255,0.6),inset_0_0_3px_rgba(0,243,255,0.3)]">
           <span id="icon-en" class="text-sm transition-opacity duration-300 opacity-100 grayscale-0">🇺🇸</span>
@@ -276,24 +243,6 @@
               <span id="t-hero-funky2" class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 neon-text-yellow uppercase text-6xl sm:text-7xl tracking-widest leading-tight pb-1">FUNKY</span>
             </div>
           </div>
-
-          <!-- CRAFTED IN JAPAN -->
-          <div class="flex flex-col items-center justify-center w-full mt-10 font-black uppercase text-slate-900 dark:text-white drop-shadow-lg leading-none">
-            <div class="w-[85vw] max-w-[320px] sm:max-w-[420px] flex flex-col items-stretch">
-              <div class="flex justify-between w-full text-4xl sm:text-5xl mb-2">
-                <span>C</span><span>R</span><span>A</span><span>F</span><span>T</span><span>E</span><span>D</span>
-              </div>
-              <div class="flex justify-center w-full my-4 sm:my-6 relative">
-                <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 flex items-center justify-center">
-                  <span class="w-16 h-16 sm:w-20 sm:h-20 bg-[#ff0033] rounded-full animate-hinomaru"></span>
-                </span>
-                <span class="relative z-10 text-xl sm:text-2xl tracking-widest">IN</span>
-              </div>
-              <div class="flex justify-between w-full text-6xl sm:text-7xl mt-2">
-                <span>J</span><span>A</span><span>P</span><span>A</span><span>N</span>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -301,21 +250,17 @@
       <section class="pt-24 pb-8 relative overflow-hidden border-t-2 bg-[#cbd5e1] border-black/10 dark:bg-[#0a0a0a] dark:border-white/10 transition-colors duration-500">
         
         <div class="px-6 mb-10 text-center relative z-10 flex flex-col items-center justify-center">
-          
-          <!-- FHW 巨大透かし文字 -->
           <div class="absolute top-[25%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10 flex justify-center items-center w-full overflow-visible">
             <div class="text-[55vw] sm:text-[300px] font-black text-black/5 dark:text-white/5 tracking-tighter select-none whitespace-nowrap transform -skew-x-6">
               FHW
             </div>
           </div>
-
           <h2 id="t-comic-title" class="text-[6vw] sm:text-4xl md:text-5xl font-black text-[#ccff00] uppercase transform skew-x-3 mb-2 neon-text-yellow whitespace-nowrap tracking-tighter" style="word-spacing: 0.3em;">
             Too Funky Comic
           </h2>
           <p id="t-comic-subtitle" class="text-lg sm:text-xl font-bold mb-1 uppercase tracking-wider text-slate-800 dark:text-white">
             Wild & Crazy Machines
           </p>
-          
           <div id="t-comic-from" class="font-black uppercase tracking-widest text-2xl sm:text-3xl md:text-4xl text-center text-cyan-500 dark:text-cyan-400 mt-5 whitespace-pre-line leading-snug drop-shadow-lg neon-text-cyan transform -skew-x-3">
             UNLIMITED DIFFUSION
           </div>
@@ -323,17 +268,15 @@
 
         <div id="comic-scroll-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-4 hide-scrollbar pt-4 relative z-10" style="scroll-behavior: smooth;">
           
-          <!-- ★★★ カード 1 (奇数パターン: シアン枠) ★★★ -->
+          <!-- ★★★ カード 1 (NASCAR) ★★★ -->
           <div style="perspective: 2500px;" class="flex-shrink-0 snap-center">
             <div id="card-ep1" class="relative w-[80vw] sm:w-[340px] rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-black shadow-lg" style="transform-style: preserve-3d;">
               
-              <!-- ヘッダー＆上のライン -->
               <div class="p-4 flex justify-between items-center bg-black relative z-30">
                 <span class="font-black uppercase tracking-wider text-white flex items-baseline gap-2">
                   <span class="text-xl">FUNKY</span> 
                   <span class="text-3xl text-[#ccff00]">★01</span>
                 </span>
-                
                 <div class="relative">
                   <button class="btn-share text-white hover:text-[#ccff00] transition-colors p-1" data-target="menu-share-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
@@ -353,27 +296,19 @@
                     </button>
                   </div>
                 </div>
-                
                 <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[85%]" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
               </div>
               
-              <!-- ★コンテンツエリア -->
               <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
-                
-                <!-- 画像エリア -->
                 <div class="w-full flex-shrink-0 flex items-center justify-center py-3">
-                  <!-- 枠からはみ出す演出のために、id を付与し overflow-hidden をJSで外せるようにします -->
                   <div id="ep1-img-container" class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)] transition-all duration-300">
-                    <img id="ep1-bg" src="303.jpg" alt="Episode 1 BG" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=303.jpg'" />
-                    
-                    <!-- 透過PNG (50px下げのベストポジション) -->
-                    <img id="ep1-fg" src="302.PNG" alt="Episode 1 FG" class="absolute inset-0 w-full h-full object-contain object-bottom transform scale-[1.15] translate-x-[4%] translate-y-[50px] origin-bottom z-10" onerror="this.style.display='none'" />
+                    <img id="ep1-bg" src="303.jpg" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=303.jpg'" />
+                    <img id="ep1-fg" src="302.PNG" class="absolute inset-0 w-full h-full object-contain object-bottom transform scale-[1.15] translate-x-[4%] translate-y-[50px] origin-bottom z-10" onerror="this.style.display='none'" />
                   </div>
                 </div>
 
                 <div class="relative flex-1 flex flex-col bg-black w-full">
                   <div class="w-[85%] mx-auto z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
-                  
                   <div class="flex-1 flex flex-col px-3 pb-4 sm:pb-5 relative w-full">
                     <div class="flex-1 flex items-center justify-center w-full">
                       <div id="t-ep1-phrase" class="text-outline-cyan text-center font-black leading-[1.1] text-[6.5vw] sm:text-[26px] tracking-wider transform -translate-y-1">
@@ -381,7 +316,7 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <!-- ★01専用「0.7秒タメてから左下へ猛ダッシュ」演出を適用！★ -->
+                      <!-- ★01専用アニメーションを起動★ -->
                       <a href="#" onclick="nascarDriveByAndGo(event, 'card-ep1', 'https://p-one-star.github.io/FUNKY-01/')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read1" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
@@ -392,11 +327,11 @@
             </div>
           </div>
 
-          <!-- ★★★ カード 2 (偶数パターン: ライムイエロー枠) ★★★ -->
+          <!-- ★★★ カード 2 (モンスタートラック) ★★★ -->
           <div style="perspective: 2500px;" class="flex-shrink-0 snap-center">
             <div id="card-ep2" class="relative w-[80vw] sm:w-[340px] rounded-[2rem] border-4 border-[#ccff00] overflow-hidden flex flex-col group bg-black transition-colors duration-500 shadow-lg" style="transform-style: preserve-3d;">
               
-              <div class="p-4 flex justify-between items-center bg-black relative z-30">
+              <div id="ep2-header" class="p-4 flex justify-between items-center bg-black relative z-30">
                 <span class="font-black uppercase tracking-wider text-white flex items-baseline gap-2">
                   <span class="text-xl">FUNKY</span> 
                   <span class="text-3xl text-cyan-400">★02</span>
@@ -421,21 +356,31 @@
                     </button>
                   </div>
                 </div>
-                
                 <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[85%]" style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0,243,255,1) 20%, rgba(0,243,255,1) 80%, transparent 100%);"></div>
               </div>
               
               <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
-                
-                <div class="w-full flex-shrink-0 flex items-center justify-center py-3">
-                  <!-- ★02用にIDを付与 -->
-                  <div id="ep2-img-container" class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
-                    <!-- 現状は1枚絵。将来のガラス砕け散り演出の土台として、手前に迫ってくる演出を割り当てる -->
-                    <img id="ep2-img" src="304.jpg" alt="Episode 2" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=304.jpg'" />
+                <div class="w-full flex-shrink-0 flex items-center justify-center py-3 relative z-10">
+                  <!-- 枠突破演出のために id 追加と overflow-hidden 制御ができるようにする -->
+                  <div id="ep2-img-container" class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)] transition-all duration-300">
+                    
+                    <!-- 背景 -->
+                    <img id="ep2-bg" src="02r.jpg" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=02r.jpg'" />
+                    
+                    <!-- 隠しキャラ (サブリミナル用・最初非表示) -->
+                    <img id="ep2-hidden" src="1318.PNG" class="absolute inset-0 w-full h-full object-cover object-top transform scale-[1.2] opacity-0 z-10" onerror="this.style.display='none'" />
+
+                    <!-- マシンとキャラのラッパー (まとめて揺らす・突進させるため) -->
+                    <div id="ep2-machine-wrapper" class="absolute inset-0 w-full h-full z-20 origin-bottom">
+                      <!-- キャラ (荷台に乗せる) -->
+                      <img id="ep2-mr" src="Mr.PNG" class="absolute inset-x-0 bottom-[35%] w-[45%] mx-auto object-contain z-20" onerror="this.style.display='none'" />
+                      <!-- マシン -->
+                      <img id="ep2-max" src="MAX.PNG" class="absolute inset-x-0 bottom-[-5%] w-[90%] mx-auto object-contain z-30" onerror="this.style.display='none'" />
+                    </div>
                   </div>
                 </div>
 
-                <div class="relative flex-1 flex flex-col bg-black w-full">
+                <div id="ep2-text-area" class="relative flex-1 flex flex-col bg-black w-full z-20">
                   <div class="w-[85%] mx-auto z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0,243,255,1) 20%, rgba(0,243,255,1) 80%, transparent 100%);"></div>
                   <div class="flex-1 flex flex-col px-3 pb-4 sm:pb-5 relative w-full">
                     <div class="flex-1 flex items-center justify-center w-full">
@@ -444,7 +389,7 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <!-- ★02は「画面手前に迫ってくる」演出(monsterSmashAndReturn)を適用！★ -->
+                      <!-- ★02専用アニメーションを起動★ -->
                       <a href="#" onclick="monsterSmashAndReturn(event, 'card-ep2')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read2" class="btn-text-glow-lime transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
@@ -491,7 +436,7 @@
               <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
                 <div class="w-full flex-shrink-0 flex items-center justify-center py-3">
                   <div class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
-                    <img id="img-ep3" src="" alt="Episode 3" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=EPISODE+03'" />
+                    <img src="" alt="Episode 3" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=EPISODE+03'" />
                   </div>
                 </div>
 
@@ -504,7 +449,7 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <!-- ★03に力作の「ページめくり」演出(turnPageAndReturn)を退避！★ -->
+                      <!-- ★03は退避させた「ページめくり」アニメーションを起動★ -->
                       <a href="#" onclick="turnPageAndReturn(event, 'card-ep3')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read3" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
@@ -552,7 +497,7 @@
               <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
                 <div class="w-full flex-shrink-0 flex items-center justify-center py-3">
                   <div class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
-                    <img id="img-ep4" src="" alt="Episode 4" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=EPISODE+04'" />
+                    <img src="" alt="Episode 4" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=EPISODE+04'" />
                   </div>
                 </div>
 
@@ -565,7 +510,7 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <a href="#" class="btn-show-toast relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group">
+                      <a href="#" class="btn-show-toast relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read4" class="btn-text-glow-lime transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
                     </div>
@@ -725,7 +670,7 @@
         comic: {
           title: "最高にファンキーなコミック", subtitle: "ワイルドでクレイジーなマシン",
           from: "止められるもんなら\n止めてみな！", series: "ワイルドマシンシリーズ", swipe: "スワイプ",
-          episodes: ['ネオンエンジン', 'サイバーエキゾースト', 'ターボホットドッグ', 'メカバイト'],
+          episodes: ['ネオンエンジン', 'サイバーエキゾースト', 'ターホットドッグ', 'メカバイト'],
           more: "ガレージは眠らない。\n次のバケモノを仕込み中... ∞",
           read: "心して進め。",
           phrase1: "俺より速いやついる？",
@@ -1010,12 +955,20 @@
       container.style.zIndex = '9999';
       document.getElementById(cardId).style.zIndex = '9999';
 
+      // 🔊 【音声追加ポイント】
+      // ここでエンジンを吹かす音を鳴らす！
+      // 例: new Audio('https://example.com/revving.mp3').play();
+
       // 1. ボタン押下直後：エンジンを吹かすブルブル演出（0.7秒間）
       fg.classList.add('animate-engine-shake');
 
       // 2. 0.7秒後にブルブルを止めて、一気に発進！
       setTimeout(() => {
         fg.classList.remove('animate-engine-shake');
+
+        // 🔊 【音声追加ポイント】
+        // ここで猛ダッシュする「ピュイーンッ！」という音を鳴らす！
+        // 例: new Audio('https://example.com/dash.mp3').play();
 
         // アニメーションの設定（急加速で走り去る）
         fg.style.transition = 'transform 0.4s cubic-bezier(0.5, 0, 1, 1)';
@@ -1045,49 +998,119 @@
       }, 700); // 最初の0.7秒のタメ
     }
 
-    // ★★★ 【★02用】 将来のモンスタートラック用：画面手前に大迫力で迫ってくる演出 ★★★
+    // ★★★ 【★02用】 ガラスぶち破り猛突進 ＆ サブリミナルホワイトアウト演出 ★★★
     function monsterSmashAndReturn(e, cardId) {
       e.preventDefault();
       
       document.body.style.overflow = 'hidden';
 
+      const card = document.getElementById(cardId);
       const container = document.getElementById('ep2-img-container');
-      const img = document.getElementById('ep2-img');
-      const overlay = document.getElementById('blackout-overlay');
+      const bg = document.getElementById('ep2-bg');
+      const machineWrapper = document.getElementById('ep2-machine-wrapper');
+      const hiddenChar = document.getElementById('ep2-hidden');
+      const whiteout = document.getElementById('whiteout-overlay');
 
+      // 吹き飛ばすUI要素
+      const textArea = document.getElementById('ep2-text-area');
+      const header = document.getElementById('ep2-header');
+
+      // 枠を突き破れるように設定
       container.classList.remove('overflow-hidden');
-      container.style.zIndex = '9999';
-      document.getElementById(cardId).style.zIndex = '9999';
+      card.style.zIndex = '9999';
 
-      // 手前に迫ってくるアニメーション
-      img.style.transition = 'transform 0.6s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.5s ease-in 0.2s';
+      // 🔊 【音声追加ポイント】
+      // ここで重低音のエンジン吹かし音を鳴らす！
 
-      requestAnimationFrame(() => {
-        // 巨大化しながら手前下へ
-        img.style.transform = 'scale(5) translateY(100px)';
-        img.style.opacity = '0';
-      });
+      // 1. タメ (0.0s - 0.7s)
+      machineWrapper.classList.add('animate-engine-shake-heavy');
 
       setTimeout(() => {
-        overlay.style.transition = 'opacity 1.0s ease-in-out';
-        overlay.classList.remove('pointer-events-none');
-        overlay.style.opacity = '1';
-      }, 500);
+        // 2. 突進 (0.7s〜)
+        machineWrapper.classList.remove('animate-engine-shake-heavy');
 
-      setTimeout(() => {
-        img.style.transition = 'none'; 
-        img.style.transform = '';      
-        img.style.opacity = '1';       
-        
-        container.classList.add('overflow-hidden');
-        container.style.zIndex = '';
-        document.getElementById(cardId).style.zIndex = '';
+        // 🔊 【音声追加ポイント】
+        // ここでガラスが割れる音 ＋ 爆音のダッシュ音を鳴らす！
 
-        overlay.style.opacity = '0';
-        overlay.classList.add('pointer-events-none');
-        
-        document.body.style.overflow = '';
-      }, 2000);
+        // マシンが手前下へ巨大化しながら突進
+        machineWrapper.style.transition = 'transform 0.4s cubic-bezier(0.5, 0, 1, 1)';
+        machineWrapper.style.transform = 'scale(6) translateY(100px)';
+
+        // UI要素が吹き飛ぶ（ガラス突き破り演出）
+        textArea.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+        textArea.style.transform = 'scale(1.5) translateY(50px)';
+        textArea.style.opacity = '0';
+
+        header.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+        header.style.transform = 'scale(1.5) translateY(-50px)';
+        header.style.opacity = '0';
+
+        // 背景ブラー
+        bg.style.transition = 'filter 0.4s ease-out';
+        bg.style.filter = 'blur(10px)';
+
+        // 3. ホワイトフラッシュ (突進開始から0.15s後)
+        setTimeout(() => {
+          whiteout.style.transition = 'opacity 0.2s ease-in';
+          whiteout.classList.remove('pointer-events-none');
+          whiteout.style.opacity = '1'; // 画面真っ白に！
+        }, 150);
+
+        // 4. サブリミナル (画面真っ白時、突進から0.45s後)
+        setTimeout(() => {
+          // 突進したマシンを隠し、隠しキャラを出す
+          machineWrapper.style.opacity = '0';
+          hiddenChar.style.opacity = '1';
+
+          // ホワイトアウトを少し晴らす（霧が晴れる）
+          whiteout.style.transition = 'opacity 0.5s ease-out';
+          whiteout.style.opacity = '0.2'; // 完全に0にはせず名残を残す
+
+          // 🔊 【音声追加ポイント】
+          // ここで「フワァン…」みたいな不思議なサブリミナル音を鳴らす！
+
+          // 5. 再びホワイトアウト (一瞬見せてから0.5s後)
+          setTimeout(() => {
+            whiteout.style.transition = 'opacity 0.2s ease-in';
+            whiteout.style.opacity = '1';
+
+            // 6. リセットして元に戻る (再ホワイトアウトから0.4s後)
+            setTimeout(() => {
+              // 全ての要素を初期状態に戻す
+              machineWrapper.style.transition = 'none';
+              machineWrapper.style.transform = '';
+              machineWrapper.style.opacity = '1';
+              
+              hiddenChar.style.opacity = '0';
+
+              textArea.style.transition = 'none';
+              textArea.style.transform = '';
+              textArea.style.opacity = '1';
+
+              header.style.transition = 'none';
+              header.style.transform = '';
+              header.style.opacity = '1';
+
+              bg.style.filter = '';
+
+              container.classList.add('overflow-hidden');
+              card.style.zIndex = '';
+
+              // ホワイトアウトを解除して元の画面に戻す
+              whiteout.style.transition = 'opacity 0.8s ease-out';
+              whiteout.style.opacity = '0';
+              setTimeout(() => {
+                whiteout.classList.add('pointer-events-none');
+                document.body.style.overflow = '';
+              }, 800);
+
+            }, 400);
+
+          }, 500);
+
+        }, 450);
+
+      }, 700);
     }
 
     // ★★★ 【★03用】 ページめくり＆暗転からの「元に戻る」演出 ★★★
