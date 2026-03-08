@@ -173,6 +173,18 @@
       animation: none;
     }
 
+    /* ★01用：発進前のエンジン吹かし（ブルブル）アニメーション */
+    @keyframes engine-shake {
+      0%, 100% { transform: scale(1.15) translate(4%, 50px) rotate(0deg); }
+      20% { transform: scale(1.15) translate(3.5%, 48px) rotate(-1deg); }
+      40% { transform: scale(1.15) translate(4.5%, 52px) rotate(1deg); }
+      60% { transform: scale(1.15) translate(3.8%, 51px) rotate(-0.5deg); }
+      80% { transform: scale(1.15) translate(4.2%, 49px) rotate(0.5deg); }
+    }
+    .animate-engine-shake {
+      animation: engine-shake 0.08s infinite ease-in-out;
+    }
+
     html, body {
       font-family: 'Inter', system-ui, sans-serif;
       overflow-x: hidden;
@@ -182,7 +194,7 @@
 
 <body class="bg-black transition-colors duration-500 selection:bg-pink-500 selection:text-white overflow-x-hidden">
 
-  <!-- ★★★ カード演出後の暗転用オーバーレイ ★★★ -->
+  <!-- ★★★ カードめくり後の暗転用オーバーレイ ★★★ -->
   <div id="blackout-overlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none z-[10000]" style="transition: opacity 1.0s ease-in-out;"></div>
 
   <!-- ★★★ 鉄の扉オーバーレイ (GARAGE行き) ★★★ -->
@@ -310,7 +322,7 @@
 
         <div id="comic-scroll-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-4 hide-scrollbar pt-4 relative z-10" style="scroll-behavior: smooth;">
           
-          <!-- ★★★ カード 1 (NASCAR) ★★★ -->
+          <!-- ★★★ カード 1 (奇数パターン: シアン枠) ★★★ -->
           <div style="perspective: 2500px;" class="flex-shrink-0 snap-center">
             <div id="card-ep1" class="relative w-[80vw] sm:w-[340px] rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-black shadow-lg" style="transform-style: preserve-3d;">
               
@@ -349,7 +361,7 @@
                 
                 <!-- 画像エリア -->
                 <div class="w-full flex-shrink-0 flex items-center justify-center py-3">
-                  <!-- 枠からはみ出す演出のために、id を付与し overflow-hidden をJSで制御できるようにします -->
+                  <!-- 枠からはみ出す演出のために、id を付与し overflow-hidden をJSで外せるようにします -->
                   <div id="ep1-img-container" class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)] transition-all duration-300">
                     <img id="ep1-bg" src="303.jpg" alt="Episode 1 BG" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=303.jpg'" />
                     
@@ -368,8 +380,8 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <!-- ★01専用「車が左下へ飛び出して走り去る超ヤバい演出」を適用！★ -->
-                      <a href="#" onclick="nascarDriveByAndGo(event, 'card-ep1', 'https://p-one-star.github.io/FUNKY-01/')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
+                      <!-- ★01専用「タメからの急発進」演出を適用！★ -->
+                      <a href="#" onclick="engineRoarAndGo(event, 'card-ep1', 'https://p-one-star.github.io/FUNKY-01/')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read1" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
                     </div>
@@ -379,7 +391,7 @@
             </div>
           </div>
 
-          <!-- ★★★ カード 2 (モンスタートラック) ★★★ -->
+          <!-- ★★★ カード 2 (偶数パターン: ライムイエロー枠) ★★★ -->
           <div style="perspective: 2500px;" class="flex-shrink-0 snap-center">
             <div id="card-ep2" class="relative w-[80vw] sm:w-[340px] rounded-[2rem] border-4 border-[#ccff00] overflow-hidden flex flex-col group bg-black transition-colors duration-500 shadow-lg" style="transform-style: preserve-3d;">
               
@@ -414,7 +426,6 @@
               
               <div class="relative w-full aspect-[4/5] flex flex-col bg-black">
                 
-                <!-- 画像エリア -->
                 <div class="w-full flex-shrink-0 flex items-center justify-center py-3">
                   <!-- ★02用にIDを付与 -->
                   <div id="ep2-img-container" class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
@@ -765,12 +776,14 @@
       
       document.getElementById('t-toast-msg').innerText = t.toast;
       
+      // ボタンテキスト一括変更
       const btnIds = ['t-btn-read1', 't-btn-read2', 't-btn-read3', 't-btn-read4'];
       btnIds.forEach(id => {
         const btn = document.getElementById(id);
         if(btn) btn.innerText = t.comic.read;
       });
       
+      // キャッチコピー1
       const phrase1 = document.getElementById('t-ep1-phrase');
       if (phrase1) {
         phrase1.innerHTML = t.comic.phrase1.replace(/\n/g, '<br>');
@@ -778,6 +791,7 @@
         else phrase1.classList.remove('italic');
       }
 
+      // キャッチコピー2
       const phrase2 = document.getElementById('t-ep2-phrase');
       if (phrase2) {
         phrase2.innerHTML = t.comic.phrase2.replace(/\n/g, '<br>');
@@ -785,6 +799,7 @@
         else phrase2.classList.remove('italic');
       }
 
+      // キャッチコピー3
       const phrase3 = document.getElementById('t-ep3-phrase');
       if (phrase3) {
         phrase3.innerHTML = t.comic.phrase3.replace(/\n/g, '<br>');
@@ -792,6 +807,7 @@
         else phrase3.classList.remove('italic');
       }
 
+      // キャッチコピー4
       const phrase4 = document.getElementById('t-ep4-phrase');
       if (phrase4) {
         phrase4.innerHTML = t.comic.phrase4.replace(/\n/g, '<br>');
@@ -799,6 +815,7 @@
         else phrase4.classList.remove('italic');
       }
 
+      // シェアメニューテキスト
       document.querySelectorAll('.t-share-copy').forEach(el => el.innerText = t.comic.shareCopy);
       document.querySelectorAll('.t-share-pin').forEach(el => el.innerText = t.comic.sharePin);
       document.querySelectorAll('.t-share-x').forEach(el => el.innerText = t.comic.shareX);
@@ -850,6 +867,7 @@
       }
     });
 
+    // ★★★ カミングスーン（工事中）トースト共通関数 ★★★
     function showComingSoonToast() {
       const toast = document.getElementById('funky-toast');
       const msg = document.getElementById('t-toast-msg');
@@ -873,6 +891,7 @@
       });
     });
 
+    // ★★★ URLコピー機能（基本） ★★★
     function fallbackCopyTextToClipboard(text) {
       var textArea = document.createElement("textarea");
       textArea.value = text;
@@ -890,6 +909,7 @@
       document.body.removeChild(textArea);
     }
 
+    // ★★★ 新しいスマートなインラインコピー関数 ★★★
     function copyLinkInline(e, url, btnElement) {
       e.preventDefault();
       e.stopPropagation(); 
@@ -911,6 +931,7 @@
       }, 1500);
     }
 
+    // ★★★ Xでシェア機能 ★★★
     function shareOnX(e, episode) {
       e.preventDefault();
       let text = '';
@@ -933,6 +954,7 @@
       });
     }
 
+    // ★★★ Pinterestでシェア機能 ★★★
     function shareOnPinterest(e, episode) {
       e.preventDefault();
       let text = '';
@@ -957,6 +979,7 @@
       });
     }
 
+    // ★★★ シェアドロップダウンメニューの開閉ロジック ★★★
     document.querySelectorAll('.btn-share').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -984,7 +1007,7 @@
     });
 
 
-    // ★★★ 【★01専用】 左下へ猛スピードで走り去る演出 ★★★
+    // ★★★ 【★01専用】 タメてから左下へ猛スピードで走り去る演出 ★★★
     function nascarDriveByAndGo(e, cardId, targetUrl) {
       e.preventDefault();
       
@@ -995,36 +1018,43 @@
       const bg = document.getElementById('ep1-bg');
       const overlay = document.getElementById('blackout-overlay');
 
-      // 枠を突き破れるように設定
       container.classList.remove('overflow-hidden');
       container.style.zIndex = '9999';
       document.getElementById(cardId).style.zIndex = '9999';
 
-      // アニメーションの時間とイージングを設定
-      // 車は急加速(ease-in)で走り去る
-      fg.style.transition = 'transform 0.4s cubic-bezier(0.5, 0, 1, 1)';
-      bg.style.transition = 'transform 0.5s ease-out, filter 0.5s ease-out';
+      // 1. ボタン押下直後：エンジンを吹かすブルブル演出（0.5秒間）
+      fg.classList.add('animate-engine-shake');
 
-      requestAnimationFrame(() => {
-        // ★車：進行方向（左下）に猛スピードで移動！scale(1.15)は維持。
-        // X方向に大きくマイナス、Y方向にプラスで斜め左下に飛ばす
-        fg.style.transform = 'scale(1.15) translate(-150%, 150px)';
-        
-        // 背景：少し右上に引っ張られるような反作用とブラーでスピード感を出す
-        bg.style.transform = 'scale(1.1) translate(5%, -5%)';
-        bg.style.filter = 'blur(8px)';
-      });
-
-      // 車が消えた後（0.4秒後）に暗転開始
+      // 2. 0.5秒後にブルブルを止めて、一気に発進！
       setTimeout(() => {
-        overlay.classList.remove('pointer-events-none');
-        overlay.style.opacity = '1';
-      }, 400);
+        fg.classList.remove('animate-engine-shake');
 
-      // 1.4秒後にジャンプ
-      setTimeout(() => {
-        window.location.href = targetUrl;
-      }, 1400);
+        // アニメーションの設定（急加速で走り去る）
+        fg.style.transition = 'transform 0.4s cubic-bezier(0.5, 0, 1, 1)';
+        bg.style.transition = 'transform 0.5s ease-out, filter 0.5s ease-out';
+
+        requestAnimationFrame(() => {
+          // 車：進行方向（左下）に猛スピードで移動！
+          fg.style.transform = 'scale(1.15) translate(-150%, 150px)';
+          
+          // 背景：少し右上に引っ張られるような反作用とブラー
+          bg.style.transform = 'scale(1.1) translate(5%, -5%)';
+          bg.style.filter = 'blur(8px)';
+        });
+
+        // 3. 発進から0.4秒後（車が消えたタイミング）に暗転開始
+        setTimeout(() => {
+          overlay.style.transition = 'opacity 1.0s ease-in-out';
+          overlay.classList.remove('pointer-events-none');
+          overlay.style.opacity = '1';
+        }, 400);
+
+        // 4. 暗転完了(1.0秒) ＋ 0.4秒のタメ ＝ 発進から1.4秒後にジャンプ！
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 1800);
+
+      }, 500); // 最初の0.5秒のタメ
     }
 
     // ★★★ 【★02用】 将来のモンスタートラック用：画面手前に大迫力で迫ってくる演出 ★★★
@@ -1037,7 +1067,6 @@
       const img = document.getElementById('ep2-img');
       const overlay = document.getElementById('blackout-overlay');
 
-      // 枠を突き破れるように設定
       container.classList.remove('overflow-hidden');
       container.style.zIndex = '9999';
       document.getElementById(cardId).style.zIndex = '9999';
@@ -1051,13 +1080,12 @@
         img.style.opacity = '0';
       });
 
-      // 暗転開始
       setTimeout(() => {
+        overlay.style.transition = 'opacity 1.0s ease-in-out';
         overlay.classList.remove('pointer-events-none');
         overlay.style.opacity = '1';
       }, 500);
 
-      // リセットして元に戻す（★02はまだジャンプ先がないため）
       setTimeout(() => {
         img.style.transition = 'none'; 
         img.style.transform = '';      
@@ -1093,6 +1121,7 @@
       });
 
       setTimeout(() => {
+        overlay.style.transition = 'opacity 1.0s ease-in-out';
         overlay.classList.remove('pointer-events-none');
         overlay.style.opacity = '1';
       }, 1600);
