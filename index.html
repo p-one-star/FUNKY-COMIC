@@ -172,8 +172,8 @@
   <div id="whiteout-overlay" class="fixed inset-0 bg-white opacity-0 pointer-events-none z-[10010]"></div>
   <!-- サブリミナル専用空間 (真っ黒背景 ＋ キャラ) -->
   <div id="subliminal-overlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none z-[10005] flex items-center justify-center overflow-hidden">
-    <!-- 最初は更に引きの(scale-[0.25])で配置し、JSでドアップに拡大させる -->
-    <img id="subliminal-img" src="1318.PNG" alt="Secret" class="w-full h-full object-contain transform scale-[0.25]" onerror="this.style.display='none'" />
+    <!-- 最初は更に引きの(scale-[0.125])で配置し、JSでドアップに拡大させる -->
+    <img id="subliminal-img" src="1318.PNG" alt="Secret" class="w-full h-full object-contain transform scale-[0.125]" onerror="this.style.display='none'" />
   </div>
 
   <!-- ★★★ 鉄の扉オーバーレイ (GARAGE行き) ★★★ -->
@@ -1077,11 +1077,11 @@
             // カード内のマシンを隠す
             machineWrapper.style.opacity = '0';
             
-            // ★修正ポイント: フルスクリーン背景と引きのキャラ(scale-0.25)を準備
+            // ★修正ポイント: フルスクリーン背景と引きのキャラ(scale-0.125)を準備
             subContainer.classList.remove('pointer-events-none');
             subContainer.style.opacity = '1';
             subImg.style.transition = 'none';
-            subImg.style.transform = 'scale(0.25)'; // ここを半分に変更
+            subImg.style.transform = 'scale(0.125)'; // ここを0.125に変更
             void subImg.offsetWidth; // リフロー
 
             // 5. 霧が晴れる＆顔面ドアップ開始
@@ -1104,7 +1104,7 @@
                 subContainer.style.opacity = '0';
                 subContainer.classList.add('pointer-events-none');
                 subImg.style.transition = 'none';
-                subImg.style.transform = 'scale(0.25)'; // 初期値に戻す
+                subImg.style.transform = 'scale(0.125)'; // 初期値に戻す
 
                 machineWrapper.style.transition = 'none';
                 machineWrapper.style.transform = '';
