@@ -174,6 +174,7 @@
     }
 
     /* ★01用：発進前のエンジン吹かし（ブルブル）アニメーション */
+    /* 基準となる translate-x-[4%] と translate-y-[50px] scale-[1.15] を維持しつつ揺らす */
     @keyframes engine-shake {
       0%, 100% { transform: scale(1.15) translate(4%, 50px) rotate(0deg); }
       20% { transform: scale(1.15) translate(3.5%, 48px) rotate(-1deg); }
@@ -194,7 +195,7 @@
 
 <body class="bg-black transition-colors duration-500 selection:bg-pink-500 selection:text-white overflow-x-hidden">
 
-  <!-- ★★★ カードめくり後の暗転用オーバーレイ ★★★ -->
+  <!-- ★★★ カード演出後の暗転用オーバーレイ ★★★ -->
   <div id="blackout-overlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none z-[10000]" style="transition: opacity 1.0s ease-in-out;"></div>
 
   <!-- ★★★ 鉄の扉オーバーレイ (GARAGE行き) ★★★ -->
@@ -365,7 +366,7 @@
                   <div id="ep1-img-container" class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)] transition-all duration-300">
                     <img id="ep1-bg" src="303.jpg" alt="Episode 1 BG" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=303.jpg'" />
                     
-                    <!-- 透過PNG (初期状態のベストポジション) -->
+                    <!-- 透過PNG (50px下げのベストポジション) -->
                     <img id="ep1-fg" src="302.PNG" alt="Episode 1 FG" class="absolute inset-0 w-full h-full object-contain object-bottom transform scale-[1.15] translate-x-[4%] translate-y-[50px] origin-bottom z-10" onerror="this.style.display='none'" />
                   </div>
                 </div>
@@ -380,8 +381,8 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <!-- ★01専用「タメからの急発進」演出を適用！★ -->
-                      <a href="#" onclick="engineRoarAndGo(event, 'card-ep1', 'https://p-one-star.github.io/FUNKY-01/')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
+                      <!-- ★01専用「タメてから左下へ猛ダッシュ」演出を適用！★ -->
+                      <a href="#" onclick="nascarDriveByAndGo(event, 'card-ep1', 'https://p-one-star.github.io/FUNKY-01/')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read1" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
                     </div>
@@ -429,7 +430,7 @@
                 <div class="w-full flex-shrink-0 flex items-center justify-center py-3">
                   <!-- ★02用にIDを付与 -->
                   <div id="ep2-img-container" class="relative w-[92%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
-                    <!-- 現状は1枚絵。将来のガラス砕け散り演出の土台として、手前に迫ってくる演出を割り当てる -->
+                    <!-- 現状は1枚絵。画面手前に迫ってくる演出用 -->
                     <img id="ep2-img" src="304.jpg" alt="Episode 2" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=304.jpg'" />
                   </div>
                 </div>
@@ -443,7 +444,7 @@
                       </div>
                     </div>
                     <div class="flex-shrink-0 flex justify-center w-full">
-                      <!-- ★02は「画面手前に大迫力で迫ってくる」演出(monsterSmashAndReturn)を適用★ -->
+                      <!-- ★02は「画面手前に迫ってくる」演出(monsterSmashAndReturn)を適用！★ -->
                       <a href="#" onclick="monsterSmashAndReturn(event, 'card-ep2')" class="relative z-10 inline-block px-4 py-1.25 sm:px-5 sm:py-1.5 rounded-full border border-cyan-400 font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_15px_rgba(0,243,255,0.8)] active:scale-95 group cursor-pointer">
                         <span id="t-btn-read2" class="btn-text-glow-lime transition-colors duration-300">PROCEED IF YOU DARE.</span>
                       </a>
@@ -776,14 +777,12 @@
       
       document.getElementById('t-toast-msg').innerText = t.toast;
       
-      // ボタンテキスト一括変更
       const btnIds = ['t-btn-read1', 't-btn-read2', 't-btn-read3', 't-btn-read4'];
       btnIds.forEach(id => {
         const btn = document.getElementById(id);
         if(btn) btn.innerText = t.comic.read;
       });
       
-      // キャッチコピー1
       const phrase1 = document.getElementById('t-ep1-phrase');
       if (phrase1) {
         phrase1.innerHTML = t.comic.phrase1.replace(/\n/g, '<br>');
@@ -791,7 +790,6 @@
         else phrase1.classList.remove('italic');
       }
 
-      // キャッチコピー2
       const phrase2 = document.getElementById('t-ep2-phrase');
       if (phrase2) {
         phrase2.innerHTML = t.comic.phrase2.replace(/\n/g, '<br>');
@@ -799,7 +797,6 @@
         else phrase2.classList.remove('italic');
       }
 
-      // キャッチコピー3
       const phrase3 = document.getElementById('t-ep3-phrase');
       if (phrase3) {
         phrase3.innerHTML = t.comic.phrase3.replace(/\n/g, '<br>');
@@ -807,7 +804,6 @@
         else phrase3.classList.remove('italic');
       }
 
-      // キャッチコピー4
       const phrase4 = document.getElementById('t-ep4-phrase');
       if (phrase4) {
         phrase4.innerHTML = t.comic.phrase4.replace(/\n/g, '<br>');
@@ -815,7 +811,6 @@
         else phrase4.classList.remove('italic');
       }
 
-      // シェアメニューテキスト
       document.querySelectorAll('.t-share-copy').forEach(el => el.innerText = t.comic.shareCopy);
       document.querySelectorAll('.t-share-pin').forEach(el => el.innerText = t.comic.sharePin);
       document.querySelectorAll('.t-share-x').forEach(el => el.innerText = t.comic.shareX);
@@ -867,7 +862,6 @@
       }
     });
 
-    // ★★★ カミングスーン（工事中）トースト共通関数 ★★★
     function showComingSoonToast() {
       const toast = document.getElementById('funky-toast');
       const msg = document.getElementById('t-toast-msg');
@@ -891,7 +885,6 @@
       });
     });
 
-    // ★★★ URLコピー機能（基本） ★★★
     function fallbackCopyTextToClipboard(text) {
       var textArea = document.createElement("textarea");
       textArea.value = text;
@@ -909,7 +902,6 @@
       document.body.removeChild(textArea);
     }
 
-    // ★★★ 新しいスマートなインラインコピー関数 ★★★
     function copyLinkInline(e, url, btnElement) {
       e.preventDefault();
       e.stopPropagation(); 
@@ -931,7 +923,6 @@
       }, 1500);
     }
 
-    // ★★★ Xでシェア機能 ★★★
     function shareOnX(e, episode) {
       e.preventDefault();
       let text = '';
@@ -954,7 +945,6 @@
       });
     }
 
-    // ★★★ Pinterestでシェア機能 ★★★
     function shareOnPinterest(e, episode) {
       e.preventDefault();
       let text = '';
@@ -979,7 +969,6 @@
       });
     }
 
-    // ★★★ シェアドロップダウンメニューの開閉ロジック ★★★
     document.querySelectorAll('.btn-share').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
