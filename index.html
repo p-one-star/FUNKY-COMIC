@@ -298,7 +298,7 @@
           <div style="perspective: 2500px;" class="flex-shrink-0 snap-center">
             <div id="card-ep1" class="relative w-[80vw] sm:w-[340px] aspect-[4/5] rounded-[2rem] border-4 border-cyan-400 overflow-hidden flex flex-col group bg-black shadow-lg" style="transform-style: preserve-3d;">
               
-              <!-- ヘッダー（余白を狭めて上に寄せる） -->
+              <!-- ヘッダー -->
               <div class="px-4 py-1.5 flex-shrink-0 flex justify-between items-center bg-black relative z-30">
                 <span class="font-black uppercase tracking-wider text-white flex items-baseline gap-1.5">
                   <span class="text-lg">FUNKY</span> 
@@ -324,14 +324,14 @@
                     </button>
                   </div>
                 </div>
+                <!-- ★不要になったヘッダー下の細ラインは削除しました！ -->
               </div>
               
               <!-- コンテンツエリア全体 -->
-              <div class="relative w-full flex-1 flex flex-col bg-black pb-3 sm:pb-4">
+              <div class="relative w-full flex-1 flex flex-col bg-black pb-1.5 sm:pb-2">
                 
-                <!-- 上部：画像と上下の細ラインをギュッとまとめる -->
                 <div class="w-full flex-shrink-0 flex flex-col items-center justify-start pt-1">
-                  <!-- ★ 画像のすぐ上の細ライン -->
+                  <!-- 画像のすぐ上の細ライン -->
                   <div class="w-[85%] mx-auto mb-2.5 z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
                   
                   <div id="ep1-img-container" class="relative w-[86%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)] transition-all duration-300">
@@ -339,19 +339,16 @@
                     <img id="ep1-fg" src="302.PNG" class="absolute inset-0 w-full h-full object-contain object-bottom transform scale-[1.15] translate-x-[4%] translate-y-[50px] origin-bottom z-10" onerror="this.style.display='none'" />
                   </div>
                   
-                  <!-- ★ 画像のすぐ下の細ライン -->
+                  <!-- 画像のすぐ下の細ライン -->
                   <div class="w-[85%] mx-auto mt-2.5 z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
                 </div>
 
-                <!-- 下部：テキストとボタンをスペースの中で均等（中央）に配置 -->
-                <div class="flex-1 flex flex-col justify-center items-center px-3 relative w-full pt-1 pb-1">
-                  <!-- テキスト -->
+                <div class="flex-1 flex flex-col justify-between items-center px-3 relative w-full pt-1 pb-1">
                   <div class="flex-1 flex items-center justify-center w-full">
                     <div id="t-ep1-phrase" class="text-outline-cyan text-center font-black leading-[1.1] text-[5.5vw] sm:text-[22px] tracking-wider">
                       WHO’S FASTER<br>THAN ME?
                     </div>
                   </div>
-                  <!-- ボタン -->
                   <div class="flex-shrink-0 flex justify-center w-full">
                     <a href="#" onclick="nascarDriveByAndGo(event, 'card-ep1', 'https://p-one-star.github.io/FUNKY-01/')" class="relative z-10 inline-block px-4 py-1.5 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
                       <span id="t-btn-read1" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
@@ -392,12 +389,12 @@
                     </button>
                   </div>
                 </div>
+                <!-- ★不要になったヘッダー下の細ラインを削除！ -->
               </div>
               
               <!-- コンテンツ -->
-              <div class="relative w-full flex-1 flex flex-col bg-black pb-3 sm:pb-4">
+              <div class="relative w-full flex-1 flex flex-col bg-black pb-1.5 sm:pb-2">
                 <div class="w-full flex-shrink-0 flex flex-col items-center justify-start pt-1 relative z-10">
-                  <!-- 上の細ライン -->
                   <div class="w-[85%] mx-auto mb-2.5 z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0,243,255,1) 20%, rgba(0,243,255,1) 80%, transparent 100%);"></div>
                   
                   <div id="ep2-img-container" class="relative w-[86%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)] transition-all duration-300">
@@ -408,11 +405,10 @@
                     </div>
                   </div>
                   
-                  <!-- 下の細ライン -->
                   <div class="w-[85%] mx-auto mt-2.5 z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0,243,255,1) 20%, rgba(0,243,255,1) 80%, transparent 100%);"></div>
                 </div>
 
-                <div id="ep2-text-area" class="flex-1 flex flex-col justify-center items-center px-3 relative w-full pt-1 pb-1 z-20">
+                <div id="ep2-text-area" class="flex-1 flex flex-col justify-between items-center px-3 relative w-full pt-1 pb-1 z-20">
                   <div class="flex-1 flex items-center justify-center w-full">
                     <div id="t-ep2-phrase" class="text-outline-lime-glow text-center font-black leading-[1.1] text-[5.5vw] sm:text-[22px] tracking-wider">
                       THIS ROAD<br>IS MINE.
@@ -458,29 +454,29 @@
                     </button>
                   </div>
                 </div>
+                <!-- ★古いラインを削除！ -->
               </div>
               
               <!-- コンテンツ -->
-              <div class="relative w-full flex-1 flex flex-col bg-black pb-3 sm:pb-4">
+              <div class="relative w-full flex-1 flex flex-col bg-black pb-1.5 sm:pb-2">
                 <div class="w-full flex-shrink-0 flex flex-col items-center justify-start pt-1">
-                  <!-- 上の細ライン -->
                   <div class="w-[85%] mx-auto mb-2.5 z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
                   
                   <div class="relative w-[86%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
                     <img src="03.jpg" alt="Episode 3" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=EPISODE+03'" />
                   </div>
                   
-                  <!-- 下の細ライン -->
                   <div class="w-[85%] mx-auto mt-2.5 z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, #ccff00 20%, #ccff00 80%, transparent 100%);"></div>
                 </div>
 
-                <div class="flex-1 flex flex-col justify-center items-center px-3 relative w-full pt-1 pb-1">
+                <div class="flex-1 flex flex-col justify-between items-center px-3 relative w-full pt-1 pb-1">
                   <div class="flex-1 flex items-center justify-center w-full">
                     <div id="t-ep3-phrase" class="text-outline-cyan text-center font-black leading-[1.1] text-[5.5vw] sm:text-[22px] tracking-wider">
                       COMING<br>SOON...
                     </div>
                   </div>
                   <div class="flex-shrink-0 flex justify-center w-full">
+                    <!-- ★03に力作の「ページめくり」演出(turnPageAndReturn)を退避！★ -->
                     <a href="#" onclick="turnPageAndReturn(event, 'card-ep3')" class="relative z-10 inline-block px-4 py-1.5 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
                       <span id="t-btn-read3" class="btn-text-glow transition-colors duration-300">PROCEED IF YOU DARE.</span>
                     </a>
@@ -521,22 +517,21 @@
                     </button>
                   </div>
                 </div>
+                <!-- ★古いラインを削除！ -->
               </div>
               
-              <div class="relative w-full flex-1 flex flex-col bg-black pb-3 sm:pb-4">
+              <div class="relative w-full flex-1 flex flex-col bg-black pb-1.5 sm:pb-2">
                 <div class="w-full flex-shrink-0 flex flex-col items-center justify-start pt-1">
-                  <!-- 上の細ライン -->
                   <div class="w-[85%] mx-auto mb-2.5 z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0,243,255,1) 20%, rgba(0,243,255,1) 80%, transparent 100%);"></div>
                   
                   <div class="relative w-[86%] aspect-[5/4] overflow-hidden rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
                     <img id="img-ep4" src="" alt="Episode 4" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/500x400/222/FFF?text=EPISODE+04'" />
                   </div>
                   
-                  <!-- 下の細ライン -->
                   <div class="w-[85%] mx-auto mt-2.5 z-10 flex-shrink-0" style="height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0,243,255,1) 20%, rgba(0,243,255,1) 80%, transparent 100%);"></div>
                 </div>
 
-                <div class="flex-1 flex flex-col justify-center items-center px-3 relative w-full pt-1 pb-1">
+                <div class="flex-1 flex flex-col justify-between items-center px-3 relative w-full pt-1 pb-1">
                   <div class="flex-1 flex items-center justify-center w-full">
                     <div id="t-ep4-phrase" class="text-outline-lime-glow text-center font-black leading-[1.1] text-[5.5vw] sm:text-[22px] tracking-wider">
                       STILL<br>BREWING...
@@ -1149,22 +1144,19 @@
       document.body.style.overflow = 'hidden';
 
       const card = document.getElementById(cardId);
-      const cardParent = card.parentElement; // ★親要素を取得
+      const cardParent = card.parentElement; // 親要素
       const overlay = document.getElementById('blackout-overlay');
 
-      // ★親要素ごと最前面に出して、他のカードの裏に潜り込まないようにする
       cardParent.style.position = 'relative';
       cardParent.style.zIndex = '9999';
 
       card.style.position = 'relative';
       card.style.zIndex = '9999';
       card.style.transformOrigin = 'left center'; 
-      card.style.transition = 'transform 2.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 2.0s ease-out';
+      card.style.transition = 'transform 2.4s cubic-bezier(0.25, 0.8, 0.25, 1)';
       
       requestAnimationFrame(() => {
-        // ★translateZ(300px)に増やし、左のカードの上にしっかり覆い被さるように手前へ持ち上げる
         card.style.transform = 'perspective(2000px) translateZ(300px) rotateX(10deg) rotateY(-110deg) rotateZ(-5deg)';
-        card.style.opacity = '0';
       });
 
       setTimeout(() => {
@@ -1176,10 +1168,9 @@
       setTimeout(() => {
         card.style.transition = 'none'; 
         card.style.transform = '';      
-        card.style.opacity = '1';       
         card.style.zIndex = '';         
         
-        cardParent.style.zIndex = ''; // ★親要素のz-indexもリセット
+        cardParent.style.zIndex = ''; 
         
         overlay.style.opacity = '0';
         overlay.classList.add('pointer-events-none');
