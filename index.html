@@ -360,8 +360,9 @@
               
               <div class="px-4 py-1 flex-shrink-0 flex justify-between items-center bg-black relative z-30">
                 <span class="font-black uppercase tracking-wider text-white flex items-baseline gap-1.5">
+                  <!-- ★修正: 愛知の文字を巨大化＆専用フォント適用可能に。AICHIと切り替え -->
                   <span id="t-card3-header-text" class="text-[26px] font-aichi tracking-widest leading-none mt-1">愛知</span>
-                  <span class="text-2xl font-stencil text-[#ccff00]">★03</span>
+                  <span class="text-2xl font-stencil text-[#ccff00]">★01</span>
                 </span>
                 
                 <div class="relative">
@@ -391,7 +392,8 @@
                 </div>
                 <div class="flex-1 flex flex-col justify-between items-center px-3 pt-1 pb-1">
                   <div class="flex-1 flex items-center justify-center w-full">
-                    <div id="t-ep3-phrase" class="text-outline-cyan text-center font-black leading-[1.1] text-[5.5vw] sm:text-[22px] tracking-wider">COMING<br>SOON...</div>
+                    <!-- ★修正: t-ep3-phrase の文言を JS 側で動的に変更します -->
+                    <div id="t-ep3-phrase" class="text-outline-cyan text-center font-black leading-[1.1] text-[5.5vw] sm:text-[22px] tracking-wider">FHW発祥の地</div>
                   </div>
                   <div class="flex-shrink-0 flex justify-center w-full">
                     <a href="#" onclick="turnPageAndReturn(event, 'card-ep3')" class="relative z-10 inline-block px-4 py-1.5 sm:px-5 sm:py-1.5 rounded-full border border-[#ccff00] font-black uppercase tracking-widest text-[14px] sm:text-base transition-all duration-300 hover:bg-[#ccff00] hover:shadow-[0_0_15px_rgba(204,255,0,0.8)] active:scale-95 group cursor-pointer">
@@ -521,13 +523,13 @@
     const translations = {
       en: {
         hero: { welcome: "Welcome", toThe: "To The", madGarage: "MAD GARAGE.", loud1: "Machines are", loud2: "LOUD", stupid1: "Stories are", stupid2: "STUPID" },
-        comic: { title: "Too Funky Comic", subtitle: "Wild & Crazy Machines", from: "UNLIMITED DIFFUSION", swipe: "SWIPE", more: "THE GARAGE NEVER SLEEPS.<br>NEXT MACHINE IS BREWING... ∞", read: "PROCEED IF YOU DARE.", phrase1: "WHO’S FASTER<br>THAN ME?", phrase2: "THIS ROAD<br>IS MINE.", phrase3: "COMING<br>SOON...", phrase4: "STILL<br>BREWING...", header3: "AICHI", shareCopy: "Copy Link", sharePin: "Share on Pinterest", shareX: "Share on X" },
+        comic: { title: "Too Funky Comic", subtitle: "Wild & Crazy Machines", from: "UNLIMITED DIFFUSION", swipe: "SWIPE", more: "THE GARAGE NEVER SLEEPS.<br>NEXT MACHINE IS BREWING... ∞", read: "PROCEED IF YOU DARE.", phrase1: "WHO’S FASTER<br>THAN ME?", phrase2: "THIS ROAD<br>IS MINE.", phrase3: "THE ORIGIN OF<br>FHW", phrase4: "STILL<br>BREWING...", header3: "AICHI", shareCopy: "Copy Link", sharePin: "Share on Pinterest", shareX: "Share on X" },
         details: { title1: "Building the ", title2: "impossible", title3: " since 20XX", desc: "Deep in the neon-lit alleys of Japan, we wrench on the wildest, most surreal machines known to humanity. It doesn't have to make sense. It just has to be FUNKY.", btn: "Join the Garage", back: "BACK TO FHW" },
         toast: "STILL BREWING IN THE GARAGE... 🎥"
       },
       ja: {
         hero: { welcome: "ようこそ", toThe: "狂気の", madGarage: "ガレージへ。", loud1: "マシンは", loud2: "爆音", stupid1: "ストーリーは", stupid2: "何でもあり" },
-        comic: { title: "最高にファンキーなコミック", subtitle: "ワイルドでクレイジーなマシン", from: "止められるもんなら<br>止めてみな！", swipe: "スワイプ", more: "ガレージは眠らない。<br>次のバケモノを仕込み中... ∞", read: "心して進め。", phrase1: "俺より速いやついる？", phrase2: "この道は俺のもんだ。", phrase3: "鋭意制作中...", phrase4: "準備中だぜ。", header3: "愛知", shareCopy: "リンクをコピー", sharePin: "Pinterestでシェア", shareX: "Xでシェア" },
+        comic: { title: "最高にファンキーなコミック", subtitle: "ワイルドでクレイジーなマシン", from: "止められるもんなら<br>止めてみな！", swipe: "スワイプ", more: "ガレージは眠らない。<br>次のバケモノを仕込み中... ∞", read: "心して進め。", phrase1: "俺より速いやついる？", phrase2: "この道は俺のもんだ。", phrase3: "FHW発祥の地", phrase4: "準備中だぜ。", header3: "愛知", shareCopy: "リンクをコピー", sharePin: "Pinterestでシェア", shareX: "Xでシェア" },
         details: { title1: "不可能を", title2: "創り出す ", title3: "20XX年から", desc: "ネオン輝く日本の路地裏深くで、人類が知る限り最もワイルドで超現実的なマシンを組み立てている。意味なんてなくていい。ただファンキーであればいいんだ。", btn: "ガレージに参加する", back: "BACK TO FHW" },
         toast: "まだガレージでバケモノを仕込み中だぜ... 🎥"
       }
@@ -559,12 +561,19 @@
       document.getElementById('t-toast-msg').innerText = t.toast;
       
       document.querySelectorAll('.t-btn-read1, .t-btn-read2, .t-btn-read3, .t-btn-read4').forEach(el => el.innerText = t.comic.read);
-      document.getElementById('t-ep1-phrase').innerHTML = t.comic.phrase1;
-      document.getElementById('t-ep2-phrase').innerHTML = t.comic.phrase2;
-      document.getElementById('t-ep3-phrase').innerHTML = t.comic.phrase3;
-      document.getElementById('t-ep4-phrase').innerHTML = t.comic.phrase4;
+      
+      const p1 = document.getElementById('t-ep1-phrase');
+      if (p1) { p1.innerHTML = t.comic.phrase1; currentLang === 'en' ? p1.classList.add('italic') : p1.classList.remove('italic'); }
+      
+      const p2 = document.getElementById('t-ep2-phrase');
+      if (p2) { p2.innerHTML = t.comic.phrase2; currentLang === 'en' ? p2.classList.add('italic') : p2.classList.remove('italic'); }
+      
+      const p3 = document.getElementById('t-ep3-phrase');
+      if (p3) { p3.innerHTML = t.comic.phrase3; currentLang === 'en' ? p3.classList.add('italic') : p3.classList.remove('italic'); }
+      
+      const p4 = document.getElementById('t-ep4-phrase');
+      if (p4) { p4.innerHTML = t.comic.phrase4; currentLang === 'en' ? p4.classList.add('italic') : p4.classList.remove('italic'); }
 
-      // ★カードのヘッダー制御（愛知・AICHI切替とフォント・サイズ設定）
       const header3Text = document.getElementById('t-card3-header-text');
       header3Text.innerText = t.comic.header3;
       if (currentLang === 'ja') {
